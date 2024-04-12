@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
 export class NavbarComponent {
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
+  isLoggedIn = false;
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
     console.log(this.isMenuOpen)
