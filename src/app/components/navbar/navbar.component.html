@@ -42,51 +42,64 @@
       </div>
     </form>
 
-    <!-- Alışveriş ikonu -->
-    <i class="fas fa-shopping-cart text-white text-2xl ml-4 cursor-pointer"></i>
+    <div *ngIf="isLoggedIn" class="flex items-center gap-4">
+      <!-- Alışveriş sepeti ikonu -->
+      <i
+        class="fas fa-shopping-cart text-white text-2xl ml-4 cursor-pointer"
+      ></i>
 
-    <!-- Bildirim ikonu -->
-    <i class="fas fa-bell text-white text-2xl ml-4 cursor-pointer"></i>
+      <!-- Bildirim zili -->
+      <i class="fas fa-bell text-white text-2xl ml-4 cursor-pointer"></i>
 
-    <!-- Profil fotoğrafı -->
-    <img
-      src="https://picsum.photos/50"
-      alt="Profil Fotoğrafı"
-      class="w-10 h-10 rounded-full ml-4 cursor-pointer"
-      (click)="toggleMenu()"
-    />
+      <!-- Profil fotoğrafı -->
+      <img
+        src="https://picsum.photos/50"
+        alt="Profil Fotoğrafı"
+        class="w-10 h-10 rounded-full ml-4 cursor-pointer"
+        (click)="toggleMenu()"
+      />
 
-    <!-- Profil yönetim penceresi -->
-    <div
-      *ngIf="isMenuOpen"
-      class="absolute right-60 top-16 bg-white text-black border p-4 rounded shadow-lg z-10"
-    >
-      <ul>
-        <li
-          class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono text-lg"
-        >
-          <a href="#">Hesabım</a>
-        </li>
-        <li
-          class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono font-bold text-lg"
-        >
-          <a href="#">Çıkış Yap</a>
-        </li>
-      </ul>
+      <!-- Profil yönetim penceresi -->
+      <div
+        *ngIf="isMenuOpen"
+        class="absolute right-60 top-16 bg-white text-black border p-4 rounded shadow-lg z-10"
+      >
+        <ul>
+          <li
+            class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono text-lg"
+          >
+            <a href="#">Hesabım</a>
+          </li>
+          <li
+            class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono font-bold text-lg"
+          >
+            <a href="#">Çıkış Yap</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Kullanıcı giriş yapmamışsa gösterilecek -->
+    <div *ngIf="!isLoggedIn" class="flex gap-4">
+      <button class="bg-blue-900 text-white px-4 py-2 rounded">
+        Giriş Yap
+      </button>
+      <button class="bg-blue-700 text-white px-4 py-2 rounded">Kayıt Ol</button>
     </div>
   </div>
+
   <hr />
   <div class="hidden md:flex bg-blue-950 items-center justify-center">
     <ul class="flex gap-6 text-xl">
       <!-- Kitap -->
-      <li 
+      <li
         class="cursor-pointer font-mono font-bold border-r pr-4 relative"
         (mouseover)="onHover(0, true)"
         (mouseleave)="onHover(0, false)"
       >
         Kitap
         <!-- Hover edildiğinde gösterilecek kutucuk -->
-        <div 
+        <div
           *ngIf="isHovered[0]"
           class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg"
         >
@@ -96,14 +109,14 @@
       </li>
 
       <!-- Dergi -->
-      <li 
+      <li
         class="cursor-pointer font-mono font-bold border-r pr-4 relative"
         (mouseover)="onHover(1, true)"
         (mouseleave)="onHover(1, false)"
       >
         Dergi
         <!-- Hover edildiğinde gösterilecek kutucuk -->
-        <div 
+        <div
           *ngIf="isHovered[1]"
           class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg"
         >
@@ -113,14 +126,14 @@
       </li>
 
       <!-- Makale -->
-      <li 
+      <li
         class="cursor-pointer font-mono font-bold relative"
         (mouseover)="onHover(2, true)"
         (mouseleave)="onHover(2, false)"
       >
         Makale
         <!-- Hover edildiğinde gösterilecek kutucuk -->
-        <div 
+        <div
           *ngIf="isHovered[2]"
           class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg"
         >
@@ -129,5 +142,5 @@
         </div>
       </li>
     </ul>
-</div>
+  </div>
 </div>
