@@ -2,8 +2,8 @@
   <div
     class="md:max-w-[1350px] mx-auto max-w-[768px] w-full h-full flex justify-between items-center"
   >
-    <i class="fas fa-book mt-1 text-2xl text-yellow-500"></i>
-    <h1 class="text-4xl text-white cursor-pointer">Papirus</h1>
+    <i class="fas fa-book mt-1 sm:text-2xl text-xl text-yellow-500"></i>
+    <h1 class="sm:text-4xl text-2xl text-white cursor-pointer">Papirus</h1>
     <form class="max-w-md mx-auto relative flex items-center">
       <label
         for="default-search"
@@ -14,12 +14,12 @@
         <input
           type="search"
           id="default-search"
-          class="block w-[500px] h-10 p-4 text-sm text-gray-900 border border-gray-300 bg-gray-50 pl-10"
+          class="block lg:w-[400px] w-40 sm:w-60 md:h-10 h-6 p-4 text-sm text-gray-900 border border-gray-300 bg-gray-50 pl-10"
           placeholder="Search..."
           required
         />
         <svg
-          class="absolute inset-y-0 left-0 w-5 h-5 text-gray-500 dark:text-gray-400 mt-3 ml-3 pointer-events-none"
+          class="absolute inset-y-0 left-0 w-5 h-5 text-gray-500 dark:text-gray-400 md:mt-3 md:ml-3 mt-2 ml-2 pointer-events-none"
           aria-hidden="true"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -35,56 +35,79 @@
         </svg>
         <button
           type="submit"
-          class="text-white h-10 bg-blue-900 font-medium text-sm px-4 py-2 ml-1"
+          class="text-white h-10 bg-blue-900 md:font-medium text-sm md:px-4 px-1 md:py-2 md:ml-1"
         >
           Search
         </button>
       </div>
     </form>
 
-    <div *ngIf="isLoggedIn" class="flex items-center gap-4">
-      <!-- Alışveriş sepeti ikonu -->
-      <i
-        class="fas fa-shopping-cart text-white text-2xl ml-4 cursor-pointer"
-      ></i>
+    <div class="md:flex hidden">
+      <div *ngIf="isLoggedIn" class="flex items-center gap-4">
+        <!-- Alışveriş sepeti ikonu -->
+        <i
+          class="fas fa-shopping-cart text-white text-2xl ml-4 cursor-pointer"
+        ></i>
 
-      <!-- Bildirim zili -->
-      <i class="fas fa-bell text-white text-2xl ml-4 cursor-pointer"></i>
+        <!-- Bildirim zili -->
+        <i class="fas fa-bell text-white text-2xl ml-4 cursor-pointer"></i>
 
-      <!-- Profil fotoğrafı -->
-      <img
-        src="https://picsum.photos/50"
-        alt="Profil Fotoğrafı"
-        class="w-10 h-10 rounded-full ml-4 cursor-pointer"
-        (click)="toggleMenu()"
-      />
+        <!-- Profil fotoğrafı -->
+        <img
+          src="https://picsum.photos/50"
+          alt="Profil Fotoğrafı"
+          class="w-10 h-10 rounded-full ml-4 cursor-pointer"
+          (click)="toggleMenu()"
+        />
 
-      <!-- Profil yönetim penceresi -->
-      <div
-        *ngIf="isMenuOpen"
-        class="absolute right-60 top-16 bg-white text-black border p-4 rounded shadow-lg z-10"
-      >
-        <ul>
-          <li
-            class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono text-lg"
-          >
-            <a href="#">Hesabım</a>
-          </li>
-          <li
-            class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono font-bold text-lg"
-          >
-            <a href="#">Çıkış Yap</a>
-          </li>
-        </ul>
+        <!-- Profil yönetim penceresi -->
+        <div
+          *ngIf="isMenuOpen"
+          class="absolute top-16 bg-white text-black border p-4 rounded shadow-lg z-10"
+        >
+          <ul>
+            <li
+              class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono text-lg"
+            >
+              <a href="#">Hesabım</a>
+            </li>
+            <li
+              class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono font-bold text-lg"
+            >
+              <a href="#">Çıkış Yap</a>
+            </li>
+          </ul>
+        </div>
       </div>
+    </div>
+      <!-- Hamburger menüsü ikonu -->
+    <div class="md:hidden flex items-center gap-4 mr-2">
+      <button (click)="toggleHamburgerMenu()">
+        <i class="fas fa-bars text-white text-2xl"></i>
+      </button>
     </div>
 
     <!-- Kullanıcı giriş yapmamışsa gösterilecek -->
-    <div *ngIf="!isLoggedIn" class="flex gap-4">
-      <button class="bg-blue-900 text-white px-4 py-2 rounded">
+    <div *ngIf="!isLoggedIn" class="md:flex hidden lg:gap-4">
+      <button class="bg-blue-900 text-white lg:px-4 px-2 lg:py-2 py-1 rounded">
         Giriş Yap
       </button>
       <button class="bg-blue-700 text-white px-4 py-2 rounded">Kayıt Ol</button>
+    </div>
+    <!-- Mobil menü -->
+    <div *ngIf="hamburgerMenuOpen" class="absolute top-[80px] w-full h-[calc(100vh - 80px)]">
+      <div class="bg-white h-full w-full p-4 bg-opacity-100 z-50 text-black md:hidden">
+        <div *ngIf="isLoggedIn" class="text-center">
+          <h1 class="text-2xl">Hesabım</h1>
+          <button class="bg-red-600 text-white px-4 py-2 mt-4 rounded">Çıkış Yap</button>
+        </div>
+        <div *ngIf="!isLoggedIn" class="text-center">
+          <button class="bg-blue-900 text-white px-4 py-2 rounded">
+            Giriş Yap
+          </button>
+          <button class="bg-blue-700 text-white px-4 py-2 ml-4 rounded">Kayıt Ol</button>
+        </div>
+      </div>
     </div>
   </div>
 
