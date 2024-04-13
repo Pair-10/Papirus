@@ -9,14 +9,18 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
+  hamburgerMenuOpen = false;
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
-  isLoggedIn = true;
+  isLoggedIn = false;
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
-    console.log(this.isMenuOpen)
   }
   onHover(index: number, isHover: boolean) {
     this.isHovered[index] = isHover;
   }
+  toggleHamburgerMenu() {
+    this.hamburgerMenuOpen = !this.hamburgerMenuOpen;
+    console.log("basildi")
+}
 }
