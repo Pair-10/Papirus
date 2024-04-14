@@ -12,7 +12,7 @@ export class NavbarComponent {
   hamburgerMenuOpen = false;
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
-  isLoggedIn = false;
+  isLoggedIn = true;
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
