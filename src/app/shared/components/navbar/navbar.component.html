@@ -1,9 +1,9 @@
-<div class="w-full h-20 bg-blue-950 text-white sticky top-0 z-50">
+<div class="w-full h-20 bg-blue-950 text-white relative top-0 z-50">
   <div
     class="md:max-w-[1350px] mx-auto max-w-[768px] w-full h-full flex justify-between items-center"
   >
     <i class="fas fa-book mt-1 sm:text-2xl text-xl text-yellow-500"></i>
-    <h1 class="sm:text-4xl text-2xl text-white cursor-pointer">Papirus</h1>
+    <h1 class="sm:text-4xl text-2xl text-white cursor-pointer" [routerLink]="['/']">Papirus</h1>
     <form class="max-w-md mx-auto relative flex items-center">
       <label
         for="default-search"
@@ -95,7 +95,7 @@
       <button class="bg-blue-700 text-white px-4 py-2 rounded">Kayıt Ol</button>
     </div>
     <!-- Mobil menü -->
-    <div *ngIf="hamburgerMenuOpen" class="absolute top-[80px] w-full h-[calc(100vh - 80px)]">
+    <div *ngIf="hamburgerMenuOpen" class="absolute top-[80px] w-full h-auto">
       <div class="bg-white h-full w-full p-4 bg-opacity-100 z-50 text-black md:hidden">
         <div *ngIf="isLoggedIn" class="text-center">
           <h1 class="text-2xl">Hesabım</h1>
@@ -107,6 +107,11 @@
           </button>
           <button class="bg-blue-700 text-white px-4 py-2 ml-4 rounded">Kayıt Ol</button>
         </div>
+        <ul class="text-2xl text-center mt-2 font-mono font-bold">
+          <li class="border-b-2 border-gray-300 pb-1">Kitap</li>
+          <li class="border-b-2 border-gray-300 pb-1">Dergi</li>
+          <li class="border-b-2 border-gray-300 pb-1">Makale</li>
+      </ul>
       </div>
     </div>
   </div>
