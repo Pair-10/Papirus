@@ -19,7 +19,7 @@ import { SidebarComponent } from '../../../../shared/components/sidebar/sidebar.
      }
    }
  }
- const colors = ['bg-black', 'bg-gray-900', 'bg-white']; 
+ const colors = ['bg-blue-900', 'bg-gray-700', 'bg-white']; 
 
 
 
