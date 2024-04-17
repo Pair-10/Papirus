@@ -1,4 +1,4 @@
-export interface RootObject {
+export interface AddCommentRequest {
 	materialId: string;
 	userId: string;
 	commentDate: string;
