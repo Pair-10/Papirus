@@ -1,42 +1,20 @@
 <div class="w-full h-20 bg-blue-950 text-white relative top-0 z-50">
-  <div
-    class="md:max-w-[1350px] mx-auto max-w-[768px] w-full h-full flex justify-between items-center"
-  >
+  <div class="md:max-w-[1350px] mx-auto max-w-[768px] w-full h-full flex justify-between items-center">
     <i class="fas fa-book mt-1 sm:text-2xl text-xl text-yellow-500"></i>
     <h1 class="sm:text-4xl text-2xl text-white cursor-pointer" [routerLink]="['/']">Papirus</h1>
     <form class="max-w-md mx-auto relative flex items-center">
-      <label
-        for="default-search"
-        class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-        >Search</label
-      >
+      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
       <div class="flex items-center">
-        <input
-          type="search"
-          id="default-search"
+        <input type="search" id="default-search"
           class="block lg:w-[400px] w-40 sm:w-60 md:h-10 h-6 p-4 text-sm text-gray-900 border border-gray-300 bg-gray-50 pl-10"
-          placeholder="Search..."
-          required
-        />
+          placeholder="Search..." required />
         <svg
           class="absolute inset-y-0 left-0 w-5 h-5 text-gray-500 dark:text-gray-400 md:mt-3 md:ml-3 mt-2 ml-2 pointer-events-none"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 20 20"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-          />
+          aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
         </svg>
-        <button
-          type="submit"
-          class="text-white h-10 bg-blue-900 md:font-medium text-sm md:px-4 px-1 md:py-2 md:ml-1"
-        >
+        <button type="submit" class="text-white h-10 bg-blue-900 md:font-medium text-sm md:px-4 px-1 md:py-2 md:ml-1">
           Search
         </button>
       </div>
@@ -45,42 +23,29 @@
     <div class="md:flex hidden">
       <div *ngIf="isLoggedIn" class="flex items-center gap-4">
         <!-- Alışveriş sepeti ikonu -->
-        <i
-          class="fas fa-shopping-cart text-white text-2xl ml-4 cursor-pointer"
-        ></i>
+        <i class="fas fa-shopping-cart text-white text-2xl ml-4 cursor-pointer"></i>
 
         <!-- Bildirim zili -->
         <i class="fas fa-bell text-white text-2xl ml-4 cursor-pointer"></i>
 
         <!-- Profil fotoğrafı -->
-        <img
-          src="https://picsum.photos/50"
-          alt="Profil Fotoğrafı"
-          class="w-10 h-10 rounded-full ml-4 cursor-pointer"
-          (click)="toggleMenu()"
-        />
+        <img src="https://picsum.photos/50" alt="Profil Fotoğrafı" class="w-10 h-10 rounded-full ml-4 cursor-pointer"
+          (click)="toggleMenu()" />
 
         <!-- Profil yönetim penceresi -->
-        <div
-          *ngIf="isMenuOpen"
-          class="absolute top-16 bg-white text-black border p-4 rounded shadow-lg z-10"
-        >
+        <div *ngIf="isMenuOpen" class="absolute top-16 bg-white text-black border p-4 rounded shadow-lg z-10">
           <ul>
-            <li
-              class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono text-lg"
-            >
+            <li class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono text-lg">
               <a href="#">Hesabım</a>
             </li>
-            <li
-              class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono font-bold text-lg"
-            >
+            <li class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono font-bold text-lg">
               <a href="#">Çıkış Yap</a>
             </li>
           </ul>
         </div>
       </div>
     </div>
-      <!-- Hamburger menüsü ikonu -->
+    <!-- Hamburger menüsü ikonu -->
     <div class="md:hidden flex items-center gap-4 mr-2">
       <button (click)="toggleHamburgerMenu()">
         <i class="fas fa-bars text-white text-2xl"></i>
@@ -108,10 +73,10 @@
           <button class="bg-blue-700 text-white px-4 py-2 ml-4 rounded">Kayıt Ol</button>
         </div>
         <ul class="text-2xl text-center mt-2 font-mono font-bold">
-          <li class="border-b-2 border-gray-300 pb-1">Kitap</li>
-          <li class="border-b-2 border-gray-300 pb-1">Dergi</li>
-          <li class="border-b-2 border-gray-300 pb-1">Makale</li>
-      </ul>
+          <li routerLink="/material-list" class="border-b-2 border-gray-300 pb-1">Kitap</li>
+          <li routerLink="/material-list" class="border-b-2 border-gray-300 pb-1">Dergi</li>
+          <li routerLink="/material-list" class="border-b-2 border-gray-300 pb-1">Makale</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -120,51 +85,33 @@
   <div class="hidden md:flex bg-blue-950 items-center justify-center">
     <ul class="flex gap-6 text-xl">
       <!-- Kitap -->
-      <li
-        class="cursor-pointer font-mono font-bold border-r pr-4 relative"
-        (mouseover)="onHover(0, true)"
-        (mouseleave)="onHover(0, false)"
-      >
+      <li class="cursor-pointer font-mono font-bold border-r pr-4 relative" routerLink="/material-list" (click)="onMaterialTypeClick('book')" (mouseover)="onHover(0, true)"
+        (mouseleave)="onHover(0, false)">
         Kitap
         <!-- Hover edildiğinde gösterilecek kutucuk -->
-        <div
-          *ngIf="isHovered[0]"
-          class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg"
-        >
+        <div *ngIf="isHovered[0]" class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg">
           <!-- Kutucuk içeriği -->
           <p>Kitap İçeriği</p>
         </div>
       </li>
 
       <!-- Dergi -->
-      <li
-        class="cursor-pointer font-mono font-bold border-r pr-4 relative"
-        (mouseover)="onHover(1, true)"
-        (mouseleave)="onHover(1, false)"
-      >
+      <li class="cursor-pointer font-mono font-bold border-r pr-4 relative" routerLink="/material-list" (click)="onMaterialTypeClick('magazine')" (mouseover)="onHover(1, true)"
+        (mouseleave)="onHover(1, false)">
         Dergi
         <!-- Hover edildiğinde gösterilecek kutucuk -->
-        <div
-          *ngIf="isHovered[1]"
-          class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg"
-        >
+        <div *ngIf="isHovered[1]" class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg">
           <!-- Kutucuk içeriği -->
           <p>Dergi İçeriği</p>
         </div>
       </li>
 
       <!-- Makale -->
-      <li
-        class="cursor-pointer font-mono font-bold relative"
-        (mouseover)="onHover(2, true)"
-        (mouseleave)="onHover(2, false)"
-      >
+      <li class="cursor-pointer font-mono font-bold relative" routerLink="/material-list" (click)="onMaterialTypeClick('article')" (mouseover)="onHover(2, true)"
+        (mouseleave)="onHover(2, false)">
         Makale
         <!-- Hover edildiğinde gösterilecek kutucuk -->
-        <div
-          *ngIf="isHovered[2]"
-          class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg"
-        >
+        <div *ngIf="isHovered[2]" class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg">
           <!-- Kutucuk içeriği -->
           <p>Makale İçeriği</p>
         </div>
