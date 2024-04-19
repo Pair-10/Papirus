@@ -6,19 +6,23 @@
                 {{ selectedMaterialType === 'book' ? 'Kitaplar' : (selectedMaterialType === 'magazine' ? 'Dergiler' :
                 'Makaleler') }}
             </h1>
-            <ul class="mt-4">
-                <li *ngFor="let category of categories$ | async" (click)="selectCategory(category.id)">
-                    {{ category.name }}
-                  </li>
+            <ul class="mt-4 space-y-2">
+                <li *ngFor="let category of categories$ | async">
+                    <button (click)="selectCategory(category.id)"
+                        class="text-left w-full py-2 px-3 rounded hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+                        {{ category.name }}
+                    </button>
+                </li>
             </ul>
         </div>
 
         <!-- Ana bölüm -->
         <div class="col-span-3">
             <!-- Kitapları listelemek için döngü -->
-            <div *ngIf="selectedMaterialType === 'book'" class="flex flex-row flex-wrap overflow-y-auto md:h-[92vh] h-screen gap-4">
-                <!-- Kitap kartları -->
-                <div *ngFor="let book of books" class="bg-white shadow-lg rounded-lg p-4">
+            <div *ngIf="selectedMaterialType === 'book'"
+                class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
+                <!-- Kartlar -->
+                <div *ngFor="let book of books" class="bg-white shadow-lg rounded-lg p-4 w-72">
                     <!-- Kitap resmi -->
                     <img class="w-full h-56 object-cover rounded-t-lg" [src]="book.materialImage"
                         [alt]="book.materialName + ' resmi'">
@@ -35,9 +39,10 @@
             </div>
 
             <!-- Dergileri listelemek için döngü -->
-            <div *ngIf="selectedMaterialType === 'magazine'" class="flex flex-row flex-wrap overflow-y-auto md:h-[92vh] h-screen gap-4">
+            <div *ngIf="selectedMaterialType === 'magazine'"
+                class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
                 <!-- Dergi kartları -->
-                <div *ngFor="let magazine of magazines" class="bg-white shadow-lg rounded-lg p-4">
+                <div *ngFor="let magazine of magazines" class="bg-white shadow-lg rounded-lg p-4 w-72">
                     <!-- Dergi resmi -->
                     <img class="w-full h-56 object-cover rounded-t-lg" [src]="magazine.materialImage"
                         [alt]="magazine.materialName + ' resmi'">
@@ -56,9 +61,10 @@
             </div>
 
             <!-- Makaleleri listelemek için döngü -->
-            <div *ngIf="selectedMaterialType === 'article'" class="flex flex-row flex-wrap overflow-y-auto md:h-[92vh] h-screen gap-4">
+            <div *ngIf="selectedMaterialType === 'article'"
+                class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
                 <!-- Makale kartları -->
-                <div *ngFor="let article of articles" class="bg-white shadow-lg rounded-lg p-4">
+                <div *ngFor="let article of articles" class="bg-white shadow-lg rounded-lg p-4 w-72">
                     <!-- Makale resmi -->
                     <img class="w-full h-56 object-cover rounded-t-lg" [src]="article.materialImage"
                         [alt]="article.materialName + ' resmi'">
