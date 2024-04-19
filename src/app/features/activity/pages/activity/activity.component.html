@@ -1,0 +1,101 @@
+<!-- <app-navbar></app-navbar> -->
+<div class="bg-[#F8F8F8]">
+  <div class="container mx-auto ">
+    <div class="pt-4 ">
+      <div class="grid grid-cols-4 gap-4 mt-12 pr-2">
+       <app-sidebar></app-sidebar><!--left menu profil fields-->
+        
+        <!-- <div class="bg-[#f5f5f5] text-black pt-5 col-span-3 flex flex-col items-center space-y--3 rounded-lg pb-20  "> -->
+          <div class="bg-[#f5f5f5] text-black pt-5 col-span-3 flex flex-col items-center space-y-3 rounded-lg pb-20 max-h-[1035px] overflow-y-auto ">
+          <div class="container mx-auto pb-2 max-w-full sm:max-w-lg rounded-lg shadow-xl mb-2 transform hover:scale-110 transition duration-300 ease-in-out" style="box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.03);">
+            <h1 class="text-blue-700 text-2xl font-bold text-center">Activities</h1>
+        </div>
+       <!---->
+          <div (click)="clearSelection()" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 ">
+            <div *ngFor="let i of [0, 1, 2, 3, 4, 5]; let index = index"
+                class="card-container mx-3 mt-6 flex flex-col rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white sm:shrink-0 sm:grow sm:basis-0 transition-transform duration-300 ease-in-out"
+                [class.scale-115]="selectedIndex === index"
+                [class.scale-125]="selectedIndex === index"
+                [class.lg:scale-155]="selectedIndex === index"
+                (click)="toggleSelected($event, index)"
+                style="display: flex; flex-direction: column; height: 100%;">
+                
+                <!-- Resim kısmı -->
+                <img class="rounded-t-lg h-32 sm:h-48 w-full object-cover" 
+                    [src]="['https://kavunlu.com/wp-content/uploads/2021/01/Kolay-Sulu-Boya-Calismalari-2-1-768x1024.jpg', 
+                            'https://iis-akakce.akamaized.net/p.z?%2F%2Fcdn%2Epazarama%2Ecom%2Fasset%2Ftre65c24b4e029be%2Fimages%2Fglasschesscamsatrantakm20cmx20cm%2D1%2Ejpg', 
+                            'https://i.pinimg.com/originals/74/eb/54/74eb54691e5e0bf7d3a9cc8f3ab58130.jpg', 'https://www.kandiragundem.com/wp-content/uploads/2020/02/ozdemir-asaf-kimdir-hayati-ve-eserleri-696x483-1.jpg', 
+                            'https://estetikev.net/wp-content/uploads/2018/01/el-yap%C4%B1m%C4%B1-seramik-kase-2-1200x800.jpg', 
+                            'https://media.timeout.com/images/104684563/750/422/image.jpg',
+                           ]
+                            [index]" 
+                    alt="Card Image {{index + 1}}" />
+                
+                <!-- Yazı kısmı -->
+                <div class="p-8 flex-grow">
+                    <h5 class="mb-4 text-2xl font-semibold leading-tight">{{ ['Watercolor Activity', 'Chess learning activity with creative drama', 'Ink drawing activity', 
+                    'Ömer Asaf Commemoration Day', 'Ceramic Painting Activity', 'Ahmet Hamdi Tanpınar Library Travel'][index] }}
+                    </h5>
+ 
+                     <div class="mb-6 text-lg">
+                    <div *ngIf="index === 0" class="text-lg" >The watercolor event offers participants the opportunity to create their own works of art while teaching watercolor techniques.
+                   <p class="text-orange-600 pt-20  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> Papirus Library/İstanbul</p>
+                   <p class="text-blue-800 pt-2  text-lg">Hour : 10.00-12-30</p>
+                    </div>
+                    <div *ngIf="index === 1" class="text-lg">Discover the game of chess with creative drama techniques! In this event, you will learn the basic rules and strategies of chess through interactive games.
+                      <p class="text-orange-600 pt-6  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> Papirus Library/İstanbul</p>
+                      <p class="text-blue-800 pt-2  text-lg">Hour : 15.00-17-30</p>
+                    </div>
+                    
+                    <div *ngIf="index === 2" class="text-lg">Dive into the bustling street life and vibrant culture of our urban landscape.
+                      <p class="text-orange-600 pt-28  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> Papirus Library/İstanbul</p>
+                      <p class="text-blue-800 pt-2  text-lg">Hour : 14.30-16-30</p>
+                    </div>
+                    <div *ngIf="index === 3" class="text-lg">With this special event, we commemorate the literary legacy and art of Ömer Asaf. In-depth discussions on his works, poetry readings and workshops reflecting his creativity will be held.
+                      <p class="text-orange-600 pt-20  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> Papirus Library/İstanbul</p>
+                      <p class="text-blue-800 pt-2  text-lg">Hour : 14.30-16-30</p>
+                    </div>
+                    <div *ngIf="index === 4" class="text-lg">A fun event that offers participants the chance to paint their own unique ceramic pieces. In this activity, you will learn various painting techniques and be able to design your ceramic works using your imagination.
+                      <p class="text-orange-600 pt-20  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> Papirus Library/İstanbul</p>
+                      <p class="text-blue-800 pt-2  text-lg">Hour : 10.30-12-30</p>
+                    </div>
+                    <div *ngIf="index === 5" class="text-lg">Located in the historical Çemberlitaş district of Istanbul, this library is dedicated to the famous Turkish writer Ahmet Hamdi Tanpınar. While it houses the authors works and the classics of Turkish literature, it is also located in a historical building.
+                      <p class="text-orange-600 pt-6  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span>Ahmet Hamdi Tanpınar Library/İstanbul</p>
+                      <p class="text-blue-800 pt-2  text-lg">Hour : 11.00-12-30</p>
+                    </div>
+                  </div>
+
+
+                </div>
+                
+                <!-- Alt kısım -->
+                <div class="font-bold text-blue-700 border-t-2 border-neutral-100 px-8 py-4 text-center text-surface/75 dark:border-white/10 dark:text-neutral-300">
+                 <i class="text-lg pr-2 fas fa-calendar-alt"></i>
+                 <small>{{ ['Event Date - 17.04.2024 -', 'Event Date - 20.04.2024 -', 'Event Date - 24.04.2024 -', 'Event Date - 27.04.2024 -', 'Event Date - 30.04.2024 -', 'Event Date - 08.05.2024 -'][index] }}</small>
+                </div>
+                
+            </div>
+          </div>
+
+        
+        
+        
+        
+          
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  
+  
+  
+   
+   
+  
+  
+  
+  
+  
