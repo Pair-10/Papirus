@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, Output, EventEmitter } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -22,6 +22,12 @@ export class NavbarComponent {
   }
   toggleHamburgerMenu() {
     this.hamburgerMenuOpen = !this.hamburgerMenuOpen;
-    console.log("basildi")
+  }
+  @Output() materialTypeSelected = new EventEmitter<string>();
+  constructor(private router: Router) { }
+  
+  onMaterialTypeClick(type: string) {
+    this.materialTypeSelected.emit(type);
+    this.router.navigate(['/material-list'], { queryParams: { type } });
 }
 }

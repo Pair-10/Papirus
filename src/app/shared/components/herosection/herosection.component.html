@@ -33,14 +33,13 @@
         Keyifli okumalar dileriz!
       </p>
     </div>
-    <div>
+    <div class="ml-6">
       <swiper-container init="false">
-        <swiper-slide><img class="w-full h-full rounded-lg" src="https://picsum.photos/600"
-            alt="photo" /></swiper-slide>
-        <swiper-slide><img class="w-full h-full rounded-lg" src="https://picsum.photos/600"
-            alt="photo" /></swiper-slide>
-        <swiper-slide><img class="w-full h-full rounded-lg" src="https://picsum.photos/600"
-            alt="photo" /></swiper-slide>
+        <ng-container *ngFor="let slide of slides">
+          <swiper-slide class="w-full h-full rounded-lg">
+              <img [src]="slide.imageUrl" class="w-full h-full rounded-lg" alt="slide image" />
+          </swiper-slide>
+        </ng-container>
       </swiper-container>
     </div>
   </div>

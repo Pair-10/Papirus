@@ -1,0 +1,82 @@
+<div class="w-full h-auto md:h-screen bg-white py-6 md:py-16">
+    <div class="md:max-w-[1350px] max-w-[600px] xl:m-auto m-6 grid grid-cols-4 gap-4 h-full">
+        <!-- Sidebar -->
+        <div class="md:col-span-1 flex flex-col bg-gray-100 p-4 rounded-lg h-full overflow-y-auto">
+            <h1 class="text-center md:text-3xl text-sm font-bold">
+                {{ selectedMaterialType === 'book' ? 'Kitaplar' : (selectedMaterialType === 'magazine' ? 'Dergiler' :
+                'Makaleler') }}
+            </h1>
+            <ul class="mt-4 space-y-2">
+                <li *ngFor="let category of categories$ | async">
+                    <button (click)="selectCategory(category.id)"
+                        class="text-left w-full py-2 px-3 rounded hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+                        {{ category.name }}
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Ana bölüm -->
+        <div class="col-span-3">
+            <!-- Kitapları listelemek için döngü -->
+            <div *ngIf="selectedMaterialType === 'book'"
+                class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
+                <!-- Kartlar -->
+                <div *ngFor="let book of books" class="bg-white shadow-lg rounded-lg p-4 w-72">
+                    <!-- Kitap resmi -->
+                    <img class="w-full h-56 object-cover rounded-t-lg" [src]="book.materialImage"
+                        [alt]="book.materialName + ' resmi'">
+                    <!-- Kitap başlığı -->
+                    <h3 class="text-xl font-bold mt-2">{{ book.materialName }}</h3>
+                    <!-- Yazar -->
+                    <p class="text-gray-600">Yazar: {{ book.author }}</p>
+                    <!-- ISBN -->
+                    <p class="text-gray-600">ISBN: {{ book.isbn }}</p>
+                    <!-- Daha fazla oku düğmesi -->
+                    <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla
+                        oku</button>
+                </div>
+            </div>
+
+            <!-- Dergileri listelemek için döngü -->
+            <div *ngIf="selectedMaterialType === 'magazine'"
+                class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
+                <!-- Dergi kartları -->
+                <div *ngFor="let magazine of magazines" class="bg-white shadow-lg rounded-lg p-4 w-72">
+                    <!-- Dergi resmi -->
+                    <img class="w-full h-56 object-cover rounded-t-lg" [src]="magazine.materialImage"
+                        [alt]="magazine.materialName + ' resmi'">
+                    <!-- Dergi başlığı -->
+                    <h3 class="text-xl font-bold mt-2">{{ magazine.materialName }}</h3>
+                    <!-- Yazar -->
+                    <p class="text-gray-600">Yazar: {{ magazine.author }}</p>
+                    <!-- ISSN -->
+                    <p class="text-gray-600">ISSN: {{ magazine.issn }}</p>
+                    <!-- Sayı -->
+                    <p class="text-gray-600">Sayı: {{ magazine.issue }}</p>
+                    <!-- Daha fazla oku düğmesi -->
+                    <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla
+                        oku</button>
+                </div>
+            </div>
+
+            <!-- Makaleleri listelemek için döngü -->
+            <div *ngIf="selectedMaterialType === 'article'"
+                class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
+                <!-- Makale kartları -->
+                <div *ngFor="let article of articles" class="bg-white shadow-lg rounded-lg p-4 w-72">
+                    <!-- Makale resmi -->
+                    <img class="w-full h-56 object-cover rounded-t-lg" [src]="article.materialImage"
+                        [alt]="article.materialName + ' resmi'">
+                    <!-- Makale başlığı -->
+                    <h3 class="text-xl font-bold mt-2">{{ article.materialName }}</h3>
+                    <!-- Yazar -->
+                    <p class="text-gray-600">Yazar: {{ article.author }}</p>
+                    <!-- Daha fazla oku düğmesi -->
+                    <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla
+                        oku</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
