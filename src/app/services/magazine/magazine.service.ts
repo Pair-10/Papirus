@@ -11,7 +11,7 @@ export class MagazineService {
     {
       id: 1,
       materialName: 'Dergi 1',
-      materialImage: 'https://picsum.photos/100',
+      materialImage: 'https://picsum.photos/100?random=1',
       author: 'Yazar A',
       categoryId: 4,
       issn: '1234-5678',
@@ -20,7 +20,7 @@ export class MagazineService {
   {
       id: 2,
       materialName: 'Dergi 2',
-      materialImage: 'https://picsum.photos/100',
+      materialImage: 'https://picsum.photos/100?random=2',
       author: 'Yazar B',
       categoryId: 1,
       issn: '8765-4321',
@@ -29,7 +29,7 @@ export class MagazineService {
   {
       id: 3,
       materialName: 'Dergi 3',
-      materialImage: 'https://picsum.photos/100',
+      materialImage: 'https://picsum.photos/100?random=3',
       author: 'Yazar C',
       categoryId: 5,
       issn: '1357-2468',
@@ -38,7 +38,7 @@ export class MagazineService {
   {
       id: 4,
       materialName: 'Dergi 4',
-      materialImage: 'https://picsum.photos/100',
+      materialImage: 'https://picsum.photos/100?random=4',
       author: 'Yazar D',
       categoryId: 2,
       issn: '8642-1357',
@@ -47,7 +47,7 @@ export class MagazineService {
   {
       id: 5,
       materialName: 'Dergi 5',
-      materialImage: 'https://picsum.photos/100',
+      materialImage: 'https://picsum.photos/100?random=5',
       author: 'Yazar E',
       categoryId: 3,
       issn: '7890-1234',
@@ -56,7 +56,7 @@ export class MagazineService {
   {
       id: 6,
       materialName: 'Dergi 6',
-      materialImage: 'https://picsum.photos/100',
+      materialImage: 'https://picsum.photos/100?random=6',
       author: 'Yazar F',
       categoryId: 4,
       issn: '4321-8765',
@@ -65,7 +65,7 @@ export class MagazineService {
   {
       id: 7,
       materialName: 'Dergi 7',
-      materialImage: 'https://picsum.photos/100',
+      materialImage: 'https://picsum.photos/100?random=7',
       author: 'Yazar G',
       categoryId: 2,
       issn: '1234-8765',
@@ -74,7 +74,7 @@ export class MagazineService {
   {
       id: 8,
       materialName: 'Dergi 8',
-      materialImage: 'https://picsum.photos/100',
+      materialImage: 'https://picsum.photos/100?random=8',
       author: 'Yazar H',
       categoryId: 1,
       issn: '5678-1234',
@@ -83,7 +83,7 @@ export class MagazineService {
   {
       id: 9,
       materialName: 'Dergi 9',
-      materialImage: 'https://picsum.photos/100',
+      materialImage: 'https://picsum.photos/100?random=9',
       author: 'Yazar I',
       categoryId: 5,
       issn: '2468-9753',
@@ -92,7 +92,7 @@ export class MagazineService {
   {
       id: 10,
       materialName: 'Dergi 10',
-      materialImage: 'https://picsum.photos/100',
+      materialImage: 'https://picsum.photos/100?random=10',
       author: 'Yazar J',
       categoryId: 3,
       issn: '9753-2468',
