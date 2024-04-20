@@ -1,16 +1,15 @@
 <!-- <app-navbar></app-navbar> -->
 <div class="bg-[#ffffff]">
   <div class="container mx-auto ">
-    
-      <div class="grid grid-cols-4 gap-4">
+
        <app-sidebar></app-sidebar><!--left menu profil fields-->
         
-        <div class="bg-[#f5f5f5] text-black pt-5 col-span-3 flex flex-col items-center space-y--3 rounded-lg">
+        <div class="bg-[#f5f5f5] text-black pt-5 col-span-3 flex flex-col items-center space-y--3 rounded-lg max-h-[1035px] overflow-y-auto">
           <div class="container mx-auto p-2 max-w-xs sm:max-w-xs rounded-lg shadow-xl mb-6 transform hover:scale-105 transition duration-300 ease-in-out" style="box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.03);">
             <h1 class="text-blue-700 text-lg font-bold text-center">My Penalties</h1>
         </div>
         
-          <div class="bg-[#f5f5f5] text-black md:w-3/4 mx-auto flex flex-col">
+          <div class="bg-[#f5f5f5] text-black md:w-3/4 mx-auto flex flex-col ">
               <!--- materials-penalty body field -->
               <div class="bg-[#f2f2f2] container mx-auto pt-4 border-2 border-[#1C39BB] rounded-lg shadow-2xl text-blue-900 font-medium" style="border-radius: 20px;">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 ">
@@ -23,13 +22,13 @@
                           <div class="mb-4 ml-10">Number Of Days Late: 10</div>
                       </div>
                       <div class="flex flex-col items-center">
-                          <div class="mt-10 text-center">Penalty Amount</div>
+                          <div class="mt-10 text-center">Penalty Price</div>
                           <div class="mt-2 text-center font-bold text-l">100₺</div>
                       </div>
                   </div>
               </div>
               
-              <div class="mt-4"></div>
+              <div class="mt-4 "></div>
               <div class="bg-blue-950 text-gray-300 container mx-auto pt-4 border-2 border-[#FFEFD5] rounded-lg shadow-2xl text-blue-950 font-medium" style="border-radius: 20px;">
                   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
@@ -41,14 +40,14 @@
                           <div class="mb-4 ml-10">Number Of Days Late: 8</div>
                       </div>
                       <div class="flex flex-col items-center">
-                          <div class="mt-10 text-center">Penalty Amount</div>
+                          <div class="mt-10 text-center">Penalty Price</div>
                           <div class="mt-2 text-center font-bold text-l">80₺</div>
                       </div>
                   </div>
               </div>
           </div>
             
-          <div class="pt-4 mx-auto mx-auto pb-10 w-full sm:w-full md:w-2/3 pl-5 pr-5">
+          <div class="pt-4 mx-auto mx-auto pb-10 w-full sm:w-full md:w-2/3 pl-5 pr-5  mb-10">
             <div class="mb-7 container mx-auto p-2 max-w-xs sm:max-w-xs  rounded-lg mt-5 shadow-xl transform hover:scale-105 transition duration-300 ease-in-out" >
               <h1 class="text-blue-700 text-lg font-bold text-center">Penalty History</h1>
           </div>
@@ -82,10 +81,10 @@
               <thead class="uppercase tracking-wider border-b-2 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
                 <tr>
                   <th scope="col" class="px-6 py-3">
-                  Books
+                  Material Name
                   </th>
                   <th scope="col" class="px-6 py-3">
-                    Penalty Amount
+                    Penalty Price
                   </th>
                   <th scope="col" class="px-6 py-3">
                     Payment Date
@@ -96,7 +95,7 @@
             <!-- Table body -->
             <tbody>
         
-              <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600">
+              <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
                 <th scope="row" class="px-6 py-3">
                   Yeraltından Notlar
                 </th>
@@ -114,7 +113,7 @@
             
             </tr>
       
-            <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600">
+            <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
               <th scope="row" class="px-6 py-3">
                 Yüzyıllık Yalnızlık
               </th>
@@ -129,7 +128,7 @@
               <td class="px-6 py-3">50.00₺</td>
               <td class="px-6 py-3">05.04.2024</td>
             </tr>
-            <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600">
+            <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
               <th scope="row" class="px-6 py-3">
               iki Şehrin Hikâyesi
               </th>
@@ -144,7 +143,7 @@
               <td class="px-6 py-3">40.00₺</td>
               <td class="px-6 py-3">09.04.2024</td>
             </tr>
-            <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600">
+            <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
               <th scope="row" class="px-6 py-3">
                 Uğultulu Tepeler
               </th>
@@ -158,7 +157,7 @@
               <td class="px-6 py-3">80.00₺</td>
               <td class="px-6 py-3">12.04.2024</td>
             </tr>
-            <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600">
+            <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
               <th scope="row" class="px-6 py-3">
                 Gizli Bahçe
               </th>
@@ -171,8 +170,8 @@
           <tfoot class="border-t-2 dark:border-neutral-600 bg-neutral-50 hover:bg-yellow-200">
             <tr>
               <th class="px-6 py-3">Total:</th>
-              <td class="px-6 py-3">170.00₺</td><!--Total PENALTY AMOUNT-->
-              <td class="px-6 py-3"></td><!--Total PENALTY AMOUNT-->
+              <td class="px-6 py-3">170.00₺</td><!--Total PENALTY PRICE-->
+              <td class="px-6 py-3"></td>
             </tr>
           </tfoot>
     
