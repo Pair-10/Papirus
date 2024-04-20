@@ -36,11 +36,13 @@ export class MaterialListComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
-            this.selectedMaterialType = params['type'] || 'book';
-            this.loadMaterials();
-            this.loadCategories();
+          this.selectedMaterialType = params['type'] || 'book';
+          const categoryId = params['categoryId'];
+          this.selectedCategory = categoryId ? +categoryId : 0; // Kategori ID'sini sayıya dönüştür
+          this.loadMaterials();
+          this.loadCategories();
         });
-    }
+      }
     loadCategories() {
         // `selectedMaterialType` değiştiğinde kategorileri güncelleyin
         this.categories$ = this.selectedMaterialType === 'book'
@@ -51,7 +53,7 @@ export class MaterialListComponent implements OnInit {
     }
     selectCategory(categoryId: number) {
         this.selectedCategory = categoryId;
-        this.loadMaterials(); // Seçilen kategoriye göre ürünleri yeniden yükleyin
+        this.loadMaterials();
     }
     loadMaterials() {
         if (this.selectedMaterialType === 'book') {
