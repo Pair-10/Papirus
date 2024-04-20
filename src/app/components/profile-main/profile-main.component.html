@@ -1,0 +1,17 @@
+<div
+class="w-full md:h-screen h-auto bg-gradient-to-b from-slate-200 to-slate-50  ">
+<div class="flex md:max-w-[1350px] xl:m-auto m-6 md:grid md:grid-cols-2">
+    <app-sidebar [gelenVeri]="veriAl" (veriGonderme)="veriYolla($event)" ></app-sidebar>  
+    <div class="flex-1 p-4">
+        <div *ngIf="gelenIcerik === 'profil-duzenle'">
+          <app-profile-edit></app-profile-edit>
+          ...
+        </div>
+        <div *ngIf="gelenIcerik === 'cezalar'">
+          
+          ...
+        </div>
+        <!-- Diğer içerikleri de aynı şekilde devam ettirin -->
+      </div>
+</div>
+</div>
