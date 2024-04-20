@@ -4,6 +4,10 @@ import { BookDetailComponent } from './features/book/pages/book-detail/book-deta
 import { PenaltyComponent } from './features/penalty/pages/penalty/penalty.component'; //penalty
 import { MaterialListComponent } from './shared/components/material-list/material-list.component';
 import { PenaltyAdminComponent } from './features/penalty/pages/penalty-admin/penalty-admin.component'; //penalty-admin
+import { ActivityComponent } from './features/activity/pages/activity/activity.component';//activity
+import { NotfoundComponent } from './shared/components/notfound/notfound.component';
+
+
 
 export const routes: Routes = [
     { path: '', component: MainComponent },
@@ -11,4 +15,8 @@ export const routes: Routes = [
     { path: 'penalty', component: PenaltyComponent }, //penalty
     { path: 'material-list', component: MaterialListComponent },
     { path: 'penalty-admin', component: PenaltyAdminComponent }, //penalty-admin
+    { path: 'activity', component: ActivityComponent }, //activity
+    { path: '**', component: NotfoundComponent }
+
+
 ];
