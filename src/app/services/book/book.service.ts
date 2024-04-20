@@ -12,7 +12,6 @@ export class BookService {
     { id: 3, name: 'Biyografi' },
     { id: 4, name: 'Tarih' },
     { id: 5, name: 'Felsefe' },
-    // Daha fazla kitap kategorisi ekleyebilirsiniz
   ];
 
   private books: Book[] = [
@@ -96,7 +95,6 @@ export class BookService {
       categoryId: 5,
       isbn: '3216549870',
     }
-    // Daha fazla kitap verisi ekleyebilirsiniz
   ];
 
   constructor() { }
