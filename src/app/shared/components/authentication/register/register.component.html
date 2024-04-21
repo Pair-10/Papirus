@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .rounded-2rem {
+      border-radius: 2rem;
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-blue-200 via-blue-300 to-blue-400 font-roboto">
+  <div class="min-h-screen flex items-center justify-center bg-blue-100">
+    <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-lg rounded-2rem">
+      <h2 class="text-center text-3xl font-extrabold text-gray-900 mb-4">Create a new account</h2>
+      <form [formGroup]="registerForm" class="space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class>
+                <label for="firstName" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+                <input type="text" name="firstName" id="firstName" [formControl]="firstname"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 " placeholder="Tobeto" required />
+              </div>
+              <div class>
+                <label for="lastName" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+                <input type="text" name="lastName" id="lastName" [formControl]="lastname"
+                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400" placeholder="TOBETO" required />
+              </div>
+          <div>
+            <label for="email" class="mb-2 text-sm font-medium text-gray-900 block">Email address</label>
+            <input type="email" name="email" id="email" [formControl]="emailaddress"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400" placeholder="tobeto@gmail.com" required />
+          </div>
+          <div>
+            <label for="phoneNumber" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Phone Number</label>
+            <input type="number" name="phoneNumber" id="phoneNumber" [formControl]="phonenumber"
+             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400" placeholder="123-456-7890" required />
+          </div>
+          <div>
+            <label for="password" class="mb-2 text-sm font-medium text-gray-900 block">Password</label>
+            <input type="password" name="password" id="password" [formControl]="password"
+             placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400" required />
+          </div>
+          <div>
+            <label for="confirmPassword" class="mb-2 text-sm font-medium text-gray-900 block">Confirm Password</label>
+            <input type="password" name="confirmPassword" id="confirmPassword" placeholder="••••••••" [formControl]="confirmpassword"
+             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400" required />
+          </div>
+        </div>
+        <div>
+          <button type="submit"(click)="registerpassword()"
+           class="bg-blue-500 hover:bg-blue-700 text-white px-4 py-2 rounded-lg w-full transition-colors duration-300">Create Account</button>
+        </div>
+        <div class="text-sm text-center text-gray-500 mt-4">
+          Already have an account? <a [routerLink]="['/login']" class="text-blue-700 hover:underline">Sign In</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
