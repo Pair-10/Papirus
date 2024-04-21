@@ -73,9 +73,9 @@
           <button class="bg-blue-700 text-white px-4 py-2 ml-4 rounded">Kayıt Ol</button>
         </div>
         <ul class="text-2xl text-center mt-2 font-mono font-bold">
-          <li routerLink="/material-list" class="border-b-2 border-gray-300 pb-1">Kitap</li>
-          <li routerLink="/material-list" class="border-b-2 border-gray-300 pb-1">Dergi</li>
-          <li routerLink="/material-list" class="border-b-2 border-gray-300 pb-1">Makale</li>
+          <li [routerLink]="['/material-list']" [queryParams]="{ type: 'book' }" class="border-b-2 border-gray-300 pb-1">Kitap</li>
+          <li [routerLink]="['/material-list']" [queryParams]="{ type: 'magazine' }" class="border-b-2 border-gray-300 pb-1">Dergi</li>
+          <li [routerLink]="['/material-list']" [queryParams]="{ type: 'article' }" class="border-b-2 border-gray-300 pb-1">Makale</li>
         </ul>
       </div>
     </div>
@@ -85,35 +85,44 @@
   <div class="hidden md:flex bg-blue-950 items-center justify-center">
     <ul class="flex gap-6 text-xl">
       <!-- Kitap -->
-      <li class="cursor-pointer font-mono font-bold border-r pr-4 relative" routerLink="/material-list" (click)="onMaterialTypeClick('book')" (mouseover)="onHover(0, true)"
-        (mouseleave)="onHover(0, false)">
-        Kitap
+      <li class="font-mono font-bold border-r pr-4 relative" (mouseover)="onHover(0, true)" (mouseleave)="onHover(0, false)">
+        <a class="cursor-pointer" routerLink="/material-list"  (click)="onMaterialTypeClick('book')">
+          Kitap
+        </a>
         <!-- Hover edildiğinde gösterilecek kutucuk -->
         <div *ngIf="isHovered[0]" class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg">
           <!-- Kutucuk içeriği -->
-          <p>Kitap İçeriği</p>
+          <button *ngFor="let category of bookcategories$ | async" (click)="selectCategory(category.id,'book')" style="display: block;">
+            {{ category.name }}
+          </button>
         </div>
       </li>
 
       <!-- Dergi -->
-      <li class="cursor-pointer font-mono font-bold border-r pr-4 relative" routerLink="/material-list" (click)="onMaterialTypeClick('magazine')" (mouseover)="onHover(1, true)"
-        (mouseleave)="onHover(1, false)">
-        Dergi
+      <li class="font-mono font-bold border-r pr-4 relative" (mouseover)="onHover(1, true)" (mouseleave)="onHover(1, false)">
+        <a class="cursor-pointer" routerLink="/material-list"  (click)="onMaterialTypeClick('magazine')">
+          Dergi
+        </a>
         <!-- Hover edildiğinde gösterilecek kutucuk -->
         <div *ngIf="isHovered[1]" class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg">
           <!-- Kutucuk içeriği -->
-          <p>Dergi İçeriği</p>
+          <button *ngFor="let category of magazinecategories$ | async" (click)="selectCategory(category.id,'magazine')" style="display: block;">
+            {{ category.name }}
+          </button>
         </div>
       </li>
 
       <!-- Makale -->
-      <li class="cursor-pointer font-mono font-bold relative" routerLink="/material-list" (click)="onMaterialTypeClick('article')" (mouseover)="onHover(2, true)"
-        (mouseleave)="onHover(2, false)">
-        Makale
+      <li class="font-mono font-bold border-r pr-4 relative" (mouseover)="onHover(2, true)" (mouseleave)="onHover(2, false)">
+        <a class="cursor-pointer" routerLink="/material-list"  (click)="onMaterialTypeClick('article')">
+          Makale
+        </a>
         <!-- Hover edildiğinde gösterilecek kutucuk -->
         <div *ngIf="isHovered[2]" class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg">
           <!-- Kutucuk içeriği -->
-          <p>Makale İçeriği</p>
+          <button *ngFor="let category of articlecategories$ | async" (click)="selectCategory(category.id,'article')" style="display: block;">
+            {{ category.name }}
+          </button>
         </div>
       </li>
     </ul>

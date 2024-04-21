@@ -21,9 +21,9 @@ export class MaterialListComponent implements OnInit {
     books: Book[] = [];
     magazines: Magazine[] = [];
     articles: Article[] = [];
-    categories$: Observable<{ id: number; name: string }[]> = of([]);
+    categories$: Observable<{ id: string; name: string }[]> = of([]);
     // Seçilen kategori
-    selectedCategory: number = 0;
+    selectedCategory: string = "";
 
     constructor(
         private route: ActivatedRoute,
@@ -36,11 +36,13 @@ export class MaterialListComponent implements OnInit {
 
     ngOnInit() {
         this.route.queryParams.subscribe(params => {
-            this.selectedMaterialType = params['type'] || 'book';
-            this.loadMaterials();
-            this.loadCategories();
+          this.selectedMaterialType = params['type'] || 'book';
+          const categoryId = params['categoryId'];
+          this.selectedCategory = categoryId !== undefined ? categoryId : "";
+          this.loadMaterials();
+          this.loadCategories();
         });
-    }
+      }
     loadCategories() {
         // `selectedMaterialType` değiştiğinde kategorileri güncelleyin
         this.categories$ = this.selectedMaterialType === 'book'
@@ -49,9 +51,9 @@ export class MaterialListComponent implements OnInit {
                 ? this.articleService.getCategories()
                 : this.magazineService.getCategories();
     }
-    selectCategory(categoryId: number) {
+    selectCategory(categoryId: string) {
         this.selectedCategory = categoryId;
-        this.loadMaterials(); // Seçilen kategoriye göre ürünleri yeniden yükleyin
+        this.loadMaterials();
     }
     loadMaterials() {
         if (this.selectedMaterialType === 'book') {
