@@ -16,4 +16,7 @@ export class SidebarComponent {
   navigateToActivity() {
     this.router.navigate(['/activity']);
   }
+  navigateToHelp() {
+    this.router.navigate(['/help']);
+  }
 }
