@@ -19,4 +19,10 @@ export class SidebarComponent {
   navigateToHelp() {
     this.router.navigate(['/help']);
   }
+  navigateToEditProfile() {
+    this.router.navigate(['/edit-profile']);
+  }
+  navigateToMyBook() {
+    this.router.navigate(['/My-Material']);
+  }
 }
