@@ -19,6 +19,9 @@ export const routes: Routes = [
     { path: 'material-list', component: MaterialListComponent },
     { path: 'penalty-admin', component: PenaltyAdminComponent }, //penalty-admin
     { path: 'activity', component: ActivityComponent }, //activity
+    {path:'help',component:HelpComponent},
+    {path:'magazine-detail',component:MagazineDetailComponent},
+    {path:'article-detail',component:ArticleDetailComponent},
     { path: '**', component: NotfoundComponent }
 
 
