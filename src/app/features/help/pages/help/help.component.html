@@ -1,0 +1,149 @@
+<!-- <app-navbar></app-navbar> -->
+<div class="bg-[#F8F8F8] ">
+    <div class="container mx-auto h-full">
+      <div class="pt-4 ">
+        <div class="grid grid-cols-4 gap-4 mt-12">
+         <app-sidebar></app-sidebar><!--left menu profil fields-->
+          
+         <div class="bg-[#f5f5f5] text-black  col-span-3 w-full flex flex-col items-center space-y-3 rounded-lg pb-20 max-h-[1035px] overflow-y-auto">
+           
+                <div class="bg-blue-900 w-full bg-cover bg-center p-10  mb-1" style="background-image: url('https://images.pexels.com/photos/3747593/pexels-photo-3747593.jpeg?auto=compress&cs=tinysrgb&w=600'); clip-path: polygon(0 0, 100% 0, 100% 65%, 0 100%); min-height: 400px;">
+                
+                <div class="container bg-gray-100 mx-auto mt-16 pb-2 w-full sm:max-w-lg rounded-lg mb-10 transform hover:scale-110 transition duration-300 ease-in-out" style="box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.03);">
+                    <h1 class="text-blue-700 text-3xl font-bold text-center">Hi how can  we help ?</h1>
+                  </div>
+                 
+        </div>
+        <div class="container bg-gray-100 mx-auto mt-40 pb-5  mb-25 w-1/2 sm:max-w-lg rounded-lg transform hover:scale-110 transition duration-300 ease-in-out " style=" box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.03);">
+            <h1 class="text-black text-xl ">The answers to all your questions about this site are below. You can refer to the contact section for more detailed answers.</h1>
+        </div>
+        
+        <!--accordion field-->
+            <div id="accordion-arrow-icon" class="w-2/3 rounded-lg ">
+                <div id="accordion-arrow-icon" class="w-full mt-2 mb-10">
+                       <!-- Accordion Panel 1-Başlık tarzı genel açıklama -->
+                        <h2 id="accordion-arrow-icon-heading-1" class="w-full ">
+                            <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-gray-800 g-gray-300 border border-b-0 border-blue-500 rounded-t-lg focus:ring-2 focus:ring-blue-300 dark:focus:ring-gray-700 dark:border-blue-700 hover:bg-gray-300 gap-3" (click)="toggleAccordion(1)" [attr.aria-expanded]="openAccordionIndex === 1" aria-controls="accordion-arrow-icon-body-1">
+                                <span>General information for materials</span>
+                            </button>
+                        </h2>
+                        <div id="accordion-arrow-icon-body-1" class="w-full transition-opacity duration-300 ease-in-out p-5 border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900" [class.hidden]="openAccordionIndex !== 1" aria-labelledby="accordion-arrow-icon-heading-1">
+                            <p class="mb-2 text-gray-500 dark:text-gray-400">For lost or worn material,the same or a new print is first obtained</p>
+                            <p class="text-gray-500 dark:text-gray-400">If it cannot be found,another material of the same value is purchased and the worn out material is not given to the user</p>
+                        </div>
+
+                    
+                    <!-- Accordion Panel 2-Soru içeriği  -->
+                    <h2 id="accordion-arrow-icon-heading-2" class="w-full">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-gray-800 g-gray-300 border border-b-0 border-orange-500  focus:ring-2 focus:ring-pink-200 dark:focus:ring-gray-700 dark:border-blue-700 hover:bg-gray-300 gap-3" (click)="toggleAccordion(2)" [attr.aria-expanded]="openAccordionIndex === 2" aria-controls="accordion-arrow-icon-body-2">
+                            <span>The material I want is borrowed,what should I do ?</span>
+                            <svg class="w-4 h-4 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-arrow-icon-body-2" class="w-full transition-opacity duration-300 ease-in-out p-5 border border-b-0 border-gray-200 dark:border-gray-700" [class.hidden]="openAccordionIndex !== 2" aria-labelledby="accordion-arrow-icon-heading-2">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">You can make a resevation for the material you want to borrow</p>
+                    </div>
+                     <!-- Accordion Panel 3-Soru içeriği  -->
+                     <h2 id="accordion-arrow-icon-heading-2" class="w-full">
+                        <button type="button" class="flex items-center justify-between w-full p-5 font-medium text-gray-800 g-gray-300 border border-b-0 border-orange-500  focus:ring-2 focus:ring-pink-200 dark:focus:ring-gray-700 dark:border-blue-700 hover:bg-gray-300 gap-3" (click)="toggleAccordion(3)" [attr.aria-expanded]="openAccordionIndex === 3" aria-controls="accordion-arrow-icon-body-2">
+                            <span>What happend if I do net return the material I borrowed by the return date?</span>
+                            <svg class="w-4 h-4 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.529 7.988a2.502 2.502 0 0 1 5 .191A2.441 2.441 0 0 1 10 10.582V12m-.01 3.008H10M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-arrow-icon-body-2" class="w-full transition-opacity duration-300 ease-in-out p-5 border border-b-0 border-gray-200 dark:border-gray-700" [class.hidden]="openAccordionIndex !== 3" aria-labelledby="accordion-arrow-icon-heading-2">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">If you do not return the material you borrowed by the deadline you will have to pay a fee of x amount for each day it is returned late</p>
+                    </div>
+
+                    
+                     <!-- Accordion Panel 4--genel anlatım tarzında -->
+                    <h2 id="accordion-arrow-icon-heading-3" class="w-full">
+                        <button type="button"
+                                class="flex items-center justify-between w-full p-5 font-medium text-gray-800 bg-gray-300 border border-b-0 border-orange-500 focus:ring-2 focus:ring-pink-200 dark:focus:ring-gray-700 dark:border-blue-700 hover:bg-gray-300 gap-3"
+                                (click)="toggleAccordion(4)"
+                                [attr.aria-expanded]="openAccordionIndex === 4"
+                                aria-controls="accordion-arrow-icon-body-3">
+                            <span>General information about late fines</span>
+                            <svg class="w-4 h-4 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18m9-9H3"/>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-arrow-icon-body-3"
+                        class="w-full transition-opacity duration-300 ease-in-out p-5 border border-b-0 border-gray-200 dark:border-gray-700"
+                        [class.hidden]="openAccordionIndex !== 4"
+                        aria-labelledby="accordion-arrow-icon-heading-3">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">If you have any penalties,you can access them listed int the penalties section</p>
+                    </div>
+
+
+                      <!-- Accordion Panel 5--genel anlatım tarzında -->
+                      <h2 id="accordion-arrow-icon-heading-3" class="w-full">
+                        <button type="button"
+                                class="flex items-center justify-between w-full p-5 font-medium text-gray-800 bg-gray-300 border border-b-0 border-orange-500 focus:ring-2 focus:ring-pink-200 dark:focus:ring-gray-700 dark:border-blue-700 hover:bg-gray-300 gap-3"
+                                (click)="toggleAccordion(5)"
+                                [attr.aria-expanded]="openAccordionIndex === 5"
+                                aria-controls="accordion-arrow-icon-body-3">
+                            <span>About borrowed material</span>
+                            <svg class="w-4 h-4 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18m9-9H3"/>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-arrow-icon-body-3"
+                        class="w-full transition-opacity duration-300 ease-in-out p-5 border border-b-0 border-gray-200 dark:border-gray-700"
+                        [class.hidden]="openAccordionIndex !== 5"
+                        aria-labelledby="accordion-arrow-icon-heading-3">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">No extension of time can be made for borrowed material</p>
+                        <p class="text-gray-500">No more than 10% of a borrowed book or an article of the same issue of a magazine is reproduced.</p>
+                    </div>
+                   <!-- Accordion Panel 6--genel anlatım tarzında -->
+                    <h2 id="accordion-arrow-icon-heading-3" class="w-full">
+                        <button type="button"
+                                class="flex items-center justify-between w-full p-5 font-medium text-gray-800 bg-gray-300 border border-b-0 border-orange-500 focus:ring-2 focus:ring-pink-200 dark:focus:ring-gray-700 dark:border-blue-700 hover:bg-gray-300 gap-3"
+                                (click)="toggleAccordion(6)"
+                                [attr.aria-expanded]="openAccordionIndex === 6"
+                                aria-controls="accordion-arrow-icon-body-3">
+                            <span>General information about material recommendations</span>
+                            <svg class="w-4 h-4 shrink-0" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v18m9-9H3"/>
+                            </svg>
+                        </button>
+                    </h2>
+                    <div id="accordion-arrow-icon-body-3"
+                        class="w-full transition-opacity duration-300 ease-in-out p-5 border border-b-0 border-gray-200 dark:border-gray-700"
+                        [class.hidden]="openAccordionIndex !== 6"
+                        aria-labelledby="accordion-arrow-icon-heading-3">
+                        <p class="mb-2 text-gray-500 dark:text-gray-400">You can make suggestions for materials that are not in the library system from the material suggestions section.</p>
+                    </div>
+                 <!--accordion field end-->
+
+                </div>
+            </div>
+        </div>
+
+        
+        
+
+            
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  
+    
+    
+    
+    
+     
+     
+    
+    
+    
+    
+    
+  
