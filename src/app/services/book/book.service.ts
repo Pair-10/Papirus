@@ -22,11 +22,10 @@ export class BookService implements OnInit {
   token = jwtToken.jwt;
   private baseUrl = 'http://localhost:60805/api';
 
-getCategories(): Observable<{ id: string; name: string }[]> {
-  return of(this.categories);
-}
+
+
   ngOnInit(): void {
-    this.getCategories();
+    
   }
 
   getMaterialTypeBook(materialTypeName: string): Observable<any[]> {

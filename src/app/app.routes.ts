@@ -6,6 +6,10 @@ import { MaterialListComponent } from './shared/components/material-list/materia
 import { PenaltyAdminComponent } from './features/penalty/pages/penalty-admin/penalty-admin.component'; //penalty-admin
 import { ActivityComponent } from './features/activity/pages/activity/activity.component';//activity
 import { NotfoundComponent } from './shared/components/notfound/notfound.component';
+import { LoginComponent } from './shared/components/authentication/login/login.component';
+import { RegisterComponent } from './shared/components/authentication/register/register.component';
+import { ForgotPasswordComponent } from './shared/components/authentication/forgot-password/forgot-password.component';
+import { NewPasswordComponent } from './shared/components/authentication/new-password/new-password.component';
 
 
 

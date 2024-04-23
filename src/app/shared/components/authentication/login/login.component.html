@@ -22,20 +22,20 @@
         <h5 class="text-xl font-medium text-gray-900 dark:text-white">Sign In To Our Platform</h5>
         <div>
           <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
-          <input type="email" name="email" id="email" placeholder="tobeto@gmail.com" [formControl]="email"
+          <input type="email" name="email" id="email" placeholder="tobeto@gmail.com" formControlName="email"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400"
             required />
         </div>
         <div>
           <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
             Password</label>
-          <input type="password" name="password" id="password" placeholder="••••••••"[formControl]="password"
+          <input type="password" name="password" id="password" placeholder="••••••••"formControlName="password"
             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400"
             required />
         </div>
         <div class="flex items-center justify-between">
           <div class="flex items-center">
-            <input type="checkbox" formControlName="rememberMe" id="remember"
+            <input type="checkbox"  id="remember"
               class="w-4 h-4 border border-gray-300 rounded-full focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" />
             <label for="remember" class="ml-2 text-sm font-medium text-gray-900">Remember Me</label>
           </div>

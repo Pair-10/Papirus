@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
   ) { }
   
   loadCategories() {
-    this.bookcategories$ = this.bookService.getCategories();
+    
     this.magazinecategories$ = this.magazineService.getCategories();
     this.articlecategories$ = this.articleService.getCategories();
 }
