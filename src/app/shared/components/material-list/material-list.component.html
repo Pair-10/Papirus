@@ -7,10 +7,10 @@
                 'Makaleler') }}
             </h1>
             <ul class="mt-4 space-y-2">
-                <li *ngFor="let category of categories$ | async">
-                    <button (click)="selectCategory(category.id)"
+                <li *ngFor="let category of materialTypes">
+                    <button (click)="selectCategory(category)"
                         class="text-left w-full py-2 px-3 rounded hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
-                        {{ category.name }}
+                        {{ category }}
                     </button>
                 </li>
             </ul>
@@ -22,20 +22,22 @@
             <div *ngIf="selectedMaterialType === 'book'"
                 class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
                 <!-- Kartlar -->
-                <div *ngFor="let book of books" class="bg-white shadow-lg rounded-lg p-4 w-72">
-                    <!-- Kitap resmi -->
-                    <img class="w-full h-56 object-cover rounded-t-lg" [src]="book.materialImage"
-                        [alt]="book.materialName + ' resmi'">
-                    <!-- Kitap başlığı -->
-                    <h3 class="text-xl font-bold mt-2">{{ book.materialName }}</h3>
-                    <!-- Yazar -->
-                    <p class="text-gray-600">Yazar: {{ book.author }}</p>
-                    <!-- ISBN -->
-                    <p class="text-gray-600">ISBN: {{ book.isbn }}</p>
-                    <!-- Daha fazla oku düğmesi -->
-                    <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla
-                        oku</button>
+                <div *ngFor="let mergedItem of originalData" class="bg-white shadow-lg rounded-lg p-4 w-72">
+                    <div class="p-4">
+                        <img class="w-full h-56 object-cover rounded-t-lg" src="https://picsum.photos/100?random">
+                        <!-- ISBN -->
+                        <p class="text-gray-600">ISBN: {{ mergedItem.book.isbn }}</p>
+                        <!-- Daha fazla oku düğmesi -->
+                        <p>Kitap ismi: {{ mergedItem.material.materialName }}</p>
+                        <p>Dil: {{mergedItem.material.language}}</p>
+                        <p>Sayfa Sayısı: {{mergedItem.material.pageCount}}</p>
+                        <p>Adet: {{mergedItem.material.quantity}}</p>
+                        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla oku</button>
+                        <!-- Material bilgileri -->
+                    </div>
                 </div>
+                
+                
             </div>
 
             <!-- Dergileri listelemek için döngü -->
@@ -43,13 +45,13 @@
                 class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
                 <!-- Dergi kartları -->
                 <div *ngFor="let magazine of magazines" class="bg-white shadow-lg rounded-lg p-4 w-72">
-                    <!-- Dergi resmi -->
-                    <img class="w-full h-56 object-cover rounded-t-lg" [src]="magazine.materialImage"
+                    <!-- Dergi resmi 
+                    <img class="w-full h-56 object-cover rounded-t-lg" [src]="magazine.materialImage"-->
                         [alt]="magazine.materialName + ' resmi'">
                     <!-- Dergi başlığı -->
                     <h3 class="text-xl font-bold mt-2">{{ magazine.materialName }}</h3>
-                    <!-- Yazar -->
-                    <p class="text-gray-600">Yazar: {{ magazine.author }}</p>
+                    <!-- Yazar 
+                    <p class="text-gray-600">Yazar: {{ magazine.author }}</p>-->
                     <!-- ISSN -->
                     <p class="text-gray-600">ISSN: {{ magazine.issn }}</p>
                     <!-- Sayı -->
@@ -65,13 +67,13 @@
                 class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
                 <!-- Makale kartları -->
                 <div *ngFor="let article of articles" class="bg-white shadow-lg rounded-lg p-4 w-72">
-                    <!-- Makale resmi -->
-                    <img class="w-full h-56 object-cover rounded-t-lg" [src]="article.materialImage"
+                    <!-- Makale resmi 
+                    <img class="w-full h-56 object-cover rounded-t-lg" [src]="article.materialImage"-->
                         [alt]="article.materialName + ' resmi'">
                     <!-- Makale başlığı -->
                     <h3 class="text-xl font-bold mt-2">{{ article.materialName }}</h3>
-                    <!-- Yazar -->
-                    <p class="text-gray-600">Yazar: {{ article.author }}</p>
+                    <!-- Yazar 
+                    <p class="text-gray-600">Yazar: {{ article.author }}</p>-->
                     <!-- Daha fazla oku düğmesi -->
                     <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla
                         oku</button>
