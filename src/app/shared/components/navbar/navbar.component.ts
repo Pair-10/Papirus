@@ -27,9 +27,9 @@ export class NavbarComponent implements OnInit {
   toggleHamburgerMenu() {
     this.hamburgerMenuOpen = !this.hamburgerMenuOpen;
   }
-  bookcategories$: Observable<{ id: number; name: string }[]> = of([]);
-  magazinecategories$: Observable<{ id: number; name: string }[]> = of([]);
-  articlecategories$: Observable<{ id: number; name: string }[]> = of([]);
+  bookcategories$: Observable<{ id: string; name: string }[]> = of([]);
+  magazinecategories$: Observable<{ id: string; name: string }[]> = of([]);
+  articlecategories$: Observable<{ id: string; name: string }[]> = of([]);
   @Output() materialTypeSelected = new EventEmitter<string>();
   constructor(
     private router: Router,
@@ -46,12 +46,12 @@ export class NavbarComponent implements OnInit {
 ngOnInit(){
   this.loadCategories();
 }
-onCategoryClick(categoryId: number) {
+onCategoryClick(categoryId: string) {
   // Redirect to the material list page with the selected category ID as query parameter
   this.router.navigate(['/material-list'], { queryParams: { categoryId } });
 }
 
-selectCategory(categoryId: number,categoryType: string) {
+selectCategory(categoryId: string,categoryType: string) {
   this.router.navigate(['/material-list'], { queryParams: { type: categoryType, categoryId: categoryId } });
 }
 

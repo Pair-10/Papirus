@@ -1,5 +1,5 @@
 export interface Material {
-    id: number;
+    id: string;
     materialName: string;
     materialImage: string;
     author: string;

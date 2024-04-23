@@ -1,7 +1,7 @@
 import { Material } from "../material/material";
 
 export interface Magazine extends Material {
-    categoryId: number;
+    categoryId: string;
     issn: string; 
     issue: string; 
 }
