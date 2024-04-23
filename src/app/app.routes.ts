@@ -6,6 +6,8 @@ import { MaterialListComponent } from './shared/components/material-list/materia
 import { PenaltyAdminComponent } from './features/penalty/pages/penalty-admin/penalty-admin.component'; //penalty-admin
 import { ActivityComponent } from './features/activity/pages/activity/activity.component';//activity
 import { NotfoundComponent } from './shared/components/notfound/notfound.component';
+import { MagazineDetailComponent } from './features/magazine/pages/magazine-detail/magazine-detail.component';
+import { ArticleDetailComponent } from './features/article/pages/article-detail/article-detail.component';
 
 
 
@@ -16,7 +18,8 @@ export const routes: Routes = [
     { path: 'material-list', component: MaterialListComponent },
     { path: 'penalty-admin', component: PenaltyAdminComponent }, //penalty-admin
     { path: 'activity', component: ActivityComponent }, //activity
-    { path: '**', component: NotfoundComponent }
-
-
+    { path: 'magazine-detail', component: MagazineDetailComponent },
+    { path: 'article-detail', component: ArticleDetailComponent },
+    { path: '**', component: NotfoundComponent },
+    
 ];
