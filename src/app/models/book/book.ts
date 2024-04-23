@@ -1,6 +1,6 @@
 import { Material } from "../material/material";
 
 export interface Book extends Material {
-    categoryId: number;
+    categoryId: string;
     isbn: string;
 }
