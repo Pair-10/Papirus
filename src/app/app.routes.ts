@@ -10,11 +10,12 @@ import { LoginComponent } from './shared/components/authentication/login/login.c
 import { RegisterComponent } from './shared/components/authentication/register/register.component';
 import { ForgotPasswordComponent } from './shared/components/authentication/forgot-password/forgot-password.component';
 import { NewPasswordComponent } from './shared/components/authentication/new-password/new-password.component';
+import { roleGuard } from './guards/role.guard';
 
 
 
 export const routes: Routes = [
-    { path: '', component: MainComponent },
+    { path: '', component: MainComponent,  canActivate:[roleGuard],data:{requiredRoles:["Admin"]}},
     { path: 'book-detail', component: BookDetailComponent },
     { path: 'penalty', component: PenaltyComponent }, //penalty
     { path: 'material-list', component: MaterialListComponent },

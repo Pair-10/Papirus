@@ -11,6 +11,11 @@ import { Router, RouterLink } from '@angular/router';
 export class SidebarComponent {
   constructor(private router: Router) {}
 
+  ngOnInit(): void {
+    
+    console.log(localStorage.getItem("Token"))
+  }
+
   navigateToPenalties() {
     this.router.navigate(['/penalty']);
   }

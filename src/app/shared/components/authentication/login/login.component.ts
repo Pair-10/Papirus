@@ -32,9 +32,10 @@ export class LoginComponent {
     
     try {  
       this.router.navigate(['/']);
-      console.log("Token:",response.accessToken.token)
+      console.log("Token:",response)
       localStorage.setItem("Token",response.accessToken.token)
       console.log(user)
+      console.log(response.accessToken.token)
     } catch (error) {
       console.log(error)
     }
