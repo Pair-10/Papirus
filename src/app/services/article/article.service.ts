@@ -1,39 +1,33 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Article } from './../../models/article/article';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
+import { jwtToken } from '../../jwttoken';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArticleService {
-  // Örnek makale verileri
-  private articles: Article[] = [
-    
-  ];
-  private categories = [
-    { id: "1", name: 'Derleme' },
-    { id: "2", name: 'Bilim' },
-    { id: "3", name: 'Edebi' },
-    { id: "4", name: 'Gazete' },
-    { id: "5", name: 'Arastirma' },
-    // Daha fazla kitap kategorisi ekleyebilirsiniz
-  ];
 
-  constructor() {}
+  constructor(private http:HttpClient) {}
+  token = jwtToken.jwt;
+  private baseUrl = 'http://localhost:60805/api';
 
-
-  getCategories(): Observable<{ id: string; name: string }[]> {
-    return of(this.categories);
-  }
 
   // Makaleleri döndürür
   getArticles(): Observable<Article[]> {
-    return of(this.articles);
+    const headers = this.token ? new HttpHeaders().set('Authorization', 'Bearer ' + this.token) : new HttpHeaders();
+    return this.http.get<any>(`${this.baseUrl}/Articles?PageIndex=0&PageSize=10`, { headers }).pipe(
+      map( response =>{
+        const articles: Article[] = response.items.map((item: any) => ({
+          id: item.id,
+          categoryId: item.categoryId,
+          materialId: item.materialId
+        }));
+        return articles;
+      })
+    )
   }
 
-  // Belirli bir kategoriye ait makaleleri döndürür
-  getArticlesByCategory(categoryId: string): Observable<Article[]> {
-    const filteredArticles = this.articles.filter(article => article.categoryId === categoryId);
-    return of(filteredArticles);
-  }
+ 
 }

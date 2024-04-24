@@ -12,7 +12,7 @@ import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { categoryType } from '../../../models/categoryType/categoryType';
-import { forkJoin, map, switchMap } from 'rxjs';
+import { catchError, forkJoin, map, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-material-list',
@@ -29,12 +29,17 @@ export class MaterialListComponent implements OnInit {
   materials: Material[] = [];
   categoryType: categoryType[] = [];
   mergedData: any[]= [];
+  mergedData2: any[]= [];
+  mergedData3: any[]= []
   originalData: any[] = [];
+  originalData2: any[] = [];
+  originalData3: any[] = [];
   selectedCategory: string = "";
   categories: any[] = [];
   materialTypes: any[] = [];
   categoryId: string = '';
   materialTypeId: string = '';
+  categoryname: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -51,40 +56,17 @@ export class MaterialListComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       this.selectedMaterialType = params['type'] || 'book';
-      const categoryId = params['categoryId'];
-      this.selectedCategory = categoryId !== undefined ? categoryId : "";
-      this.loadMaterials();
-      this.loadCategories();
-      this.getCategoryTypes()
-      this.loadBooksAndMaterials();
+      this.categoryname = params['categoryId'];
+      this.selectedCategory = this.categoryname !== undefined ? this.categoryname : "";
+      this.loadMaterials(this.categoryname);
+      this.loadCategoryTypes();
     });
   }
 
   //--------------------------------------------------------
-  loadCategories() {
-    this.listservice.getCategoriess().subscribe(
-      (response) => {
-        this.categories = response;
-        if (this.selectedMaterialType === 'book') {
-          this.categoryId = this.categories[0].id
-          this.loadCategoryTypes(this.categoryId);
-        }
-        else if (this.selectedMaterialType === 'magazine') {
-          this.loadCategoryTypes(this.categories[0].id);
-        }
-        else if (this.selectedMaterialType === 'article') {
-          this.loadCategoryTypes(this.categories[0].id);
-        }
-      },
-      (error) => {
-        console.error('Error fetching categories:', error);
-      }
-    );
-  }
-
-  loadCategoryTypes(categoryId: string) {
+  loadCategoryTypes() {
     this.categories = [];
-    this.listservice.getCategoryTypes(categoryId).subscribe(
+    this.listservice.getCategoryTypes().subscribe(
       (response) => {
         if (this.selectedMaterialType === 'book') {
           const filteredItems = response.filter(item => item.categoryId === "f1c535cb-263f-47c8-1e5e-08dc61e8e461");
@@ -132,33 +114,71 @@ export class MaterialListComponent implements OnInit {
   }
   //--------------------------------------------------------
 
-  getCategoryTypes(){
-      this.categorytypeService.getCategoryTypes().subscribe(response => {
-      });
-  }
   selectCategory(categoryName: string) {
     this.selectedCategory = "";
-    this.bookService.getMaterialTypeBook(categoryName).pipe(
+    this.listservice.getMaterialType(categoryName).pipe(
       switchMap(response => {
         // Seçilen kategoriye ait materialTypeId'yi seçili kategoriye ata
-        response.map(category=>this.selectedCategory = category.id)
+        response.map(category=>{this.selectedCategory = category.id})
         // MergedData'yı filtreleme
-        return forkJoin(
-          this.mergedData.map(veri =>
-            this.categorytypeService.getCategoryType(veri.book.materialId, veri.book.categoryId).pipe(
-              map(responses => {
-                // Veri varsa, her bir response için materialTypeId'yi kontrol et
-                return responses.some(veri => veri.materialTypeId === this.selectedCategory);
-              })
+        if(this.selectedMaterialType === 'book'){
+          return forkJoin(
+            this.mergedData.map(veri =>
+              this.categorytypeService.getCategoryType(veri.book.materialId, veri.book.categoryId).pipe(
+                map(responses => {
+                  // Veri varsa, her bir response için materialTypeId'yi kontrol et
+                  return responses.some(veri => veri.materialTypeId === this.selectedCategory);
+                }),
+                catchError(error => {
+                  console.error('Error fetching category types:', error);
+                  return of(false); // Hata durumunda false döndür
+                })
+              )
+            )
+          );
+        }
+        else if(this.selectedMaterialType === 'magazine'){
+          return forkJoin(
+            this.mergedData2.map(veri=>
+              this.categorytypeService.getCategoryType(veri.magazine.materialId, veri.magazine.categoryId).pipe(
+                map(responses => {
+                  // Veri varsa, her bir response için materialTypeId'yi kontrol et
+                  return responses.some(veri => veri.materialTypeId === this.selectedCategory);
+                })
+              )
             )
           )
-        );
+        }
+        else if(this.selectedMaterialType === 'article'){
+          return forkJoin(
+            this.mergedData3.map(veri=>
+              this.categorytypeService.getCategoryType(veri.article.materialId, veri.article.categoryId).pipe(
+                map(responses => {
+                  // Veri varsa, her bir response için materialTypeId'yi kontrol et
+                  return responses.some(veri => veri.materialTypeId === this.selectedCategory);
+                })
+              )
+            )
+          )
+        }
+        else{
+          return response;
+        }
       })
     ).subscribe(
       (results: boolean[]) => {
-        // MergedData'yı filtreleme
-        this.originalData = [...this.mergedData]; // Orijinal verileri yeniden yükle
-        this.originalData = this.mergedData.filter((veri, index) => results[index]);
+        if(this.selectedMaterialType === 'book'){
+          this.originalData = [...this.mergedData]; // Orijinal verileri yeniden yükle
+          this.originalData = this.mergedData.filter((veri, index) => results[index]);
+        }
+        else if(this.selectedMaterialType === 'magazine'){
+          this.originalData2 = [...this.mergedData2]; // Orijinal verileri yeniden yükle
+          this.originalData2 = this.mergedData2.filter((veri, index) => results[index]);
+        }
+        else if(this.selectedMaterialType === 'article'){
+          this.originalData3 = [...this.mergedData3]; // Orijinal verileri yeniden yükle
+          this.originalData3 = this.mergedData3.filter((veri, index) => results[index]);
+        }
   
       },
       (error) => {
@@ -184,8 +204,50 @@ export class MaterialListComponent implements OnInit {
         this.mergedData.push(mergedItem);
       }
     });
+    if(this.categoryname){
+      this.selectCategory(this.categoryname)
+      return [];
+    }
+    else{
     this.originalData = [...this.mergedData]
     return this.mergedData;
+  }
+  }
+
+  mergeMagazinesAndMaterials(magazines: Magazine[], materials: Material[]): any[] {
+    magazines.forEach((magazine: Magazine) => {
+        const material = materials.find((material: Material) => material.id === magazine.materialId);
+        if (material) {
+            const mergedItem = { magazine, material };
+            this.mergedData2.push(mergedItem);
+        }
+    });
+    if(this.categoryname){
+      this.selectCategory(this.categoryname)
+      return [];
+    }
+    else{
+    this.originalData2 = [...this.mergedData2]
+    return this.mergedData2;
+  }
+}
+
+  mergeArticlesAndMaterials(articles:Article[], materials: Material[]):any [] {
+    articles.forEach((article: Article)=>{
+      const material = materials.find((material:Material) => material.id === article.materialId);
+      if(material) {
+        const mergedItem = { article, material};
+        this.mergedData3.push(mergedItem);
+      }
+    });
+    if(this.categoryname){
+      this.selectCategory(this.categoryname)
+      return [];
+    }
+    else{
+    this.originalData3 = [...this.mergedData3]
+    return this.mergedData3;
+  }
   }
 
   loadBooksAndMaterials(){
@@ -201,24 +263,46 @@ export class MaterialListComponent implements OnInit {
       })
     });
   }
+  loadMagazinesAndMaterials() {
+    this.mergedData2 = [];
+    this.magazineService.getMagazines().subscribe(magazines => {
+        const magazineObservables = magazines.map(magazine => this.materialService.getMaterialsByMaterialId(magazine.materialId));
+        forkJoin(magazineObservables).subscribe(
+            (responses) => {
+                this.mergeMagazinesAndMaterials(magazines, responses);
+            },
+            (error) => {
+                console.error('Error fetching materials for magazines:', error);
+            }
+        );
+    });
+}
 
-  loadMaterials() {
+
+
+  loadArticleAndMaterials(){
+    this.mergedData3 = [];
+    this.articleService.getArticles().subscribe(articles =>{
+      const articleObservables = articles.map(article => this.materialService.getMaterialsByMaterialId(article.materialId));
+        forkJoin(articleObservables).subscribe(
+            (responses) => {
+                this.mergeArticlesAndMaterials(articles, responses);
+            },
+            (error) => {
+                console.error('Error fetching materials for articles:', error);
+            }
+        );
+    });
+  }
+  
+
+  loadMaterials(deneme:string) {
     if (this.selectedMaterialType === 'book') {
-
+      this.loadBooksAndMaterials();
     } else if (this.selectedMaterialType === 'magazine') {
-      this.magazineService.getMagazines().subscribe(magazines => {
-        // Kategoriyi filtreleyin
-        this.magazines = this.selectedCategory
-          ? magazines.filter(magazine => magazine.categoryId === this.selectedCategory)
-          : magazines;
-      });
+      this.loadMagazinesAndMaterials();
     } else if (this.selectedMaterialType === 'article') {
-      this.articleService.getArticles().subscribe(articles => {
-        // Kategoriyi filtreleyin
-        this.articles = this.selectedCategory
-          ? articles.filter(article => article.categoryId === this.selectedCategory)
-          : articles;
-      });
+      this.loadArticleAndMaterials();
     }
   }
 }

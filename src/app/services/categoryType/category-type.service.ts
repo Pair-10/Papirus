@@ -14,11 +14,7 @@ export class CategoryTypeService {
     private baseUrl = 'http://localhost:60805/api';
 
 
-    getCategoryTypes(){
-      const headers = this.token ? new HttpHeaders().set('Authorization', 'Bearer ' + this.token) : new HttpHeaders();
-      const url = `${this.baseUrl}/CategoryTypes?PageIndex=0&PageSize=10`;
-      return this.http.get<any>(url, {headers})
-    }
+   
     getCategoryType(materialId: string, categoryId: string): Observable<any[]> {
       const headers = this.token ? new HttpHeaders().set('Authorization', 'Bearer ' + this.token) : new HttpHeaders();
       const url = `${this.baseUrl}/CategoryTypes?PageIndex=0&PageSize=10`;

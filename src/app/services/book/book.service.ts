@@ -8,13 +8,6 @@ import { jwtToken } from '../../jwttoken';
   providedIn: 'root',
 })
 export class BookService implements OnInit {
-  private categories = [
-    { id: "1", name: 'Roman' },
-    { id: "2", name: 'Bilimkurgu' },
-    { id: "3", name: 'Biyografi' },
-    { id: "4", name: 'Tarih' },
-    { id: "5", name: 'Felsefe' },
-  ];
 
 
 
@@ -22,27 +15,10 @@ export class BookService implements OnInit {
   token = jwtToken.jwt;
   private baseUrl = 'http://localhost:60805/api';
 
-getCategories(): Observable<{ id: string; name: string }[]> {
-  return of(this.categories);
-}
   ngOnInit(): void {
-    this.getCategories();
   }
 
-  getMaterialTypeBook(materialTypeName: string): Observable<any[]> {
-    const headers = this.token ? new HttpHeaders().set('Authorization', 'Bearer ' + this.token) : new HttpHeaders();
-    return this.http.get<any>(`${this.baseUrl}/MaterialTypes?PageIndex=0&PageSize=10`, { headers }).pipe(
-        switchMap((response: any) => {
-            const itemsArray = response.items; // items dizisini al
-            // materialTypeName ile eşleşen öğeyi bul
-            const foundItem = itemsArray.find((item: any) => item.name === materialTypeName);
-            // Bulunan öğeyi dizi içine al
-            const resultArray = foundItem ? [foundItem] : [];
-            // Diziyi Observable ile döndür
-            return of(resultArray);
-        })
-    );
-}
+  
 
   // Tüm kitapları döndürür
   getBooks(): Observable<Book[]> {
