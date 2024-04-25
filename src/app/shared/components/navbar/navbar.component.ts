@@ -32,16 +32,66 @@ export class NavbarComponent implements OnInit {
   @Output() materialTypeSelected = new EventEmitter<string>();
   constructor(
     private router: Router,
-    private bookService: BookService,
-    private magazineService: MagazineService,
-    private articleService: ArticleService
+    private listService: ListService
   ) { }
   
-  loadCategories() {
-    this.bookcategories$ = this.bookService.getCategories();
-    this.magazinecategories$ = this.magazineService.getCategories();
-    this.articlecategories$ = this.articleService.getCategories();
+loadCategoryTypes() {
+  const categoryIds = ["f1c535cb-263f-47c8-1e5e-08dc61e8e461", "fa0be4d1-3580-4ddb-1e5f-08dc61e8e461", "7f15efda-deb4-438f-1e60-08dc61e8e461"];
+  
+  categoryIds.forEach(categoryId => {
+    this.listService.getCategoryTypes().subscribe(
+      (response) => {
+        this.processCategoryTypes(response, categoryId);
+      },
+      (error) => {
+        console.error('Error fetching category types:', error);
+      }
+    );
+  });
 }
+
+processCategoryTypes(response: any[], categoryId: string) {
+  const filteredItems = response.filter(item => item.categoryId === categoryId);
+  for (let item of filteredItems) {
+    this.loadMaterialTypes(item.materialTypeId, categoryId);
+  }
+}
+
+loadMaterialTypes(materialTypeId: string, categoryId: string) {
+  this.listService.getMaterialTypes(materialTypeId).subscribe(
+    (response) => {
+      const filteredItems = response.filter(item => item.id === materialTypeId);
+      const materialNames = filteredItems.map(item => item.name);
+      // Kategoriye göre doğru diziye atama yap
+      for (let i = 0; i < materialNames.length; i++) {
+        const materialName = materialNames[i];
+        if (categoryId === "f1c535cb-263f-47c8-1e5e-08dc61e8e461") {
+          if(!this.bookcategories.includes(materialName))
+            this.bookcategories.push(materialName);
+        } else if (categoryId === "fa0be4d1-3580-4ddb-1e5f-08dc61e8e461") {
+          if(!this.magazinecategories.includes(materialName))
+            this.magazinecategories.push(materialName);
+        } else if (categoryId === "7f15efda-deb4-438f-1e60-08dc61e8e461") {
+          if(!this.articlecategories.includes(materialName))
+            this.articlecategories.push(materialName);
+        }
+      }
+    },
+    (error) => {
+      console.error('Error fetching material types:', error);
+    }
+  );
+}
+
+
+
+
+
+
+
+
+
+//--------------------------------------
 ngOnInit(){
   this.loadCategoryTypes();
 }

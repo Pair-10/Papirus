@@ -8,13 +8,7 @@ import { jwtToken } from '../../jwttoken';
   providedIn: 'root',
 })
 export class BookService implements OnInit {
-  private categories = [
-    { id: "1", name: 'Roman' },
-    { id: "2", name: 'Bilimkurgu' },
-    { id: "3", name: 'Biyografi' },
-    { id: "4", name: 'Tarih' },
-    { id: "5", name: 'Felsefe' },
->>>>>>>>> Temporary merge branch 2
+  
   ];
 
   private books: Book[] = [
@@ -101,12 +95,16 @@ export class BookService implements OnInit {
 
   ];
 
-  constructor() { }
 
-  // Tüm kitap kategorilerini döndürür
-  getCategories(): Observable<{ id: string; name: string }[]> {
-    return of(this.categories);
+
+  constructor(private http: HttpClient) { }
+  token = jwtToken.jwt;
+  private baseUrl = 'http://localhost:60805/api';
+
+  ngOnInit(): void {
   }
+
+  
 
   // Tüm kitapları döndürür
   getBooks(): Observable<Book[]> {
