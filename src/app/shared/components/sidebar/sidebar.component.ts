@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css'
 })
@@ -21,5 +20,14 @@ export class SidebarComponent {
   }
   navigateToActivity() {
     this.router.navigate(['/activity']);
+  }
+  navigateToHelp() {
+    this.router.navigate(['/help']);
+  }
+  navigateToEditProfile() {
+    this.router.navigate(['/edit-profile']);
+  }
+  navigateToMyBook() {
+    this.router.navigate(['/My-Material']);
   }
 }
