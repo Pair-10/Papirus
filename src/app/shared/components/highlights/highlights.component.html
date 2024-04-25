@@ -1,0 +1,13 @@
+<div class="flex md:h-screen w-full justify-center items-center">
+  <div class="lg:max-w-[1000px] md:max-w-[750px] sm:max-w-[600px] max-w-[300px] xl:m-auto m-6">
+    <h1 class="text-3xl font-bold text-center mb-10">Öne Çıkan Materyaller</h1>
+    <swiper-container class="mySwiper" pagination="true" pagination-clickable="true" space-between="30"
+      [slidesPerView]="slidesPerView" autoplay="true" navigation="enabled">
+      <ng-container *ngFor="let slide of slides">
+        <swiper-slide class="w-full h-full rounded-lg">
+            <img [src]="slide.imageUrl" class="w-auto h-full rounded-lg" alt="slide image" />
+        </swiper-slide>
+      </ng-container>
+    </swiper-container>
+  </div>
+</div>

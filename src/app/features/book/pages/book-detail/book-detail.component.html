@@ -1,0 +1,51 @@
+<!--Kitap Bilgisi-->
+<app-book></app-book>
+<!--İlginizi çekebilecek diğer kitaplar-->
+<div class="md:h-[70vh] w-full whitespace-normal overflow-auto">
+    <div class="md:max-w-[1350px] max-w-[600px] xl:m-auto m-6">
+      <h1 class="text-3xl font-bold text-center mb-10 mt-20">İlginizi Çekebilecek Diğer Kitaplar</h1>
+      <swiper-container
+        class="mySwiper"
+        pagination="true"
+        pagination-clickable="true"
+        space-between="30"
+        slides-per-view="3"
+        autoplay="true"
+      >
+        <swiper-slide
+          ><img
+            class="w-full h-full rounded-lg"
+            src="https://www.panelkirtasiye.com/productimages/434311/big/9789750806605_1.jpg"
+            alt="photo"
+        /></swiper-slide>
+        <swiper-slide
+          ><img
+            class="w-full h-full rounded-lg"
+            src="https://1.bp.blogspot.com/-427ZVQAuRO4/Xo3omnRLixI/AAAAAAAAC5Q/N4lIXKO-OT4J0IjrB02MATn3wAH79MGJQCLcBGAsYHQ/s1600/9789750806629_1.jpg"
+            alt="photo"
+        /></swiper-slide>
+        <swiper-slide
+          ><img
+            class="w-full h-full rounded-lg"
+            src="https://www.panelkirtasiye.com/productimages/480302/big/9789750739880_1.jpg"
+            alt="photo"
+        /></swiper-slide>
+        <swiper-slide
+          ><img
+            class="w-full h-full rounded-lg"
+            src="https://www.panelkirtasiye.com/productimages/503038/big/9789750826672_1.jpg"
+            alt="photo"
+        /></swiper-slide>
+        <swiper-slide
+          ><img
+            class="w-full h-full rounded-lg"
+            src="https://www.panelkirtasiye.com/productimages/503198/big/9789750806612_1.jpg"
+            alt="photo"
+        /></swiper-slide>
+      </swiper-container>
+    </div>
+  </div>
+<!-- Değerlendirmeler -->
+<app-comment></app-comment>
+
+<router-outlet></router-outlet>
