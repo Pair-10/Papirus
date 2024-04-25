@@ -5,6 +5,10 @@ import { PenaltyComponent } from './features/penalty/pages/penalty/penalty.compo
 import { MaterialListComponent } from './shared/components/material-list/material-list.component';
 import { PenaltyAdminComponent } from './features/penalty/pages/penalty-admin/penalty-admin.component'; //penalty-admin
 import { ActivityComponent } from './features/activity/pages/activity/activity.component';//activity
+import { HelpComponent } from './features/help/pages/help/help.component';//help
+import {EditProfileComponent } from './features/edit-profile/pages/edit-profile/edit-profile.component'
+import {MyBooksComponent} from './features/my-books/pages/my-books/my-books.component'
+import {EditUsersComponent} from './features/edit-users/pages/edit-users/edit-users.component'
 import { NotfoundComponent } from './shared/components/notfound/notfound.component';
 
 
@@ -16,7 +20,12 @@ export const routes: Routes = [
     { path: 'material-list', component: MaterialListComponent },
     { path: 'penalty-admin', component: PenaltyAdminComponent }, //penalty-admin
     { path: 'activity', component: ActivityComponent }, //activity
-    { path: '**', component: NotfoundComponent }
-
+    {path:'help',component:HelpComponent},//help
+    {path:'edit-profile',component:EditProfileComponent},
+    {path:'My-Material',component:MyBooksComponent},
+    {path:'edit-user',component:EditUsersComponent},
+    { path: '**', component: NotfoundComponent },
+    
+  
 
 ];
