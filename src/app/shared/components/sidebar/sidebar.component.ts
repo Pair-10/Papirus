@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-sidebar',
   standalone: true,
@@ -10,6 +10,11 @@ import { Router } from '@angular/router';
 export class SidebarComponent {
   constructor(private router: Router) {}
 
+  ngOnInit(): void {
+    
+    console.log(localStorage.getItem("Token"))
+  }
+
   navigateToPenalties() {
     this.router.navigate(['/penalty']);
   }
@@ -18,5 +23,11 @@ export class SidebarComponent {
   }
   navigateToHelp() {
     this.router.navigate(['/help']);
+  }
+  navigateToEditProfile() {
+    this.router.navigate(['/edit-profile']);
+  }
+  navigateToMyBook() {
+    this.router.navigate(['/My-Material']);
   }
 }
