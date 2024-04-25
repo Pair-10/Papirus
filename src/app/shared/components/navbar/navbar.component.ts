@@ -2,7 +2,6 @@ import { ListService } from './../../../services/list/list.service';
 import { CommonModule } from '@angular/common';
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { Observable, catchError, forkJoin, map, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
