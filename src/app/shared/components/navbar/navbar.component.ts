@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   hamburgerMenuOpen = false;
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
-  isLoggedIn = true;
+  isLoggedIn = false;
   materialTypes: any[] = [];
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
