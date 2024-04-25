@@ -1,6 +1,4 @@
-import { AddMaterialRequest } from "../../material/models/addMaterialRequest";
-
-export interface AddBookRequest extends AddMaterialRequest {
+export interface AddBookRequest {
 	categoryId: string;
 	isbn: string;
 }
