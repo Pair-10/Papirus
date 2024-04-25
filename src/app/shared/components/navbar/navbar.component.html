@@ -92,9 +92,9 @@
         <!-- Hover edildiğinde gösterilecek kutucuk -->
         <div *ngIf="isHovered[0]" class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg">
           <!-- Kutucuk içeriği -->
-          <button *ngFor="let category of bookcategories$ | async" (click)="selectCategory(category.id,'book')" style="display: block;">
-            {{ category.name }}
-          </button>
+          <button *ngFor="let category of bookcategories; let i = index" (click)="selectCategory(category, 'book')" style="display: block;">
+            {{ category }}
+        </button>
         </div>
       </li>
 
@@ -106,8 +106,8 @@
         <!-- Hover edildiğinde gösterilecek kutucuk -->
         <div *ngIf="isHovered[1]" class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg">
           <!-- Kutucuk içeriği -->
-          <button *ngFor="let category of magazinecategories$ | async" (click)="selectCategory(category.id,'magazine')" style="display: block;">
-            {{ category.name }}
+          <button *ngFor="let category of magazinecategories; let i = index" (click)="selectCategory(category,'magazine')" style="display: block;">
+            {{ category }}
           </button>
         </div>
       </li>
@@ -120,8 +120,8 @@
         <!-- Hover edildiğinde gösterilecek kutucuk -->
         <div *ngIf="isHovered[2]" class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg">
           <!-- Kutucuk içeriği -->
-          <button *ngFor="let category of articlecategories$ | async" (click)="selectCategory(category.id,'article')" style="display: block;">
-            {{ category.name }}
+          <button *ngFor="let category of articlecategories; let i = index" (click)="selectCategory(category,'article')" style="display: block;">
+            {{ category }}
           </button>
         </div>
       </li>

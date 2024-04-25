@@ -44,18 +44,17 @@
             <div *ngIf="selectedMaterialType === 'magazine'"
                 class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
                 <!-- Dergi kartları -->
-                <div *ngFor="let magazine of magazines" class="bg-white shadow-lg rounded-lg p-4 w-72">
-                    <!-- Dergi resmi 
-                    <img class="w-full h-56 object-cover rounded-t-lg" [src]="magazine.materialImage"-->
-                        [alt]="magazine.materialName + ' resmi'">
+                <div *ngFor="let magazine of originalData2" class="bg-white shadow-lg rounded-lg p-4 w-72">
+                    <!-- Dergi resmi  -->
+                    <img class="w-full h-56 object-cover rounded-t-lg" src="https://picsum.photos/100?random">
                     <!-- Dergi başlığı -->
-                    <h3 class="text-xl font-bold mt-2">{{ magazine.materialName }}</h3>
+                    <h3 class="text-xl font-bold mt-2">{{ magazine.material.materialName }}</h3>
                     <!-- Yazar 
                     <p class="text-gray-600">Yazar: {{ magazine.author }}</p>-->
                     <!-- ISSN -->
-                    <p class="text-gray-600">ISSN: {{ magazine.issn }}</p>
+                    <p class="text-gray-600">ISSN: {{ magazine.magazine.issn }}</p>
                     <!-- Sayı -->
-                    <p class="text-gray-600">Sayı: {{ magazine.issue }}</p>
+                    <p class="text-gray-600">Sayı: {{ magazine.magazine.issue }}</p>
                     <!-- Daha fazla oku düğmesi -->
                     <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla
                         oku</button>
@@ -66,14 +65,12 @@
             <div *ngIf="selectedMaterialType === 'article'"
                 class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
                 <!-- Makale kartları -->
-                <div *ngFor="let article of articles" class="bg-white shadow-lg rounded-lg p-4 w-72">
-                    <!-- Makale resmi 
-                    <img class="w-full h-56 object-cover rounded-t-lg" [src]="article.materialImage"-->
-                        [alt]="article.materialName + ' resmi'">
+                <div *ngFor="let article of originalData3" class="bg-white shadow-lg rounded-lg p-4 w-72">
+                    <!-- Makale resmi -->
+                    <img class="w-full h-56 object-cover rounded-t-lg" src="https://picsum.photos/100?random"> 
                     <!-- Makale başlığı -->
-                    <h3 class="text-xl font-bold mt-2">{{ article.materialName }}</h3>
-                    <!-- Yazar 
-                    <p class="text-gray-600">Yazar: {{ article.author }}</p>-->
+                    <h3 class="text-xl font-bold mt-2">{{ article.material.materialName }}</h3>
+                    <p class="text-lg">{{article.material.pageCount}}</p>
                     <!-- Daha fazla oku düğmesi -->
                     <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla
                         oku</button>

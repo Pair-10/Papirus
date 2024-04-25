@@ -1,6 +1,8 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Magazine } from './../../models/magazine/magazine';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
+import { jwtToken } from '../../jwttoken';
 
 @Injectable({
   providedIn: 'root',
@@ -19,22 +21,26 @@ export class MagazineService {
     // Daha fazla kitap kategorisi ekleyebilirsiniz
   ];
 
-  constructor() { }
-
-  getCategories(): Observable<{ id: string; name: string }[]> {
-    return of(this.categories);
-  }
+  constructor(private http: HttpClient) { }
+  token = jwtToken.jwt;
+  private baseUrl = 'http://localhost:60805/api';
 
   // Dergileri döndürür
   getMagazines(): Observable<Magazine[]> {
-    return of(this.magazines);
-  }
-
-  // Belirli bir kategoriye ait dergileri döndürür
-  getMagazinesByCategory(categoryId: string): Observable<Magazine[]> {
-    const filteredMagazines = this.magazines.filter(
-      (magazine) => magazine.categoryId === categoryId
+    const headers = this.token ? new HttpHeaders().set('Authorization', 'Bearer ' + this.token) : new HttpHeaders();
+    return this.http.get<any>(`${this.baseUrl}/Magazines?PageIndex=0&PageSize=10`, { headers }).pipe(
+        map(response => {
+            const magazines: Magazine[] = response.items.map((item: any) => ({
+                id: item.id,
+                categoryId: item.categoryId,
+                issn: item.issn,
+                issue: item.issue,
+                materialId: item.materialId
+            }));
+            return magazines;
+        })
     );
-    return of(filteredMagazines);
-  }
+}
+
+
 }

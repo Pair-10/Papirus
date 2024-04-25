@@ -1,10 +1,8 @@
+import { ListService } from './../../../services/list/list.service';
 import { CommonModule } from '@angular/common';
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { ArticleService } from './../../../services/article/article.service';
-import { MagazineService } from './../../../services/magazine/magazine.service';
-import { BookService } from './../../../services/book/book.service';
+import { Observable, catchError, forkJoin, map, of, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -18,6 +16,7 @@ export class NavbarComponent implements OnInit {
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
   isLoggedIn = true;
+  materialTypes: any[] = [];
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
@@ -27,9 +26,9 @@ export class NavbarComponent implements OnInit {
   toggleHamburgerMenu() {
     this.hamburgerMenuOpen = !this.hamburgerMenuOpen;
   }
-  bookcategories$: Observable<{ id: string; name: string }[]> = of([]);
-  magazinecategories$: Observable<{ id: string; name: string }[]> = of([]);
-  articlecategories$: Observable<{ id: string; name: string }[]> = of([]);
+  bookcategories: any[]=[];
+  magazinecategories: any[]=[];
+  articlecategories: any[]=[];
   @Output() materialTypeSelected = new EventEmitter<string>();
   constructor(
     private router: Router,
@@ -39,21 +38,18 @@ export class NavbarComponent implements OnInit {
   ) { }
   
   loadCategories() {
-    
+    this.bookcategories$ = this.bookService.getCategories();
     this.magazinecategories$ = this.magazineService.getCategories();
     this.articlecategories$ = this.articleService.getCategories();
 }
 ngOnInit(){
-  this.loadCategories();
-}
-onCategoryClick(categoryId: string) {
-  // Redirect to the material list page with the selected category ID as query parameter
-  this.router.navigate(['/material-list'], { queryParams: { categoryId } });
+  this.loadCategoryTypes();
 }
 
 selectCategory(categoryId: string,categoryType: string) {
   this.router.navigate(['/material-list'], { queryParams: { type: categoryType, categoryId: categoryId } });
 }
+
 
   onMaterialTypeClick(type: string) {
     this.materialTypeSelected.emit(type);
