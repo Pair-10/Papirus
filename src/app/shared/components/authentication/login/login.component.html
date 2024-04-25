@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gradient-to-br from-blue-200 via-blue-300 to-blue-400 font-roboto">
+  <style>
+    .rounded-2rem {
+      border-radius: 2rem;
+    }
+  </style>
+  <div class="min-h-screen flex items-center justify-center bg-blue-100">
+    <div class="bg-white shadow-md rounded-2rem w-full max-w-sm p-4 sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <form [formGroup]="loginForm" class="space-y-6">
+        <h5 class="text-xl font-medium text-gray-900 dark:text-white">Sign In To Our Platform</h5>
+        <div>
+          <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
+          <input type="email" name="email" id="email" placeholder="tobeto@gmail.com" formControlName="email"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400"
+            required />
+        </div>
+        <div>
+          <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+            Password</label>
+          <input type="password" name="password" id="password" placeholder="••••••••"formControlName="password"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400"
+            required />
+        </div>
+        <div class="flex items-center justify-between">
+          <div class="flex items-center">
+            <input type="checkbox"  id="remember"
+              class="w-4 h-4 border border-gray-300 rounded-full focus:ring-blue-500 focus:border-blue-500 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" />
+            <label for="remember" class="ml-2 text-sm font-medium text-gray-900">Remember Me</label>
+          </div>
+     
+          <a href="/forgot-password"
+            class="text-sm text-blue-700 hover:underline dark:text-blue-500">Forgot Password?</a>
+        </div>
+        <button type="button" (click)="loginClick()"
+          class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg rounded-2rem text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your
+          account</button>
+        <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+          Not Registered? <a [routerLink]="['/register']" class="text-blue-700 hover:underline dark:text-blue-500">Create
+            Account</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
