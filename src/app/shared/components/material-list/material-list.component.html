@@ -73,7 +73,7 @@
                     <h3 class="text-xl font-bold mt-2">{{ article.material.materialName }}</h3>
                     <p class="text-lg">{{article.material.pageCount}}</p>
                     <!-- Daha fazla oku düğmesi -->
-                    <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla
+                    <button (click)="materialyazdir(article)" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla
                         oku</button>
                 </div>
             </div>

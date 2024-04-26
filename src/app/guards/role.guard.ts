@@ -1,5 +1,4 @@
 import { CanActivateFn } from '@angular/router';
-import { jwtDecode } from 'jwt-decode';
 import { JWT_ROLES } from '../constants/jwtAttribute';
 import { inject } from '@angular/core';
 import { JwtService } from '../services/jwt/jwt.service';
