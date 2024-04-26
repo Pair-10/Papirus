@@ -2,6 +2,7 @@ import { ListService } from './../../../services/list/list.service';
 import { CommonModule } from '@angular/common';
 import { Component, Output, EventEmitter, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { TokenService } from '../../../core/services/token.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,7 +15,7 @@ export class NavbarComponent implements OnInit {
   hamburgerMenuOpen = false;
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
-  isLoggedIn = false;
+  isLoggedIn: boolean = false;
   materialTypes: any[] = [];
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -31,8 +32,9 @@ export class NavbarComponent implements OnInit {
   @Output() materialTypeSelected = new EventEmitter<string>();
   constructor(
     private router: Router,
-    private listService: ListService
-  ) { }
+    private listService: ListService,
+    private tokenService: TokenService
+  ) {}
   
 loadCategoryTypes() {
   const categoryIds = ["f1c535cb-263f-47c8-1e5e-08dc61e8e461", "fa0be4d1-3580-4ddb-1e5f-08dc61e8e461", "7f15efda-deb4-438f-1e60-08dc61e8e461"];
@@ -83,18 +85,11 @@ loadMaterialTypes(materialTypeId: string, categoryId: string) {
 }
 
 
-
-
-
-
-
-
-
 //--------------------------------------
 ngOnInit(){
   this.loadCategoryTypes();
+  this.isLoggedIn = this.tokenService.hasToken();
 }
-
 selectCategory(categoryId: string,categoryType: string) {
   this.router.navigate(['/material-list'], { queryParams: { type: categoryType, categoryId: categoryId } });
 }
