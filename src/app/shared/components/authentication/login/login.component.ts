@@ -35,8 +35,6 @@ export class LoginComponent {
     
     try {      
       localStorage.setItem("Token",response.accessToken.token)
-      console.log(user)
-      console.log(response.accessToken.token)
       this.navbarService.setLoggedIn(true)
 
       this.router.navigate(['/']);
