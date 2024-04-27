@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { RegisterService } from './../../../../services/register/register.service';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import {Router, RouterLink, RouterModule} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink, RouterModule} from '@angular/router';
+import { IRegister } from '../../../../models/register/register';
+import { IUser } from '../../../../models/user/user';
 
 @Component({
   selector: 'app-register',
@@ -10,50 +13,45 @@ import {Router, RouterLink, RouterModule} from '@angular/router';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  registerForm: FormGroup;
-  firstname = new FormControl('');
-  lastname = new FormControl('');
-  emailaddress = new FormControl('');
-  phonenumber = new FormControl('');
-  password = new FormControl('');
-  confirmpassword = new FormControl('');
-
-  constructor(private formBuilder: FormBuilder,public router: Router){
-    this.registerForm = this.formBuilder.group({
-      firstname: [''], 
-      lastname: [''], 
-      emailaddress: [''], 
-      phonenumber: [''], 
-      password: [''], 
-      confirmpassword: ['']
-    })
+  formBuilder=inject(FormBuilder);
+  httpService = inject(RegisterService);
+  router = inject(Router);
+  route = inject(ActivatedRoute);
+  registerForm = this.formBuilder.group({
+    firstname: [''], 
+    lastname: [''], 
+    email: [''], 
+    phonenumber: [''], 
+    password: [''], 
+    confirmpassword: ['']
+  });
+register(){
+  const user:IUser={
+     email: this.registerForm.value.email!,
+     password:this.registerForm.value.password!,
   }
-  
-  public registerpassword(){
-  
-    if (this.firstname.value=="" || this.lastname.value=="",
-        this.emailaddress.value=="" || this.phonenumber.value=="",
-        this.password.value=="" || this.confirmpassword.value=="" 
-       ) 
-    {
+  const register: IRegister = {
+    user:user,
+    firstName: this.registerForm.value.firstname!,
+    lastName: this.registerForm.value.lastname!,
+    phoneNumber: this.registerForm.value.phonenumber!,
+  };
+  if (this.registerForm.value.password! !== this.registerForm.value.confirmpassword!) {
+    // Şifreler eşleşmiyorsa hata mesajı göster
+    console.log('Şifreler eşleşmiyor.');
+    return; // Fonksiyonu burada sonlandır
+  }
 
-      return alert("Required fields cannot be left blank!")
-    }
-
+  this.httpService.createUser(register).subscribe(()=>{
     
-    if (this.password.value==this.confirmpassword.value) {
-      this.router.navigate(["login"])
-     }
-     else{
-     return  alert("Password repeat is incorrect!")
-     }
-     console.log(this.firstname.value)
-    console.log(this.lastname.value)
-    console.log(this.emailaddress.value)
-    console.log(this.phonenumber.value)
-    console.log(this.password.value)
-    console.log(this.confirmpassword.value)
-  }
-
+      this.router.navigate(['/login']);
+    
+   
+   
+  },error=>{
+    console.log('Kayıt sırasında bir hata oluştu:', error);
+  })
+}
 
 }
+

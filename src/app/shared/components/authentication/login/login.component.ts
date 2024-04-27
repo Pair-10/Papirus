@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { TokenService } from './../../../../core/services/token.service';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import {Router, RouterLink, RouterModule} from '@angular/router';
+import {ActivatedRoute, Router, RouterLink, RouterModule} from '@angular/router';
+import { LoginService } from '../../../../services/login/login.service';
+import { IUser } from '../../../../models/user/user';
+import { NavbarService } from '../../../../services/navbar/navbar.service';
+
 
 
 @Component({
@@ -11,23 +16,36 @@ import {Router, RouterLink, RouterModule} from '@angular/router';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  loginForm: FormGroup; 
-  email = new FormControl('');
-  password = new FormControl('');
-  constructor(private formBuilder: FormBuilder) {
-    this.loginForm = this.formBuilder.group({
-      email: [''], 
-      password: [''],
-      rememberMe: [false] 
-    });
-  }
+  formBuilder=inject(FormBuilder);
+  httpService=inject(LoginService)
+  navbarService=inject(NavbarService)
+  router = inject(Router);
+  route = inject(ActivatedRoute);
+  loginForm = this.formBuilder.group({
+    email: [''], 
+    password: [''], 
+
+  });
   public loginClick(){
+    const user:IUser={
+      email: this.loginForm.value.email!,
+      password:this.loginForm.value.password!,
+   }
+   this.httpService.loginUser(user).subscribe((response)=>{
+    
+    try {      
+      localStorage.setItem("Token",response.accessToken.token)
+      console.log(user)
+      console.log(response.accessToken.token)
+      this.navbarService.setLoggedIn(true)
 
-    if (this.email.value=="" || this.password.value=="") {
-
-      return alert("Mandatory fields cannot be left empty!")
-    }   
-    console.log(this.email.value)
-    console.log(this.password.value)
+      this.router.navigate(['/']);
+      
+    } catch (error) {
+      console.log(error)
+    }
+    
+   
+  })
   }
 }

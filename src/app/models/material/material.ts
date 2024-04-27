@@ -1,6 +1,9 @@
 export interface Material {
     id: string;
+    language: string;
+    publicationDate: string;
     materialName: string;
-    materialImage: string;
-    author: string;
+    pageCount:number;
+    quantity: number;
+    status: boolean;
 }

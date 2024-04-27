@@ -7,14 +7,14 @@ export class TokenService {
   constructor() {}
 
   setToken(token: string) {
-    localStorage.setItem('token', token);
+    localStorage.setItem('Token', token);
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    return localStorage.getItem('Token');
   }
 
   hasToken(): boolean {
-    return this.getToken() != null;
+    return this.getToken() != "";
   }
 }
