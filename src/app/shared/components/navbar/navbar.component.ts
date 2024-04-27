@@ -3,9 +3,7 @@ import { ListService } from './../../../services/list/list.service';
 import { CommonModule } from '@angular/common';
 import { Component, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
-import { Observable, catchError, forkJoin, map, of, switchMap } from 'rxjs';
 import { NavbarService } from '../../../services/navbar/navbar.service';
-import { JwtService } from '../../../services/jwt/jwt.service';
 import { TokenService } from '../../../core/services/token.service';
 
 @Component({
