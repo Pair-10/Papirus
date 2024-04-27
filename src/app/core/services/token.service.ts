@@ -15,6 +15,6 @@ export class TokenService {
   }
 
   hasToken(): boolean {
-    return this.getToken() != null;
+    return this.getToken() != "";
   }
 }

@@ -115,7 +115,6 @@ export class MaterialListComponent implements OnInit {
   }
   //--------------------------------------------------------
   materialyazdir(material: any) {
-
     this.router.navigate(['/material-detail'], { state: { material } });
   }
 
