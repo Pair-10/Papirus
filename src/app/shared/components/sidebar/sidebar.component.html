@@ -2,7 +2,8 @@
 <div class="bg-[#dddddd] text-white p-4 col-span-1 flex flex-col items-center rounded-lg h-full">
   <img src="https://tecdn.b-cdn.net/img/new/avatars/2.webp" class="w-32 rounded-full" alt="Avatar" />
   <div class="flex justify-center items-center w-full">
-    <span class="text-xl font-bold mb-5 mt-5 text-blue-900">Robert Eggers</span>
+    <span class="text-xl font-bold mb-5 mt-5 text-blue-900 text-center">{{username}} {{ lastname }}</span>
+    
  </div>
   <!--left profile buttons with aligned icons-->
   <div class="w-full max-w-72 mx-auto text-gray-900 bg-[#dddddd]  rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white flex flex-col items-center justify-center">
@@ -54,7 +55,7 @@
           <span class="hidden md:flex pl-2 truncate">Help</span>
       </button>
       
-    <button type="button" class="ml-2 flex items-center justify-center w-full py-3 text-l rounded-b-lg font-bold rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden">
+    <button type="button" (click)="navigateToSignOut()" class="ml-2 flex items-center justify-center w-full py-3 text-l rounded-b-lg font-bold rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden">
       <span class="w-5 sm:-ml-40 md:ml-4 lg:-ml-2"><i class="fas fa-sign-out-alt"></i></span>
       <span class="hidden md:flex ml-1 truncate">Sign Out</span>
   </button>

@@ -17,7 +17,7 @@ import { roleGuard } from './guards/role.guard';
 
 
 export const routes: Routes = [
-    { path: '', component: MainComponent,  canActivate:[roleGuard],data:{requiredRoles:["Admin"]}},
+    { path: '', component: MainComponent},
     { path: 'book-detail', component: BookDetailComponent },
     { path: 'penalty', component: PenaltyComponent }, //penalty
     { path: 'material-list', component: MaterialListComponent },

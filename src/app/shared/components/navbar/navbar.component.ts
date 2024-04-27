@@ -1,8 +1,12 @@
+
 import { ListService } from './../../../services/list/list.service';
 import { CommonModule } from '@angular/common';
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { Observable, catchError, forkJoin, map, of, switchMap } from 'rxjs';
+import { NavbarService } from '../../../services/navbar/navbar.service';
+import { JwtService } from '../../../services/jwt/jwt.service';
+import { TokenService } from '../../../core/services/token.service';
 
 @Component({
   selector: 'app-navbar',
@@ -12,11 +16,16 @@ import { Observable, catchError, forkJoin, map, of, switchMap } from 'rxjs';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
+  navbarService=inject(NavbarService)
+  tokenService=inject(TokenService)
   hamburgerMenuOpen = false;
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
   isLoggedIn = false;
   materialTypes: any[] = [];
+  
+  
+  
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
@@ -84,17 +93,22 @@ loadMaterialTypes(materialTypeId: string, categoryId: string) {
 }
 
 
-
-
-
-
-
-
-
 //--------------------------------------
-ngOnInit(){
-  this.loadCategoryTypes();
+checkToken() {
+  const token = this.tokenService.getToken();
+  if (token) {
+    this.isLoggedIn = true;
+  }
 }
+ngOnInit(): void {
+  this.navbarService.isLoggedIn.subscribe(isLoggedIn => {
+    this.isLoggedIn = isLoggedIn;
+  });
+  this.checkToken()
+  };
+
+
+
 
 selectCategory(categoryId: string,categoryType: string) {
   this.router.navigate(['/material-list'], { queryParams: { type: categoryType, categoryId: categoryId } });
