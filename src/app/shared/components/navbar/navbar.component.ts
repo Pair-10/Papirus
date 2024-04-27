@@ -1,7 +1,10 @@
+
 import { ListService } from './../../../services/list/list.service';
 import { CommonModule } from '@angular/common';
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { NavbarService } from '../../../services/navbar/navbar.service';
+import { TokenService } from '../../../core/services/token.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,11 +14,16 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
+  navbarService=inject(NavbarService)
+  tokenService=inject(TokenService)
   hamburgerMenuOpen = false;
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
   isLoggedIn: boolean = false;
   materialTypes: any[] = [];
+  
+  
+  
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
@@ -82,14 +90,28 @@ export class NavbarComponent implements OnInit {
     );
   }
 
+//--------------------------------------
+checkToken() {
+  const token = this.tokenService.getToken();
+  if (token) {
+    this.isLoggedIn = true;
+  }
+}
+ngOnInit(): void {
+  this.loadCategoryTypes();
+  this.navbarService.isLoggedIn.subscribe(isLoggedIn => {
+    this.isLoggedIn = isLoggedIn;
+  });
+  this.checkToken()
+  };
 
-  //--------------------------------------
-  ngOnInit() {
-    this.loadCategoryTypes();
-  }
-  selectCategory(categoryId: string, categoryType: string) {
-    this.router.navigate(['/material-list'], { queryParams: { type: categoryType, categoryId: categoryId } });
-  }
+
+
+
+selectCategory(categoryId: string,categoryType: string) {
+  this.router.navigate(['/material-list'], { queryParams: { type: categoryType, categoryId: categoryId } });
+}
+
 
 
   onMaterialTypeClick(type: string) {

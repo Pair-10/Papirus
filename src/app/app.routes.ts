@@ -13,13 +13,15 @@ import { LoginComponent } from './shared/components/authentication/login/login.c
 import { RegisterComponent } from './shared/components/authentication/register/register.component';
 import { roleGuard } from './guards/role.guard';
 import { MaterialDetailComponent } from './shared/components/material-detail/material-detail.component';
+import { BookDetailComponent } from './features/book-will-be-deleted/pages/book-detail/book-detail.component';
 
 
 
 
 export const routes: Routes = 
 [
-    { path: '', component: MainComponent,  canActivate:[roleGuard],data:{requiredRoles:["Admin"]}},
+    { path: '', component: MainComponent },
+    { path: 'book-detail', component: BookDetailComponent },
     { path: 'material-detail', component: MaterialDetailComponent },
     { path: 'penalty', component: PenaltyComponent }, //penalty
     { path: 'material-list', component: MaterialListComponent },

@@ -4,6 +4,8 @@ import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angul
 import {ActivatedRoute, Router, RouterLink, RouterModule} from '@angular/router';
 import { LoginService } from '../../../../services/login/login.service';
 import { IUser } from '../../../../models/user/user';
+import { NavbarService } from '../../../../services/navbar/navbar.service';
+
 
 
 @Component({
@@ -16,6 +18,7 @@ import { IUser } from '../../../../models/user/user';
 export class LoginComponent {
   formBuilder=inject(FormBuilder);
   httpService=inject(LoginService)
+  navbarService=inject(NavbarService)
   router = inject(Router);
   route = inject(ActivatedRoute);
   loginForm = this.formBuilder.group({
@@ -32,7 +35,12 @@ export class LoginComponent {
     
     try {      
       localStorage.setItem("Token",response.accessToken.token)
+      console.log(user)
+      console.log(response.accessToken.token)
+      this.navbarService.setLoggedIn(true)
+
       this.router.navigate(['/']);
+      
     } catch (error) {
       console.log(error)
     }
