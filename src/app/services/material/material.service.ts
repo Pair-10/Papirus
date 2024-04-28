@@ -10,11 +10,9 @@ import { jwtToken } from '../../jwttoken';
 export class MaterialService {
 
   constructor(private http: HttpClient) { }
-  token = jwtToken.jwt
   private baseUrl = 'http://localhost:60805/api';
   getCategoryTypes(): Observable<any[]> {
-    const headers = this.token ? new HttpHeaders().set('Authorization', 'Bearer ' + this.token) : new HttpHeaders();
-    return this.http.get<any>(`${this.baseUrl}/Materials?PageIndex=0&PageSize=10`, { headers }).pipe(
+    return this.http.get<any>(`${this.baseUrl}/Materials?PageIndex=0&PageSize=10`).pipe(
       map(response => {
         return response.items;
       })
@@ -22,8 +20,7 @@ export class MaterialService {
     }
   
     getMaterialsByMaterialId(materialId: string): Observable<Material> {
-      const headers = this.token ? new HttpHeaders().set('Authorization', 'Bearer ' + this.token) : new HttpHeaders();
-      return this.http.get<any>(`${this.baseUrl}/Materials/${materialId}`, { headers }).pipe(
+      return this.http.get<any>(`${this.baseUrl}/Materials/${materialId}`).pipe(
         map(response => {
           const material: Material = {
             id: response.id,

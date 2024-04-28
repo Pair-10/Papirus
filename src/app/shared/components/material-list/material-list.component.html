@@ -32,12 +32,13 @@
                         <p>Dil: {{mergedItem.material.language}}</p>
                         <p>Sayfa Sayısı: {{mergedItem.material.pageCount}}</p>
                         <p>Adet: {{mergedItem.material.quantity}}</p>
-                        <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla oku</button>
+                        <button (click)="materialyazdir(mergedItem)" class="mt-4 bg-blue-500 text-white px-4 py-2  rounded hover:bg-blue-600">Daha fazla
+                            oku</button>
                         <!-- Material bilgileri -->
                     </div>
                 </div>
-                
-                
+
+
             </div>
 
             <!-- Dergileri listelemek için döngü -->
@@ -56,7 +57,7 @@
                     <!-- Sayı -->
                     <p class="text-gray-600">Sayı: {{ magazine.magazine.issue }}</p>
                     <!-- Daha fazla oku düğmesi -->
-                    <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla
+                    <button (click)="materialyazdir(magazine)" class="mt-4 bg-blue-500 text-white px-4 py-2  rounded hover:bg-blue-600">Daha fazla
                         oku</button>
                 </div>
             </div>
@@ -67,12 +68,12 @@
                 <!-- Makale kartları -->
                 <div *ngFor="let article of originalData3" class="bg-white shadow-lg rounded-lg p-4 w-72">
                     <!-- Makale resmi -->
-                    <img class="w-full h-56 object-cover rounded-t-lg" src="https://picsum.photos/100?random"> 
+                    <img class="w-full h-56 object-cover rounded-t-lg" src="https://picsum.photos/100?random">
                     <!-- Makale başlığı -->
                     <h3 class="text-xl font-bold mt-2">{{ article.material.materialName }}</h3>
                     <p class="text-lg">{{article.material.pageCount}}</p>
                     <!-- Daha fazla oku düğmesi -->
-                    <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla
+                    <button (click)="materialyazdir(article)" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla
                         oku</button>
                 </div>
             </div>

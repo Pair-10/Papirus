@@ -45,7 +45,6 @@ register(){
   this.httpService.createUser(register).subscribe(()=>{
     
       this.router.navigate(['/login']);
-      console.log(register)
     
    
    

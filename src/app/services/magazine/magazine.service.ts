@@ -22,13 +22,11 @@ export class MagazineService {
   ];
 
   constructor(private http: HttpClient) { }
-  token = jwtToken.jwt;
   private baseUrl = 'http://localhost:60805/api';
 
   // Dergileri döndürür
   getMagazines(): Observable<Magazine[]> {
-    const headers = this.token ? new HttpHeaders().set('Authorization', 'Bearer ' + this.token) : new HttpHeaders();
-    return this.http.get<any>(`${this.baseUrl}/Magazines?PageIndex=0&PageSize=10`, { headers }).pipe(
+    return this.http.get<any>(`${this.baseUrl}/Magazines?PageIndex=0&PageSize=10`).pipe(
         map(response => {
             const magazines: Magazine[] = response.items.map((item: any) => ({
                 id: item.id,
