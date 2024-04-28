@@ -12,7 +12,6 @@ export class BookService implements OnInit {
 
 
   constructor(private http: HttpClient) { }
-  token = jwtToken.jwt;
   private baseUrl = 'http://localhost:60805/api';
 
   ngOnInit(): void {
@@ -22,8 +21,7 @@ export class BookService implements OnInit {
 
   // Tüm kitapları döndürür
   getBooks(): Observable<Book[]> {
-    const headers = this.token ? new HttpHeaders().set('Authorization', 'Bearer ' + this.token) : new HttpHeaders();
-    return this.http.get<any>(`${this.baseUrl}/Books?PageIndex=0&PageSize=10`, { headers }).pipe(
+    return this.http.get<any>(`${this.baseUrl}/Books?PageIndex=0&PageSize=10`).pipe(
       map(response => {
         const books: Book[] = response.items.map((item: any) => ({
           id: item.id,
