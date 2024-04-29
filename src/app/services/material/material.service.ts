@@ -29,7 +29,7 @@ export class MaterialService {
             pageCount: response.pageCount,
             materialName: response.materialName,
             quantity: response.quantity,
-            status: response.status
+            status: response.status,
           };
           return material;
         })

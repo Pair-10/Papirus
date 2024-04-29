@@ -5,5 +5,6 @@ export interface Material {
     materialName: string;
     pageCount:number;
     quantity: number;
-    status: boolean;
+    status: boolean,
+    isReturned?: boolean,
 }

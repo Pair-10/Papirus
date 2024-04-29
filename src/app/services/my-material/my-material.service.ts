@@ -18,7 +18,8 @@ export class MyMaterialService {
           id: item.id,
           deadline: new Date(item.deadline),
           materialId: item.materialId,
-          userId: item.userId
+          userId: item.userId,
+          isReturned: item.isReturned
         }));
         return borrowedMaterials.filter((item: MyBorrowedMaterials) => item.userId === userId);
       })

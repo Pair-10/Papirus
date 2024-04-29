@@ -78,7 +78,21 @@
                                         {{material.pageCount}}
                                     </td>
                                     <td>
-                                        <button (click)="teslimEt(material)" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                                        <div *ngIf="showConfirmation" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                                            <div class="bg-white p-8 rounded-lg shadow-lg">
+                                                <p>Materyali teslim etmeye emin misiniz?</p>
+                                                <div class="mt-4 flex justify-end">
+                                                    <button (click)="cancelConfirmation()"
+                                                            class="mr-4 px-4 py-2 bg-red-500 text-white rounded-lg">İptal</button>
+                                                    <button (click)="confirmDelivery(material)"
+                                                            class="px-4 py-2 bg-green-500 text-white rounded-lg">Evet</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button (click)="showConfirmation = true"
+                                                [disabled]="material.isReturned"
+                                                class="py-2 px-4 rounded text-white font-bold {{ material.isReturned ? 'bg-gray-400' : 'bg-green-500 hover:bg-green-600' }}">
                                             Teslim Et
                                         </button>
                                     </td>
