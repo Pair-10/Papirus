@@ -29,7 +29,7 @@ export const routes: Routes =
     { path: 'activity', component: ActivityComponent }, //activity
     { path: 'help', component: HelpComponent },//help
     { path: 'edit-profile', component: EditProfileComponent },
-    { path: 'My-Material', component: MyBooksComponent },
+    { path: 'my-materials', component: MyBooksComponent },
     { path: 'edit-user', component: EditUsersComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },

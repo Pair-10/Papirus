@@ -66,10 +66,13 @@ export class MaterialDetailComponent implements OnInit{
     this.borrow = !this.borrow;
   }
   borrowMaterial() {
-    // Form verisini al
-    const formData = this.borrowForm.value;
+    if (this.borrowForm.invalid) {
+      console.error("Form geçersiz, lütfen tüm alanları doldurun.");
+      return;
+  }
+    console.log(this.borrowForm.value);
+    let formData = this.borrowForm.value;
 
-    // Servise gönder
     this.borrowService.borrowMaterialService(formData).subscribe(
       response =>{
         console.log("Ödünç alma işlemi gerçekleşti.");
