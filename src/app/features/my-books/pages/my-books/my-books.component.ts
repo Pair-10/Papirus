@@ -25,7 +25,6 @@ export class MyBooksComponent implements OnInit {
     returnedService = inject(ReturnedService)
     borrowedMaterials: MyBorrowedMaterials[] = [];
     transformedMaterials: Material[] = [];
-    showConfirmation: boolean = false;
     userid: any;
     ngOnInit(): void {
         this.userService.getUser().subscribe(
@@ -42,11 +41,8 @@ export class MyBooksComponent implements OnInit {
                     })
                 ).subscribe(
                     transformedResponses => {
-                        // Her bir malzeme için isReturned özelliğini kontrol ederek transformedMaterials dizisini oluşturun
                         this.transformedMaterials = transformedResponses.map((material, index) => {
-                            // borrowedMaterials dizisindeki ilgili öğeyi alın
                             const borrowedMaterial = this.borrowedMaterials[index];
-                            // isReturned özelliğini kontrol edin ve dönüştürülmüş malzemeye ekleyin
                             material.isReturned = borrowedMaterial.isReturned;
                             return material;
                         });
@@ -55,18 +51,11 @@ export class MyBooksComponent implements OnInit {
             }
         );
     }
-    cancelConfirmation() {
-        this.showConfirmation = false;
-    }
-    confirmDelivery(material: Material) {
-        // Teslim işlemlerini burada gerçekleştirin
-        this.teslimEt(material);
 
-        // Onay kutusunu gizleyin
-        this.showConfirmation = false;
-    }
     teslimEt(gelenveri: any){
-        const eslesenVeri = this.borrowedMaterials.find(veri => veri.materialId === gelenveri.id)
+        let eslesenVeri :any =[];
+        console.log(gelenveri);
+        eslesenVeri = this.borrowedMaterials.find(veri => veri.materialId === gelenveri.id)
         if (eslesenVeri) {
             eslesenVeri.isReturned = true;
         }

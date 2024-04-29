@@ -17,4 +17,5 @@ export class ReturnedService {
     }
     return this.http.post(`${this.baseUrl}/Returneds`, veri);
   }
+  
 }
