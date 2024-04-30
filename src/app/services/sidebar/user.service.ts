@@ -23,5 +23,4 @@ export class UserService {
   getUser(){
     return this.http.get<{id:string, firstName: string,lastName:string,email:string,phoneNumber:string}>(this.apiUrl +`/api/Users/${this.nameIdentifier}`);
   }
-
 }

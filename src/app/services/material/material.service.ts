@@ -29,10 +29,28 @@ export class MaterialService {
             pageCount: response.pageCount,
             materialName: response.materialName,
             quantity: response.quantity,
-            status: response.status
+            status: response.status,
           };
           return material;
         })
       );
+    }
+    getMaterial(){
+      return this.http.get<any>(`${this.baseUrl}/Materials?PageIndex=0&PageSize=20`).pipe(
+        map(response =>{
+          return response
+        })
+      )
+    }
+    setMaterial(material: any){
+      const materialData = {
+        materialName: material.materialName,
+        quantity: material.quantity,
+        language: material.language,
+        pageCount: material.pageCount,
+        status: material.status,
+        publicationDate: material.publicationDate,
+      }
+      return this.http.post<any>(`${this.baseUrl}/Materials`,materialData)
     }
 }

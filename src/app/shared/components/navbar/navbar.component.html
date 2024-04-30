@@ -36,7 +36,7 @@
         <!-- Profil yönetim penceresi -->
         <div *ngIf="isMenuOpen" class="absolute top-16 bg-white text-black border p-4 rounded shadow-lg z-10">
           <ul>
-            <li class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono text-lg">
+            <li [routerLink]="['/my-materials']" class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono text-lg">
               <a class="cursor-pointer">Hesabım</a>
             </li>
             <li class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono font-bold text-lg">
