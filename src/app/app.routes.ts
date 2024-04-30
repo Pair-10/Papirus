@@ -14,6 +14,7 @@ import { RegisterComponent } from './shared/components/authentication/register/r
 import { roleGuard } from './guards/role.guard';
 import { MaterialDetailComponent } from './shared/components/material-detail/material-detail.component';
 import { BookDetailComponent } from './features/book-will-be-deleted/pages/book-detail/book-detail.component';
+import { AddMaterialsComponent } from './shared/components/edit-materials/add-materials.component';
 
 
 
@@ -23,11 +24,12 @@ export const routes: Routes =
     { path: '', component: MainComponent },
     { path: 'book-detail', component: BookDetailComponent },
     { path: 'material-detail', component: MaterialDetailComponent },
-    { path: 'penalty', component: PenaltyComponent }, //penalty
+    { path: 'penalty', component: PenaltyComponent },
+    { path: 'add-materials', component: AddMaterialsComponent },
     { path: 'material-list', component: MaterialListComponent },
-    { path: 'penalty-admin', component: PenaltyAdminComponent }, //penalty-admin
-    { path: 'activity', component: ActivityComponent }, //activity
-    { path: 'help', component: HelpComponent },//help
+    { path: 'penalty-admin', component: PenaltyAdminComponent },
+    { path: 'activity', component: ActivityComponent }, 
+    { path: 'help', component: HelpComponent },
     { path: 'edit-profile', component: EditProfileComponent },
     { path: 'my-materials', component: MyBooksComponent },
     { path: 'edit-user', component: EditUsersComponent },

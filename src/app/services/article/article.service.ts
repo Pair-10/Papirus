@@ -26,6 +26,13 @@ export class ArticleService {
       })
     )
   }
-
+  setArticles(article:any){
+    const articles = {
+      categoryId : article.categoryId,
+      materialId: article.materialId,
+      publicationName: article.publicationName
+    }
+    return this.http.post<any>(`${this.baseUrl}/Articles`,articles)
+  }
  
 }

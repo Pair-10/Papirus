@@ -34,7 +34,14 @@ export class BookService implements OnInit {
     );
   }
 
-  
+  setBooks(book:any){
+    const books = {
+      categoryId : book.categoryId,
+      isbn : book.isbn,
+      materialId: book.materialId
+    }
+    return this.http.post<any>(`${this.baseUrl}/Books`,books)
+  }
     /*const category = this.categories.find(cat => cat.id === categoryId);
     const filteredBooks = this.books.filter(book => book.categoryId === categoryId);
 

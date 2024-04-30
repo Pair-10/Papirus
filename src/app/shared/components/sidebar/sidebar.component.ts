@@ -40,6 +40,9 @@ export class SidebarComponent {
   navigateToMyBook() {
     this.router.navigate(['/my-materials']);
   }
+  navigateToAddMaterials(){
+    this.router.navigate(['/add-materials']);
+  }
   navigateToSignOut() {
     this.navbarService.setLoggedIn(false)
     this.router.navigate(['/']);
