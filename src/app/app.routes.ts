@@ -14,7 +14,7 @@ import { RegisterComponent } from './shared/components/authentication/register/r
 import { roleGuard } from './guards/role.guard';
 import { MaterialDetailComponent } from './shared/components/material-detail/material-detail.component';
 import { BookDetailComponent } from './features/book-will-be-deleted/pages/book-detail/book-detail.component';
-import { AddMaterialsComponent } from './shared/components/edit-materials/add-materials.component';
+import { AddMaterialsComponent } from './shared/components/add-materials/add-materials.component';
 
 
 
