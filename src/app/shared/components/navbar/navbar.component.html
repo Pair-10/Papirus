@@ -21,6 +21,7 @@
     </form>
 
     <div class="md:flex hidden">
+      
       <div *ngIf="isLoggedIn" class="flex items-center gap-4">
         <!-- Alışveriş sepeti ikonu -->
         <i class="fas fa-shopping-cart text-white text-2xl ml-4 cursor-pointer"></i>
@@ -35,8 +36,8 @@
         <!-- Profil yönetim penceresi -->
         <div *ngIf="isMenuOpen" class="absolute top-16 bg-white text-black border p-4 rounded shadow-lg z-10">
           <ul>
-            <li class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono text-lg">
-              <a href="#">Hesabım</a>
+            <li [routerLink]="['/my-materials']" class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono text-lg">
+              <a class="cursor-pointer">Hesabım</a>
             </li>
             <li class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono font-bold text-lg">
               <a href="#">Çıkış Yap</a>
@@ -54,10 +55,10 @@
 
     <!-- Kullanıcı giriş yapmamışsa gösterilecek -->
     <div *ngIf="!isLoggedIn" class="md:flex hidden lg:gap-4">
-      <button class="bg-blue-900 text-white lg:px-4 px-2 lg:py-2 py-1 rounded">
+      <button class="bg-blue-900 text-white lg:px-4 px-2 lg:py-2 py-1 rounded" [routerLink]="['/login']" >
         Giriş Yap
       </button>
-      <button class="bg-blue-700 text-white px-4 py-2 rounded">Kayıt Ol</button>
+      <button class="bg-blue-700 text-white px-4 py-2 rounded" [routerLink]="['/register']">Kayıt Ol</button>
     </div>
     <!-- Mobil menü -->
     <div *ngIf="hamburgerMenuOpen" class="absolute top-[80px] w-full h-auto">
@@ -67,10 +68,10 @@
           <button class="bg-red-600 text-white px-4 py-2 mt-4 rounded">Çıkış Yap</button>
         </div>
         <div *ngIf="!isLoggedIn" class="text-center">
-          <button class="bg-blue-900 text-white px-4 py-2 rounded">
+          <button class="bg-blue-900 text-white px-4 py-2 rounded" [routerLink]="['/login']">
             Giriş Yap
           </button>
-          <button class="bg-blue-700 text-white px-4 py-2 ml-4 rounded">Kayıt Ol</button>
+          <button class="bg-blue-700 text-white px-4 py-2 ml-4 rounded" [routerLink]="['/register']">Kayıt Ol</button>
         </div>
         <ul class="text-2xl text-center mt-2 font-mono font-bold">
           <li [routerLink]="['/material-list']" [queryParams]="{ type: 'book' }" class="border-b-2 border-gray-300 pb-1">Kitap</li>

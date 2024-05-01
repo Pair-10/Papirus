@@ -1,0 +1,135 @@
+<div class="bg-[#F8F8F8]">
+    <div class="container mx-auto ">
+      <div class="pt-4 ">
+        <div class="grid grid-cols-4 gap-4 mt-12 pr-2 ">
+         <app-sidebar></app-sidebar>
+         <div class="flex flex-col items-center  col-span-3 bg-[#f2f2f2] pb-52">
+            <div class=" col-span-3 flex justify-center pt-12 pb-12">
+                <h1 class="text-blue-900 font-bold text-3xl">Add Materials</h1>
+            </div>
+            <div >
+                <form [formGroup]="materialForm" (ngSubmit)="onSubmit()" class="max-w-md mx-auto space-y-4">
+                    <div>
+                      <label for="materialName" class="block text-sm font-medium text-gray-700">Material Name</label>
+                      <input type="text" formControlName="materialName" id="materialName" class="mt-1 p-2 block w-full border-gray-300 rounded-md">
+                    </div>
+                    
+                    <div>
+                      <label for="quantity" class="block text-sm font-medium text-gray-700">Quantity</label>
+                      <input type="number" formControlName="quantity" id="quantity" class="mt-1 p-2 block w-full border-gray-300 rounded-md">
+                    </div>
+                  
+                    <div>
+                      <label for="language" class="block text-sm font-medium text-gray-700">Language</label>
+                      <input type="text" formControlName="language" id="language" class="mt-1 p-2 block w-full border-gray-300 rounded-md">
+                    </div>
+                  
+                    <div>
+                      <label for="pageCount" class="block text-sm font-medium text-gray-700">Page Count</label>
+                      <input type="number" formControlName="pageCount" id="pageCount" class="mt-1 p-2 block w-full border-gray-300 rounded-md">
+                    </div>
+                  
+                    <div>
+                      <label for="status" class="block text-sm font-medium text-gray-700">Avaible</label>
+                      <input type="checkbox" formControlName="status" id="status" class="mt-1 p-2 block border-gray-300 rounded-md">
+                    </div>
+                  
+                    <div>
+                      <label for="publicationDate" class="block text-sm font-medium text-gray-700">Publication Date</label>
+                      <input type="date" formControlName="publicationDate" id="publicationDate" class="mt-1 p-2 block w-full border-gray-300 rounded-md">
+                    </div>
+                  
+                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                      Submit
+                    </button>
+                  </form>
+                  <div class="mt-6 flex space-x-4">
+                    <label class="flex items-center space-x-2">
+                        <input type="radio" name="option" value="book" [(ngModel)]="selectedOption" [disabled]="erisim">
+                        <span>Kitap</span>
+                    </label>
+                    <label class="flex items-center space-x-2">
+                        <input type="radio" name="option" value="magazine" [(ngModel)]="selectedOption" [disabled]="erisim">
+                        <span>Dergi</span>
+                    </label>
+                    <label class="flex items-center space-x-2">
+                        <input type="radio" name="option" value="article" [(ngModel)]="selectedOption" [disabled]="erisim">
+                        <span>Makale</span>
+                    </label>
+                </div>
+                
+                  
+                  <div *ngIf="selectedOption === 'book'" class="mt-4">
+                    <form #form2="ngForm" (ngSubmit)="setOtherMaterial(form2.value, 'bookForm')">
+                        <div class="mb-4">
+                          <label class="block">CategoryId</label>
+                          <input type="text" name="categoryId" [ngModel]="'f1c535cb-263f-47c8-1e5e-08dc61e8e461'" class="mt-1 block w-full">
+                        </div>
+                        <div class="mb-4">
+                          <label class="block">ISBN no</label>
+                          <input type="text" name="isbn" class="mt-1 block w-full" ngModel>
+                        </div>
+                        <div class="mb-4">
+                          <label class="block">Material Name</label>
+                          <select name="materialId" class="mt-1 block w-full" ngModel>
+                            <option *ngFor="let material of materials" [ngValue]="material.id">{{ material.materialName }}</option>
+                          </select>
+                        </div>
+                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                            Submit
+                          </button>
+                      </form>
+                  </div>
+                  
+                  <div *ngIf="selectedOption === 'magazine'" class="mt-4">
+                    <form #form1="ngForm" (ngSubmit)="setOtherMaterial(form1.value, 'magazineForm')">
+                        <div class="mb-4">
+                          <label class="block">CategoryId</label>
+                          <input type="text" name="categoryId" [ngModel]="'fa0be4d1-3580-4ddb-1e5f-08dc61e8e461'" class="mt-1 block w-full">
+                        </div>
+                        <div class="mb-4">
+                          <label class="block">ISSN no</label>
+                          <input type="text" name="issn" class="mt-1 block w-full" ngModel>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block">Issue</label>
+                            <input type="text" name="issue" class="mt-1 block w-full" ngModel>
+                          </div>
+                        <div class="mb-4">
+                          <label class="block">Material Name</label>
+                          <select name="materialId" class="mt-1 block w-full" ngModel>
+                            <option *ngFor="let material of materials" [ngValue]="material.id">{{ material.materialName }}</option>
+                          </select>
+                        </div>
+                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                            Submit
+                          </button>
+                      </form>
+                  </div>
+                  
+                  <div *ngIf="selectedOption === 'article'" class="mt-4">
+                    <form #form="ngForm" (ngSubmit)="setOtherMaterial(form.value, 'articleForm')">
+                        <div class="mb-4">
+                          <label class="block">CategoryId</label>
+                          <input type="text" name="categoryId" [ngModel]="'7f15efda-deb4-438f-1e60-08dc61e8e461'"  class="mt-1 block w-full">
+                        </div>
+                        <div class="mb-4">
+                          <label class="block">Publication Name</label>
+                          <input type="text" name="publicationName" class="mt-1 block w-full" ngModel>
+                        </div>
+                        <div class="mb-4">
+                          <label class="block">Material Name</label>
+                          <select name="materialId" class="mt-1 block w-full" ngModel>
+                            <option *ngFor="let material of materials" [ngValue]="material.id">{{ material.materialName }}</option>
+                          </select>
+                        </div>
+                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
+                            Submit
+                          </button>
+                      </form>
+                  </div>
+            </div>
+         </div>   
+      </div>
+    </div>
+    </div>
