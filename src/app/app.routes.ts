@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { MainComponent } from './shared/components/main/main.component';
-
 import { PenaltyComponent } from './features/penalty/pages/penalty/penalty.component'; //penalty
 import { MaterialListComponent } from './shared/components/material-list/material-list.component';
 import { PenaltyAdminComponent } from './features/penalty/pages/penalty-admin/penalty-admin.component'; //penalty-admin
@@ -10,7 +9,6 @@ import { EditProfileComponent } from './features/edit-profile/pages/edit-profile
 import { MyBooksComponent } from './features/my-books/pages/my-books/my-books.component'
 import { EditUsersComponent } from './features/edit-users/pages/edit-users/edit-users.component'
 import { NotfoundComponent } from './shared/components/notfound/notfound.component';
-
 import { LoginComponent } from './shared/components/authentication/login/login.component';
 import { RegisterComponent } from './shared/components/authentication/register/register.component';
 import { roleGuard } from './guards/role.guard';
@@ -19,10 +17,11 @@ import { BookDetailComponent } from './features/book-will-be-deleted/pages/book-
 
 
 
-export const routes: Routes = [
-    { path: '', component: MainComponent},
-    { path: 'book-detail', component: BookDetailComponent },
+
+export const routes: Routes = 
+[
     { path: '', component: MainComponent },
+    { path: 'book-detail', component: BookDetailComponent },
     { path: 'material-detail', component: MaterialDetailComponent },
     { path: 'penalty', component: PenaltyComponent }, //penalty
     { path: 'material-list', component: MaterialListComponent },

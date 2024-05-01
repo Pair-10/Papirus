@@ -21,8 +21,8 @@
                                 <h4 class="mb-4 mt-6 text-2xl font-bold">{{ author.name }} {{ author.surname }}</h4>
                             </div>
                         </div>
-                        <div style="display: inline-block; margin-left: 20px;">
-                            <h4 class="mb-4 text-2xl font-bold hover:underline" routerLink="/">Yapı Kredi Yayınları</h4>
+                        <div class="inline-block ml-5" *ngFor="let publisher of publishers">
+                            <h4 class="mb-4 text-2xl font-bold hover:underline">{{ publisher.name }}</h4>
                         </div>
 
 
@@ -70,15 +70,19 @@
                             </div>
 
                             <div class="mb-6">
-                                <p class="flex items-center">
+                                <div class="flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="2" stroke="currentColor"
                                         class="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>Yayınevi: Yapı Kredi Yayınları
-                                </p>
+                                    </svg>
+                                    <div *ngFor="let publisher of publishers">
+                                        <h4>Yayın Evi: {{ publisher.name }}</h4>
+                                    </div>
+                                </div>
                             </div>
+                            
                             <div class="mb-6">
                                 <p class="flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -97,7 +101,7 @@
                                         class="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>İlk Baskı Yılı: {{material.material.publicationDate}}
+                                    </svg>İlk Baskı Yılı: {{year}}
                                 </p>
                             </div>
 
@@ -119,19 +123,26 @@
                                         class="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>Tür: Edebiyat
+                                    </svg>Tür: {{tur}}
                                 </p>
                             </div>
 
                             <div class="mb-6">
-                                <p class="flex items-center">
+                                <p class="flex items-center" *ngIf="material.book">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="2" stroke="currentColor"
                                         class="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M4.5 12.75l6 6 9-13.5" />
-                                    </svg>ISBN:
-                                    {{material.book.isbn}}
+                                    </svg>ISBN: {{material.book.isbn}}
+                                </p>
+                                <p class="flex items-center" *ngIf="material.magazine">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="2" stroke="currentColor"
+                                        class="mr-3 h-6 w-6 text-neutral-900 dark:text-neutral-100">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M4.5 12.75l6 6 9-13.5" />
+                                    </svg>ISSN: {{material.magazine.issn}}
                                 </p>
                             </div>
 

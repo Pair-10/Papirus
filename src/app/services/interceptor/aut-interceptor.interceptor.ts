@@ -8,7 +8,6 @@ export const autInterceptor: HttpInterceptorFn = (req, next) => {
         Authorization: `Bearer ${token}`
       }
     });
-    console.log(cloneRequest)
     return next(cloneRequest);
   }
   else {
