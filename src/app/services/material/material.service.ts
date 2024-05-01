@@ -53,4 +53,19 @@ export class MaterialService {
       }
       return this.http.post<any>(`${this.baseUrl}/Materials`,materialData)
     }
+    updateMaterial(material: any){
+      const updateData = {
+        id: material.id,
+        publicationDate: material.publicationDate,
+        language: material.language,
+        pageCount: material.pageCount,
+        status: material.status,
+        materialName: material.materialName,
+        quantity: material.quantity
+      }
+      return this.http.put<any>(`${this.baseUrl}/Materials`,updateData)
+    }
+    deleteMaterial(material: any){
+      return this.http.delete<any>(`${this.baseUrl}/Materials/${material.id}`)
+    }
 }

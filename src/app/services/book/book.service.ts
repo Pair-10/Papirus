@@ -42,12 +42,8 @@ export class BookService implements OnInit {
     }
     return this.http.post<any>(`${this.baseUrl}/Books`,books)
   }
-    /*const category = this.categories.find(cat => cat.id === categoryId);
-    const filteredBooks = this.books.filter(book => book.categoryId === categoryId);
-
-    return of({
-      category: category ? category.name : 'Kategori bulunamadı',
-      books: filteredBooks,
-    });*/
+  deleteBook(book: any){
+    return this.http.delete<any>(`${this.baseUrl}/Books/${book.id}`)
+  }
   
 }

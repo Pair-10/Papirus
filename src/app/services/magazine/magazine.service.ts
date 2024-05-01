@@ -48,6 +48,8 @@ setMagazines(magazine:any){
   }
   return this.http.post<any>(`${this.baseUrl}/Magazines`,magazines)
 }
-
+deleteMagazine(magazine: any){
+  return this.http.delete<any>(`${this.baseUrl}/Magazines/${magazine.id}`)
+}
 
 }
