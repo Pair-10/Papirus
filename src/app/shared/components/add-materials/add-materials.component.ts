@@ -6,6 +6,7 @@ import { MaterialService } from '../../../services/material/material.service';
 import { CommonModule } from '@angular/common';
 import { BookService } from '../../../services/book/book.service';
 import { ArticleService } from '../../../services/article/article.service';
+import { ListService } from '../../../services/list/list.service';
 
 @Component({
   selector: 'app-add-materials',
@@ -21,10 +22,12 @@ export class AddMaterialsComponent implements OnInit {
   magazineService = inject(MagazineService)
   articleService = inject(ArticleService)
   materialService =  inject(MaterialService)
+  listService = inject(ListService)
   materialId : string = "";
   materials: any[] = [{}];
-  erisim : boolean = true;
+  erisim : boolean = false;
   selectedOption: string = '';
+  materialTypeNames : any;
   
   materialForm = this.formBuilder.group({
     materialName: [''],
@@ -39,6 +42,11 @@ export class AddMaterialsComponent implements OnInit {
     this.materialService.getMaterial().subscribe(
       (responses)=>{
         this.materials = responses.items;
+      }
+    )
+    this.listService.getMaterialTypeNames().subscribe(
+      response =>{
+        this.materialTypeNames = response.items
       }
     )
   }
@@ -58,30 +66,19 @@ export class AddMaterialsComponent implements OnInit {
   }
   
   setOtherMaterial(formValue: any, formType: string){
+    this.listService.setCategoryTypes(formValue.materialId,formValue.categoryId,formValue.materialTypeName).subscribe();
     if(formType === 'bookForm'){
-      this.bookService.setBooks(formValue).subscribe(
-        response =>{
-          console.log(response);
-        }
-      )
+      this.bookService.setBooks(formValue).subscribe()
       formValue="";
     }
     else if(formType === 'magazineForm'){
-      this.magazineService.setMagazines(formValue).subscribe(
-        response =>{
-          console.log(response);
-        }
-      )
+      this.magazineService.setMagazines(formValue).subscribe()
       formValue="";
     }
     else if(formType === 'articleForm'){
-      this.articleService.setArticles(formValue).subscribe(
-        response =>{
-          console.log(response);
-        }
-      )
+      this.articleService.setArticles(formValue).subscribe()
       formValue="";
     }
-
+    
   }
 }

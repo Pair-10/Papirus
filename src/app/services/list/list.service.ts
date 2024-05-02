@@ -29,6 +29,19 @@ return this.http.get<any>(`${this.baseUrl}/MaterialTypes?PageIndex=0&PageSize=10
   map(response => response.items)
 );
 }
+getMaterialTypeNames(){
+  return this.http.get<any>(`${this.baseUrl}/MaterialTypes?PageIndex=0&PageSize=20`)
+}
+
+setCategoryTypes(materialId:any,categoryId:any,materialTypeId:any){
+  const body ={
+    materialId: materialId,
+    categoryId : categoryId,
+    materialTypeId: materialTypeId
+  }
+  return this.http.post<any>(`${this.baseUrl}/CategoryTypes`, body);
+}
+
 getMaterialType(materialTypeName: string): Observable<any[]> {
   return this.http.get<any>(`${this.baseUrl}/MaterialTypes?PageIndex=0&PageSize=10`).pipe(
       switchMap((response: any) => {
