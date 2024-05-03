@@ -34,5 +34,7 @@ export class ArticleService {
     }
     return this.http.post<any>(`${this.baseUrl}/Articles`,articles)
   }
- 
+  deleteArticle(article: any){
+    return this.http.delete<any>(`${this.baseUrl}/Articles/${article.id}`)
+  }
 }

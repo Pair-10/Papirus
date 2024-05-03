@@ -43,6 +43,9 @@ export class SidebarComponent {
   navigateToAddMaterials(){
     this.router.navigate(['/add-materials']);
   }
+  navigateToEditMaterials(){
+    this.router.navigate(['/edit-materials']);
+  }
   navigateToSignOut() {
     this.navbarService.setLoggedIn(false)
     this.router.navigate(['/']);

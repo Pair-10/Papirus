@@ -15,6 +15,7 @@ import { roleGuard } from './guards/role.guard';
 import { MaterialDetailComponent } from './shared/components/material-detail/material-detail.component';
 import { BookDetailComponent } from './features/book-will-be-deleted/pages/book-detail/book-detail.component';
 import { AddMaterialsComponent } from './shared/components/add-materials/add-materials.component';
+import { EditMaterialsComponent } from './shared/components/edit-materials/edit-materials.component';
 
 
 
@@ -26,6 +27,7 @@ export const routes: Routes =
     { path: 'material-detail', component: MaterialDetailComponent },
     { path: 'penalty', component: PenaltyComponent },
     { path: 'add-materials', component: AddMaterialsComponent },
+    { path: 'edit-materials', component: EditMaterialsComponent },
     { path: 'material-list', component: MaterialListComponent },
     { path: 'penalty-admin', component: PenaltyAdminComponent },
     { path: 'activity', component: ActivityComponent }, 
