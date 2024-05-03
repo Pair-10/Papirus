@@ -1,5 +1,5 @@
 <!-- <app-navbar></app-navbar> -->
-<div class="bg-[#F8F8F8]">
+<div class="bg-[#F8F8F8] ">
   <div class="container mx-auto ">
     <div class="pt-4 ">
       <div class="grid grid-cols-4 gap-4 mt-12 pr-2">
@@ -9,265 +9,25 @@
           <div class="container mx-auto p-2 max-w-xs sm:max-w-xs rounded-lg shadow-xl mb-6 transform hover:scale-105 transition duration-300 ease-in-out" style="box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.03);">
             <h1 class="text-blue-700 text-lg font-bold text-center">Penalties</h1>
         </div>
-        
+       
+       
           <div class="bg-[#f5f5f5] text-black md:w-3/4 mx-auto flex flex-col">
+            <app-form-first></app-form-first>
               <!--- materials-penalty body field -->
-              <div class="bg-[#f2f2f2] container mx-auto pt-4 border-2 border-[#1C39BB] rounded-lg shadow-2xl text-blue-900 font-medium" style="border-radius: 20px;">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <div class="mb-4 pl-10 py-2 font-bold text-lg bg-gradient-to-r from-teal-300 via-purple-500 to-blue-400 text-white shadow-lg rounded-r-full transform hover:scale-110 transition duration-300 ease-in-out w-40 cursor-pointer">
-                      Suç ve Ceza
-                  </div>
-                      <div class="mb-4 ml-10">Date Received:  01.03.2024</div>
-                      <div class="mb-4 ml-10">Deadline:  07.03.2024</div>
-                      <div class="mb-4 ml-10">Number Of Days Late: 10</div>
-                  </div>
-                  <div class="flex flex-col items-center">
-                    <div class="mt-2 text-center font-bold">UserID: 255869</div>
-                      <div class="mt-5 text-center">Penalty Price</div>
-                      <div class="mt-2 text-center font-bold text-l">100₺</div>
-                    <div class="mt-5 text-center ml-7 mb-4">
-                      <button class="bg-blue-700 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded-xl mr-3">Edit</button>
-                      <button class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded-xl">Delete</button>
-                      </div>
-                  </div>
-              </div>
-              </div>
-              
+             
               <div class="mt-4"></div>
-              <div class="bg-blue-950 text-gray-300 container mx-auto pt-4 border-2 border-[#FFEFD5] rounded-lg shadow-2xl text-blue-950 font-medium" style="border-radius: 20px;">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <div class="mb-4 pl-10 py-2 font-bold text-lg bg-gradient-to-r from-blue-200 via-gray-200 to-blue-300 text-blue-950 shadow-lg rounded-r-full transform hover:scale-110 transition duration-300 ease-in-out w-40 cursor-pointer">
-                      Sefiller
-                  </div>
-                  
-                      <div class="mb-4 ml-10">Date Received: 20.03.2024</div>
-                      <div class="mb-4 ml-10">Deadline: 02.04.2024</div>
-                      <div class="mb-4 ml-10">Number Of Days Late: 8</div>
-                  </div>
-                  <div class="flex flex-col items-center">
-                    <div class="mt-2 text-center font-bold">UserID: 255869</div>
-                      <div class="mt-5 text-center">Penalty Price</div>
-                      <div class="mt-2 text-center font-bold text-l">80₺</div>
-                      <div class="mt-5 text-center ml-5 mb-4">
-                      <button class="bg-blue-200 hover:bg-blue-400 text-blue-950 font-bold py-2 px-4 rounded-xl mr-3">Edit</button>
-                      <button class="bg-gray-500 hover:bg-red-400 text-white font-bold py-2 px-4 rounded-xl">Delete</button>
-                      </div>
-                  </div>
-              </div>
-              </div>
+
+              <app-form-second></app-form-second>
+          
+       
           </div>
             
           <div class="pt-4 mx-auto mx-auto pb-10 w-full sm:w-full md:w-2/3 pl-5 pr-5">
             <div class="mb-7 container mx-auto p-2 max-w-xs sm:max-w-xs  rounded-lg mt-5 shadow-xl transform hover:scale-105 transition duration-300 ease-in-out" >
               <h1 class="text-blue-700 text-lg font-bold text-center">Penalty History</h1>
           </div>
-
-            <!-- Penalty History Table responsive wrapper -->
-            <div class="overflow-y-auto bg-gray-300 dark:bg-neutral-700 max-h-[500px] rounded-3xl p-1 w-full">
-              <!-- Search input -->
-              <div id="animatedDiv" class="relative m-1 mb-3 mr-5  float-left mt-1 pt-0.5 pr-0.5 rounded-lg">
-                <label for="inputSearch" class="sr-only">Search </label>
-                <input id="inputSearch" type="text" placeholder="Search..." class="block w-64 rounded-lg border dark:border-none dark:bg-neutral-600 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400" />
-                <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transform">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 text-neutral-500 dark:text-neutral-200">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-                  </svg>
-                </span>
-              </div>
-            <!-- Filter settings-->
-            <div class="relative m-[2px] mb-3 float-right hidden sm:block mt-1">
-              <label for="inputFilter" class="sr-only">Filter</label>
-              <select id="inputFilter" class="block w-40 rounded-lg border dark:border-none dark:bg-neutral-600 p-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400">
-                <option value="1" selected>Last week</option>
-                <option value="2">Last month</option>
-                <option value="3">Yesterday</option>
-                <option value="4">Last 7 days</option>
-                <option value="5">Last 30 days</option>
-              </select>
-            </div>
-    
-            <!-- Table -->
-            <table class="min-w-full text-left text-xs whitespace-nowrap max-w-[200px] mx-auto">
-              <thead class="uppercase tracking-wider border-b-2 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
-                <tr>
-                  <th scope="col" class="px-6 py-3">
-                    UserID
-                    </th>
-                  <th scope="col" class="px-6 py-3">
-                  Material Name
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Penalty Price
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Payment Date
-                  </th>
-                  <th scope="col" class="px-6 py-3">
-                    Status
-                  </th>
-                </tr>
-              </thead>
-    
-   <!-- Table body -->
-   <tbody>
-      
-    <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
-      <th scope="row" class="px-6 py-3">
-        152358
-      </th>
-      <td class="px-6 py-3">Yeraltından Notlar</td>
-      <td class="px-6 py-3">120.00₺</td>
-      <td class="px-6 py-3">25.03.2024</td>
-      <td class="px-6 py-3">paid-up</td>
-    
-    </tr>
-
-  <tr class="border-b dark:border-neutral-600 hover:bg-yellow-200 dark:hover:bg-neutral-600 bg-neutral-50 dark:bg-neutral-800 ">
-    <th scope="row" class="px-6 py-3">
-      356818 
-    </th>
-    <td class="px-6 py-3">Babalar ve Oğullar</td>
-
-    <td class="px-6 py-3">70.00₺</td>
-    <td class="px-6 py-3">----------</td>
-    <td class="px-6 py-3">unpaid</td>
-  </tr>
-
-  <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
- 
-    <th scope="row" class="px-6 py-3">
-      256856
-    </th>
-    <td class="px-6 py-3">Yüzyıllık Yalnızlık</td>
-    <td class="px-6 py-3">80.00₺</td>
-    <td class="px-6 py-3">02.04.2024</td>
-    <td class="px-6 py-3">paid-up</td>
-  </tr>
-
-  <tr class="border-b dark:border-neutral-600 hover:bg-yellow-200 dark:hover:bg-neutral-600 bg-neutral-50 dark:bg-neutral-800">
-    <th scope="row" class="px-6 py-3">
-      656856
-    </th>
-    <td class="px-6 py-3">Dönüşüm</td>
-    <td class="px-6 py-3">50.00₺</td>
-    <td class="px-6 py-3">05.04.2024</td>
-    <td class="px-6 py-3">paid-up</td>
-  </tr>
-  <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
-    <th scope="row" class="px-6 py-3">
-      256856
-      </th>
-    <td class="px-6 py-3">iki Şehrin Hikâyesi</td>
-    <td class="px-6 py-3">70.00₺</td>
-    <td class="px-6 py-3">----------</td>
-    <td class="px-6 py-3">unpaid</td>
-  </tr>
-
-  <tr class="border-b dark:border-neutral-600 hover:bg-yellow-200 dark:hover:bg-neutral-600 bg-neutral-50 dark:bg-neutral-800">
-    <th scope="row" class="px-6 py-3">
-      756856 
-    </th>
-    <td class="px-6 py-3">Bir Kuzey Macerası</td>
-    <td class="px-6 py-3">40.00₺</td>
-    <td class="px-6 py-3">09.04.2024</td>
-    <td class="px-6 py-3">paid-up</td>
-  </tr>
-  <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
-    <th scope="row" class="px-6 py-3">
-      256856 
-    </th>
-    <td class="px-6 py-3">Uğultulu Tepeler</td>
-    <td class="px-6 py-3">60.00₺</td>
-    <td class="px-6 py-3">11.04.2024</td>
-    <td class="px-6 py-3">paid-up</td>
-  </tr>
-  <tr class="border-b dark:border-neutral-600 hover:bg-yellow-200  dark:hover:bg-neutral-600  bg-neutral-50 dark:bg-neutral-800">
-    <th scope="row" class="px-6 py-3">
-      256856 
-      </th>
-    <td class="px-6 py-3">İnsancıklar</td>
-    <td class="px-6 py-3">80.00₺</td>
-    <td class="px-6 py-3">12.04.2024</td>
-    <td class="px-6 py-3">paid-up</td>
-  </tr>
-  <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
-    <th scope="row" class="px-6 py-3">
-      456856 
-    </th>
-    <td class="px-6 py-3">Gizli Bahçe</td>
-    <td class="px-6 py-3">50.00₺</td>
-    <td class="px-6 py-3">13.04.2024</td>
-    <td class="px-6 py-3">paid-up</td>
-  </tr>
-</tbody>
-
-<!-- Table footer -->
-<tfoot class="border-t-2 dark:border-neutral-600 bg-neutral-50 hover:bg-yellow-200">
-  <tr>
-    <th class="px-6 py-3">Total:</th>
-    <th class="px-6 py-3"></th>
-    <td class="px-6 py-3">170.00₺</td><!--Total PENALTY Price-->
-    <td class="px-6 py-3"></td>
-    <td class="px-6 py-3"></td>
-  </tr>
-</tfoot>
-
-</table>
-    
-      <nav class="flex items-center justify-between text-sm" aria-label="Page navigation example">
-        <p>
-          Showing <strong>1-5</strong> of <strong>10</strong>
-        </p>
-    
-        <ul class="list-style-none flex">
-          <li>
-            <a
-              class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
-              href="#!"
-            >
-              Previous
-            </a>
-          </li>
-          <li>
-            <a
-              class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
-              href="#!"
-            >
-              1
-            </a>
-          </li>
-          <li aria-current="page">
-            <a
-              class="relative block rounded bg-blue-100 px-3 py-1.5 text-sm font-medium text-blue-700 transition-all duration-300"
-              href="#!"
-            >
-              2
-              <span class="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]">
-                (current)
-              </span>
-            </a>
-          </li>
-          <li>
-            <a
-              class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
-              href="#!"
-            >
-              3
-            </a>
-          </li>
-          <li>
-            <a
-              class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
-              href="#!"
-            >
-              Next
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+<app-table></app-table>
+          
             </div>
   
         </div>

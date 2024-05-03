@@ -1,10 +1,13 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
 import { NavbarComponent } from '../../../../shared/components/navbar/navbar.component';
 import { SidebarComponent } from '../../../../shared/components/sidebar/sidebar.component';
+import { FormFirstComponent } from '../../components/forms/form-first/form-first.component';
+import { FormSecondComponent } from '../../components/forms/form-second/form-second.component';
+import { TableComponent } from '../../components/table/table/table.component';
  @Component({
    selector: 'app-penalty-admin',
    standalone: true,
-  imports: [NavbarComponent,SidebarComponent],
+  imports: [NavbarComponent,SidebarComponent,FormFirstComponent,FormSecondComponent,TableComponent],
    templateUrl: './penalty-admin.component.html',
    styleUrls: ['./penalty-admin.component.css'],
  })
