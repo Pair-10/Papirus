@@ -20,7 +20,9 @@ return this.http.get<any>('http://localhost:60805/api/Categories?PageIndex=0&Pag
 
 getCategoryTypes(): Observable<any[]> {
 return this.http.get<any>(`${this.baseUrl}/CategoryTypes?PageIndex=0&PageSize=10`).pipe(
-  map(response => response.items)
+  map(response => {
+    return response.items
+  })
 );
 }
 

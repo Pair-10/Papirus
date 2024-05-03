@@ -6,6 +6,8 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { MaterialService } from '../../../services/material/material.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArticleService } from '../../../services/article/article.service';
+import { NotificationService } from '../../../services/notification/notification.service';
+import { UserService } from '../../../services/user/user.service';
 
 
 @Component({
@@ -20,6 +22,8 @@ export class EditMaterialsComponent implements OnInit {
   bookService = inject(BookService)
   magazineService = inject(MagazineService)
   articleService = inject(ArticleService)
+  notificationService = inject(NotificationService)
+  userService = inject(UserService)
   materials: any;
   selectedMaterial: any = null;
   deletingMaterial: any = null;

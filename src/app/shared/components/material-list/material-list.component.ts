@@ -40,6 +40,7 @@ export class MaterialListComponent implements OnInit {
   categoryId: string = '';
   materialTypeId: string = '';
   categoryname: string = '';
+  listMenuOpen: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -118,6 +119,9 @@ export class MaterialListComponent implements OnInit {
     this.router.navigate(['/material-detail'], { state: { material } });
   }
 
+  toggleMenu(){
+    this.listMenuOpen = !this.listMenuOpen;
+  }
 
   //--------------------------------------------------------
   selectCategory(categoryName: string) {
