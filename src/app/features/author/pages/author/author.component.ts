@@ -1,12 +1,13 @@
 import { Component, ElementRef, Renderer2 } from '@angular/core';
-import { SidebarComponent } from '../../../../shared/components/sidebar/sidebar.component';
+// import { SidebarComponent } from '../../../../shared/components/sidebar/sidebar.component';
+import { SidebarAdminComponent } from '../../../../shared/components/sidebar-admin/sidebar-admin.component';
 import { TableAuthorComponent } from '../../components/table/table-author/table-author.component';
 import { FormAuthorComponent } from '../../components/forms/form-author/form-author.component';
 @Component({
   selector: 'app-author',
  standalone: true,
 
-  imports: [SidebarComponent,TableAuthorComponent,FormAuthorComponent],
+  imports: [SidebarAdminComponent,TableAuthorComponent,FormAuthorComponent],
   templateUrl: './author.component.html',
   styleUrls: ['./author.component.css']
 })

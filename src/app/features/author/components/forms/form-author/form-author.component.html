@@ -7,7 +7,7 @@
 
       <form [formGroup]="userForm" (ngSubmit)="saveUserData()">
         <div class="mb-4 ml-10">AuthorID: <span class="ml-3"></span>
-        <input type="text" formControlName="id" (input)="fetchUserById()" class="bg-pink-100 border border-gray-600 text-black "></div>
+        <input type="text" formControlName="id" (input)="fetchUserById()" class="bg-blue-100 border border-gray-600 text-black "></div>
         <div class="mb-4 ml-10">Name:<span class="ml-10"></span>  <input type="text" formControlName="name"class="text-center bg-gray-200"></div>
         <div class="mb-4 ml-10">Surname:<span class="ml-5"></span> <input type="text" formControlName="surname"class="text-center bg-gray-200"></div>
         <!-- <div class="mt-4 ml-10 ">Bio:<span class="ml-16"></span> <input type="text" formControlName="bio" class="text-center bg-gray-200"></div>  -->
@@ -42,7 +42,7 @@
         <div class=" text-right font-bold text-l mr-2"> <input type="text" formControlName="webSite" class="ml-auto mt-2  text-black bg-gray-200"></div>
        
         <div class="mt-5 text-center ml-7 mb-4 ">
-            <button type="submit" class=" bg-orange-700 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded-xl mr-2">Save</button>
+            <button type="submit" class=" bg-yellow-600 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded-xl mr-2">Save</button>
             <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-xl" (click)="updateUserData()">Update</button>
             <button type="button" class="bg-blue-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-xl ml-2" (click)="deleteUserData()">Delete</button>
 
