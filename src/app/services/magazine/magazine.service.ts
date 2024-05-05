@@ -39,6 +39,17 @@ export class MagazineService {
         })
     );
 }
-
+setMagazines(magazine:any){
+  const magazines = {
+    categoryId : magazine.categoryId,
+    issn: magazine.issn,
+    issue: magazine.issue,
+    materialId: magazine.materialId
+  }
+  return this.http.post<any>(`${this.baseUrl}/Magazines`,magazines)
+}
+deleteMagazine(magazine: any){
+  return this.http.delete<any>(`${this.baseUrl}/Magazines/${magazine.id}`)
+}
 
 }

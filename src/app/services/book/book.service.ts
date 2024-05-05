@@ -34,13 +34,16 @@ export class BookService implements OnInit {
     );
   }
 
-  
-    /*const category = this.categories.find(cat => cat.id === categoryId);
-    const filteredBooks = this.books.filter(book => book.categoryId === categoryId);
-
-    return of({
-      category: category ? category.name : 'Kategori bulunamadı',
-      books: filteredBooks,
-    });*/
+  setBooks(book:any){
+    const books = {
+      categoryId : book.categoryId,
+      isbn : book.isbn,
+      materialId: book.materialId
+    }
+    return this.http.post<any>(`${this.baseUrl}/Books`,books)
+  }
+  deleteBook(book: any){
+    return this.http.delete<any>(`${this.baseUrl}/Books/${book.id}`)
+  }
   
 }

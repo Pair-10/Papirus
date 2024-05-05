@@ -35,4 +35,37 @@ export class MaterialService {
         })
       );
     }
+    getMaterial(){
+      return this.http.get<any>(`${this.baseUrl}/Materials?PageIndex=0&PageSize=20`).pipe(
+        map(response =>{
+          return response
+        })
+      )
+    }
+    setMaterial(material: any){
+      const materialData = {
+        materialName: material.materialName,
+        quantity: material.quantity,
+        language: material.language,
+        pageCount: material.pageCount,
+        status: material.status,
+        publicationDate: material.publicationDate,
+      }
+      return this.http.post<any>(`${this.baseUrl}/Materials`,materialData)
+    }
+    updateMaterial(material: any){
+      const updateData = {
+        id: material.id,
+        publicationDate: material.publicationDate,
+        language: material.language,
+        pageCount: material.pageCount,
+        status: material.status,
+        materialName: material.materialName,
+        quantity: material.quantity
+      }
+      return this.http.put<any>(`${this.baseUrl}/Materials`,updateData)
+    }
+    deleteMaterial(material: any){
+      return this.http.delete<any>(`${this.baseUrl}/Materials/${material.id}`)
+    }
 }
