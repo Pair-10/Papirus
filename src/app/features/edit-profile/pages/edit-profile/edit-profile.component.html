@@ -1,47 +1,55 @@
 <div class="bg-[#F8F8F8]">
-    <div class="container mx-auto ">
-      <div class="pt-4 ">
-        <div class="grid grid-cols-4 gap-4 mt-12 pr-2 ">
-         <app-sidebar></app-sidebar>
-         <div class="flex flex-col items-center  col-span-3 bg-[#f2f2f2] pb-52">
-            <div class=" col-span-3 flex justify-center pt-32 pb-24">
-                <h1 class="text-blue-900 font-bold text-3xl">Edit Profile</h1>
-            </div>
-            <div >
-                <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="max-w-md mx-auto">
-                    <div class="relative z-0 w-full mb-5 group">
-                      <label for="name_field" class="text-xl">Name</label>
-                      <input type="text" id="name_field" formControlName="firstName" class="block py-2.5 px-0 w-full text-xl text-blue-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required />
-                    </div>
-                    <div class="relative z-0 w-full mb-5 group">
-                      <label for="surname-field" class="text-xl">Surname</label>
-                      <input type="text" id="surname-field" formControlName="lastName" class="block py-2.5 px-0 w-full text-xl text-blue-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required />
-                    </div>
-                    <div class="relative z-0 w-full mb-5 group">
-                      <label for="email-field" class="text-xl">Email</label>
-                      <input type="email" id="email-field" formControlName="email" class="block py-2.5 px-0 w-full text-xl text-blue-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required />
-                    </div>
-                    <div class="relative z-0 w-full mb-5 group">
-                      <label for="phone-number-field" class="text-xl">Phone Number</label>
-                      <input type="text" id="phone-number-field" formControlName="phoneNumber" class="block py-2.5 px-0 w-full text-xl text-blue-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required />
-                    </div>
-          
-                    <button type="submit" class="text-white mt-8 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save Changes</button>
-                  </form>
+  <div class="container mx-auto ">
+    <div class="pt-4 ">
+      <div class="grid grid-cols-4 gap-4 mt-12 pr-2 ">
+       <app-sidebar></app-sidebar>
+       <div class="flex flex-col items-center  col-span-3 bg-[#f2f2f2] pb-52">
+          <div class=" col-span-3 flex justify-center pt-32 pb-24">
+              <h1 class="text-blue-900 font-bold text-3xl">Edit Profile</h1>
+          </div>
+          <div >
+              <form class="max-w-md mx-auto">
+                  <div class="relative z-0 w-full mb-5 group w-96">
+                      <label class="text-xl" >Name</label>
+                      <input type="text" name="name-field" id="name_field" class="block py-2.5 px-0 w-full text-xl text-blue-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Yusuf Emre " required />
+                      
+                  </div>
+                  <div class="relative z-0 w-full mb-5 group">
+                      <label class="text-xl" class="">Surname</label>
+                      <input type="password" name="surname-field" id="surname-field" class="block py-2.5 px-0 w-full text-xl text-blue-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="Avsar " required />
+                      
+                  </div>
+                  <div class="relative z-0 w-full mb-5 group">
+                      <label class="text-xl">Email</label>
+                      <input type="email" name="email-field" id="email-field" class="block py-2.5 px-0 w-full text-xl text-blue-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="yusuffemreavsar@gmail.com " required />                       
+                  </div>
+                      <div class="relative z-0 w-full mb-5 group">
+                      <label class="text-xl">Phone Number</label>
+                      <input type="password" name="phone-number-field" id="phone-number-field" class="block py-2.5 px-0 w-full text-xl text-blue-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="+905549744506 " required />                       
+                  </div>
+                  <div class="relative z-0 w-full mb-5 group">
+                      <label class="text-xl">Password</label>
+                      <input type="password" name="password-field" id="password-field" class="block py-2.5 px-0 w-full text-xl text-blue-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder="********************* " required />                       
+                  </div>
+   
+                  <button type="submit" class="text-white mt-8  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save Changes</button>
                   
-            </div>
-         </div>   
-      </div>
+              
+                  
+                </form>
+          </div>
+       </div>   
     </div>
-    </div>
-    
-    
-    
-    
-     
-     
-    
-    
-    
-    
-    
+  </div>
+  </div>
+  
+  
+  
+  
+   
+   
+  
+  
+  
+  
+  

@@ -1,0 +1,117 @@
+
+<div class="bg-[#dddddd] text-white p-4 col-span-1 flex flex-col items-center rounded-lg h-full">
+    <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" class="w-32 rounded-full" alt="Avatar" />
+    <div class="flex justify-center items-center w-full">
+      <span class="text-xl font-bold mb-5 mt-5 text-blue-900">Harper Bennett</span>
+   </div>
+    <!--left profile buttons with aligned icons-->
+    <div class="w-full max-w-72 mx-auto text-gray-900 bg-[#dddddd]  rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white flex flex-col items-center justify-center">
+      <div class="w-full  mx-auto text-blue-900 bg-[#dddddd]  rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white flex flex-col items-center justify-center">
+        <button type="button" class="flex items-center justify-center pr-5 w-full px-2 py-3 text-l rounded-b-lg font-bold border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden">
+          <span class="w-5 ml-5 sm:ml-1 md:ml-3 lg:ml-1.5"><i class="fas fa-user-edit"></i></span>
+          <span class="hidden md:flex truncate pl-1">Edit User</span>
+      </button>
+      
+        <button type="button" 
+        class="  ml-3 flex items-center justify-center w-full px-1 py-3 text-l rounded-b-lg font-bold border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-yellow-500 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden"
+        (click)="navigateToEditProfile()">
+        <span class="w-5"><i class="fas fa-edit  sm:-ml-1  lg:-ml-1"></i></span>
+        <div class="hidden md:flex flex-col  truncate ">
+            <span class="hidden md:flex ml-1 truncate pl-1">Edit Profile</span>
+          
+        </div>
+        </button>
+
+        <button type="button" 
+        class=" mr-1 flex items-center justify-center w-full px-2 py-1 text-l rounded-b-lg font-bold border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-yellow-500 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden"
+        (click)="navigateToAddMaterial()">
+        <span class="w-5"><i class="fas fa-folder-plus ml-2 sm:-ml-1  lg:-ml-1"></i></span>
+        <div class="hidden md:flex flex-col  truncate ">
+            <span class="hidden md:flex ml-1 truncate pl-2">Add</span>
+            <span class="hidden md:flex ml-1 truncate pl-1">Materials</span>
+        </div>
+        </button>
+
+       
+
+        <button type="button" 
+        class=" mr-1 flex items-center justify-center w-full px-1 py-2 text-l rounded-b-lg font-bold border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-yellow-500 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden"
+        (click)="navigateToEditMaterial()">
+        <span class="w-5"><i class="fas fa-book ml-2 sm:-ml-1  lg:-ml-1"></i></span>
+        <div class="hidden md:flex flex-col  truncate ">
+            <span class="hidden md:flex ml-1 truncate pl-2">Edit</span>
+            <span class="hidden md:flex ml-1 truncate pl-1">Materials</span>
+        </div>
+        </button>
+
+       
+        <button type="button" 
+        class="pl-3  mr-1 flex items-center justify-center w-full px-1 py-2 text-l rounded-b-lg font-bold border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-yellow-500 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden"
+        (click)="navigateToPenalties()">
+        <span class="w-5"><i class="fas fa-ban"></i></span>
+        <div class="hidden md:flex flex-col  truncate ">
+            <span class="hidden md:flex ml-1 truncate pl-2">Penalty</span>
+            <span class="hidden md:flex ml-1 truncate pl-1">Operations</span>
+        </div>
+        </button>
+
+        <button type="button" 
+        class="pl-4  mr-1 flex items-center justify-center w-full px-1 py-2 text-l rounded-b-lg font-bold border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-yellow-500 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden"
+        (click)="navigateToAuthor()">
+        <span class="w-5"><i class="fas fa-feather-alt"></i></span>
+        <div class="hidden md:flex flex-col  truncate ">
+            <span class="hidden md:flex ml-1 truncate pl-2">Author</span>
+            <span class="hidden md:flex ml-1 truncate pl-1">Operations</span>
+        </div>
+        </button>
+
+
+        
+
+
+            <button type="button" 
+        class="pl-6 mr-1 flex items-center justify-center w-full px-1 py-2 text-l rounded-b-lg font-bold border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-yellow-500 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden"
+        (click)="navigateToPublisher()">
+        <span class="w-5"><i class="fas fa-store-alt -ml-4 sm:-ml-6  lg:-ml-1"></i></span>
+        <div class="hidden md:flex flex-col  truncate ">
+            <span class="hidden md:flex ml-1 truncate pl-2">Publisher</span>
+            <span class="hidden md:flex ml-1 truncate pl-1">Operations</span>
+        </div>
+        </button>
+
+
+        <!-- <button type="button" class="flex items-center justify-center w-full px-1 py-3 text-l rounded-b-lg font-bold border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden "
+        (click)="navigateToActivity()">
+          <span class=" w-5 text-l"><i class="fas fa-theater-masks"></i></span>
+          <span class="hidden md:flex truncate pl-2">Activities</span>
+        </button> -->
+        <button type="button" class="mr-3 flex items-center justify-center w-full px-1 py-3 text-l rounded-b-lg font-bold border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden ">
+          <span class="w-5"><i class="fas fa-poll ml-2 sm:-ml-6  lg:-ml-1"></i></span>
+          <span class="hidden md:flex ml-1 truncate pl-1">Surveys</span>
+        </button>
+        <button type="button" class="flex items-center justify-center w-full px-1 py-3 text-l rounded-b-lg font-bold border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-yellow-500 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden">
+          <span class="w-5"><i class="fas fa-cogs"></i></span>
+          <span class="hidden md:flex ml-2 truncate ">Settings</span>
+        </button>
+  
+        <button type="button" class="ml-2 flex items-center justify-center w-full px-1 py-3 text-l rounded-b-lg font-bold border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden ">
+          <span class="w-5 -ml-1 sm:-ml-1  lg:-ml-1"><i class="fas fa-heart"></i></span>
+          <span class="hidden md:flex ml-2 truncate">Favorites</span>
+      </button>
+   
+          <!-- <button type="button" class="pl-6 flex items-center justify-center w-full pr-7 px-1 py-3 text-l rounded-b-lg font-bold border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-yellow-500 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden"
+          (click)="navigateToHelp()">
+            <span class="w-5 ml-1 sm:ml-2  lg:-ml-5"><i class="fas fa-question-circle"></i></span>
+            <span class="hidden md:flex pl-2 truncate">Help</span>
+        </button>
+         -->
+      <button type="button" class="ml-2 flex items-center justify-center w-full py-3 text-l rounded-b-lg font-bold rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white overflow-hidden">
+        <span class="w-5 sm:-ml-40 md:ml-4 lg:-ml-2"><i class="fas fa-sign-out-alt"></i></span>
+        <span class="hidden md:flex ml-1 truncate">Sign Out</span>
+    </button>
+    
+  </div> 
+    </div>
+    <!--left profile buttons with aligned icons end-->
+  </div>
+   
