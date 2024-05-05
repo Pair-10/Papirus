@@ -38,7 +38,13 @@ export class SidebarComponent {
     this.router.navigate(['/edit-profile']);
   }
   navigateToMyBook() {
-    this.router.navigate(['/My-Material']);
+    this.router.navigate(['/my-materials']);
+  }
+  navigateToAddMaterials(){
+    this.router.navigate(['/add-materials']);
+  }
+  navigateToEditMaterials(){
+    this.router.navigate(['/edit-materials']);
   }
   navigateToSignOut() {
     this.navbarService.setLoggedIn(false)
