@@ -30,7 +30,7 @@ export class ArticleService {
     const articles = {
       categoryId : article.categoryId,
       materialId: article.materialId,
-      publicationName: article.publicationName
+      publictionName: article.publicationName
     }
     return this.http.post<any>(`${this.baseUrl}/Articles`,articles)
   }
