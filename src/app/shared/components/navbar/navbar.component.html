@@ -30,19 +30,26 @@
         <div class="relative">
           <i (click)="showNotificationPopup()" class="fas fa-bell text-white text-2xl ml-4 cursor-pointer"></i>
         </div>
-        <!-- Notification popup -->
+
+        <!-- Bildirim popup -->
         <div *ngIf="showPopup" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
           <div class="bg-white text-center text-black rounded-lg p-8">
-            <ul>
-              <li *ngFor="let notification of notifications" class="mb-4">
-                <h2 class="text-lg font-bold mb-4">{{notification.notificationType}}</h2>
-                <p class="font-semibold">{{ notification.notificationDesc}}</p>
-              </li>
-            </ul>
+            <ng-container *ngIf="notifications.length > 0; else noNotifications">
+              <ul>
+                <li *ngFor="let notification of notifications" class="mb-4">
+                  <h2 class="text-lg font-bold mb-4">{{ notification.notificationType }}</h2>
+                  <p class="font-semibold">{{ notification.notificationDesc }}</p>
+                </li>
+              </ul>
+            </ng-container>
+            <ng-template #noNotifications>
+              <p class="text-lg font-bold mb-4">Bildiriminiz Yok</p>
+            </ng-template>
             <button (click)="closeNotificationPopup()"
               class="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Close</button>
           </div>
         </div>
+
 
         <!-- Profil fotoğrafı -->
         <img src="https://picsum.photos/50" alt="Profil Fotoğrafı" class="w-10 h-10 rounded-full ml-4 cursor-pointer"
