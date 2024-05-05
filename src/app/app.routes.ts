@@ -17,6 +17,7 @@ import { roleGuard } from './guards/role.guard';
 import { MaterialDetailComponent } from './shared/components/material-detail/material-detail.component';
 import { BookDetailComponent } from './features/book-will-be-deleted/pages/book-detail/book-detail.component';
 import { AddMaterialsComponent } from './shared/components/add-materials/add-materials.component';
+import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
 import { EditMaterialsComponent } from './shared/components/edit-materials/edit-materials.component';
 
 
@@ -41,6 +42,7 @@ export const routes: Routes =
     { path: 'my-materials', component: MyBooksComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
+    {path:'sidebar',component:SidebarComponent},
     { path: '**', component: NotfoundComponent },
 
 ];

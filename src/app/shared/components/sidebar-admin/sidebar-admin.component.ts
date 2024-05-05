@@ -23,6 +23,10 @@ export class SidebarAdminComponent {
   navigateToEditProfile() {
     this.router.navigate(['/edit-profile']);
   }
+
+  navigateToEditUser() {
+    this.router.navigate(['/edit-user']);
+  }
   navigateToAddMaterial() {
     this.router.navigate(['/add-materials']);
   }
