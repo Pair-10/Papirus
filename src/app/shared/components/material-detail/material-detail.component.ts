@@ -1,17 +1,20 @@
+import { JwtService } from './../../../services/jwt/jwt.service';
 import { AuthorService } from './../../../services/author/author.service';
-import { CommonModule } from '@angular/common';
-import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnInit } from '@angular/core';
 import { CommentComponent } from '../../../features/comment/components/comment/comment.component';
 import { ActivatedRoute } from '@angular/router';
 import { MaterialAuthorService } from '../../../services/material-author/material-author.service';
 import { ListService } from '../../../services/list/list.service';
 import { MaterialPublisherService } from '../../../services/material-publisher/material-publisher.service';
 import { PublisherService } from '../../../services/publisher/publisher.service';
-
+import { BorrowMaterialComponent } from '../borrow-material/borrow-material/borrow-material.component';
+import { BorrowMaterialService } from '../../../services/borrow-material/borrow-material.service';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 @Component({
   selector: 'app-material-detail',
   standalone: true,
-  imports: [CommonModule,CommentComponent],
+  imports: [CommonModule,CommentComponent, BorrowMaterialComponent,ReactiveFormsModule],
   templateUrl: './material-detail.component.html',
   styleUrl: './material-detail.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -25,6 +28,13 @@ export class MaterialDetailComponent implements OnInit{
   publishers: any[] = [];
   tur: any;
   year: number = 0;
+  token: any;
+  decodedToken: any;
+  userId: any;
+  borrow: boolean = false;
+  borrowForm!: FormGroup;
+  odunc_alindi: boolean = false;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -33,14 +43,46 @@ export class MaterialDetailComponent implements OnInit{
     private listService: ListService,
     private materialPublisherService: MaterialPublisherService,
     private publisherService: PublisherService,
+    private jwtService: JwtService,
+    private borrowService: BorrowMaterialService,
+    private formBuilder: FormBuilder,
   ) { }
 
   ngOnInit(): void {
     this.material = history.state.material;
     this.materialId = history.state.material.material.id;
     this.materialAuthor(this.materialId)
+    this.token = localStorage.getItem('Token');
+    this.decodedToken = this.jwtService.getDecodedAccessToken(this.token);
+    this.userId = this.decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
+    this.borrowForm = this.formBuilder.group({
+      selectedDate: [''],
+      material: [this.material.material.id],
+      user: [this.userId],
+    });
   }
 
+  popup(){
+    this.borrow = !this.borrow;
+  }
+  borrowMaterial() {
+    if (this.borrowForm.invalid) {
+      console.error("Form geçersiz, lütfen tüm alanları doldurun.");
+      return;
+  }
+    console.log(this.borrowForm.value);
+    let formData = this.borrowForm.value;
+
+    this.borrowService.borrowMaterialService(formData).subscribe(
+      response =>{
+        console.log("Ödünç alma işlemi gerçekleşti.");
+        this.popup();
+      },
+      error =>{
+        console.error("Ödünç alma sırasında bir hata oluştu. ", error)
+      }
+    ); 
+}
   materialAuthor(materialId: any){
     const date = new Date(this.material.material.publicationDate)
     this.year = date.getFullYear();

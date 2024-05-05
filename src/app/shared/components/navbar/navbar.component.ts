@@ -5,6 +5,9 @@ import { Component, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NavbarService } from '../../../services/navbar/navbar.service';
 import { TokenService } from '../../../core/services/token.service';
+import { UserService } from '../../../services/sidebar/user.service';
+import { NotificationService } from '../../../services/notification/notification.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -16,12 +19,17 @@ import { TokenService } from '../../../core/services/token.service';
 export class NavbarComponent implements OnInit {
   navbarService=inject(NavbarService)
   tokenService=inject(TokenService)
+  userService = inject(UserService)
+  notificationService = inject(NotificationService)
   hamburgerMenuOpen = false;
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
   isLoggedIn: boolean = false;
   materialTypes: any[] = [];
-  
+  userId: any;
+  notificationId:any;
+  notifications: any[] = [];
+  showPopup: boolean = false;
   
   
   toggleMenu() {
@@ -97,8 +105,27 @@ checkToken() {
     this.isLoggedIn = true;
   }
 }
-ngOnInit(): void {
+ngOnInit() {
   this.loadCategoryTypes();
+  
+  this.userService.getUser().pipe(
+    switchMap(user => {
+      this.userId = user.id
+      return this.notificationService.getUserNotification();
+    })
+  ).subscribe(
+    response => {
+      response.items.find((veri:any)=>{
+        if(veri.userId === this.userId){
+          this.notificationService.getNotification(veri.notificationId).subscribe(
+            responses=>{
+              this.notifications.push(responses);
+            }
+          )
+        }
+      }) // Bildirimleri kullanabilirsiniz
+    }
+  );
   this.navbarService.isLoggedIn.subscribe(isLoggedIn => {
     this.isLoggedIn = isLoggedIn;
   });
@@ -117,5 +144,13 @@ selectCategory(categoryId: string,categoryType: string) {
   onMaterialTypeClick(type: string) {
     this.materialTypeSelected.emit(type);
     this.router.navigate(['/material-list'], { queryParams: { type } });
+  }
+
+  showNotificationPopup() {
+    this.showPopup = true;
+  }
+
+  closeNotificationPopup() {
+    this.showPopup = false;
   }
 }

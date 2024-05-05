@@ -1,12 +1,13 @@
+
 <!-- <app-navbar></app-navbar> -->
-<div class="bg-[#F8F8F8]">
-  <div class="container mx-auto ">
+<div class="bg-[#F8F8F8] h-screen">
+  <div class="container mx-auto  ">
     <div class="pt-4 ">
       <div class="grid grid-cols-4 gap-4 mt-12 pr-2">
        <app-sidebar></app-sidebar><!--left menu profil fields-->
         
         <!-- <div class="bg-[#f5f5f5] text-black pt-5 col-span-3 flex flex-col items-center space-y--3 rounded-lg pb-20  "> -->
-          <div class="bg-[#f5f5f5] text-black pt-5 col-span-3 flex flex-col items-center space-y-3 rounded-lg pb-20 max-h-[1035px] overflow-y-auto ">
+          <div class="bg-[#f5f5f5] text-black pt-5 col-span-3 flex flex-col items-center space-y-3 rounded-lg pb-20 max-h-[800px] overflow-y-auto ">
           <div class="container mx-auto pb-2 max-w-full sm:max-w-lg rounded-lg shadow-xl mb-2 transform hover:scale-110 transition duration-300 ease-in-out" style="box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1), 0 -2px 4px -1px rgba(0, 0, 0, 0.03);">
             <h1 class="text-blue-700 text-2xl font-bold text-center">Activities</h1>
         </div>
@@ -38,29 +39,29 @@
                     </h5>
  
                      <div class="mb-6 text-lg">
-                    <div *ngIf="index === 0" class="text-lg" >The watercolor event offers participants the opportunity to create their own works of art while teaching watercolor techniques.
-                   <p class="text-orange-600 pt-20  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> Papirus Library/İstanbul</p>
+                    <div *ngIf="index === 0" class="text-lg" > {{ Activities.length > 0 ? Activities[1]?.desc : 'Veritabanında bulunamadı' }}
+                   <p class="text-orange-600 pt-20  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> {{ Activities.length > 0 ? Activities[1]?.location : 'Veritabanında bulunamadı' }}</p>
                    <p class="text-blue-800 pt-2  text-lg">Hour : 10.00-12-30</p>
                     </div>
-                    <div *ngIf="index === 1" class="text-lg">Discover the game of chess with creative drama techniques! In this event, you will learn the basic rules and strategies of chess through interactive games.
-                      <p class="text-orange-600 pt-6  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> Papirus Library/İstanbul</p>
+                    <div *ngIf="index === 1" class="text-lg">{{ Activities.length > 0 ? Activities[4]?.desc : 'Veritabanında bulunamadı' }}
+                      <p class="text-orange-600 pt-6  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> {{ Activities.length > 0 ? Activities[4]?.location : 'Veritabanında bulunamadı' }}</p>
                       <p class="text-blue-800 pt-2  text-lg">Hour : 15.00-17-30</p>
                     </div>
                     
-                    <div *ngIf="index === 2" class="text-lg">Dive into the bustling street life and vibrant culture of our urban landscape.
-                      <p class="text-orange-600 pt-28  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> Papirus Library/İstanbul</p>
+                    <div *ngIf="index === 2" class="text-lg">{{ Activities.length > 0 ? Activities[5]?.desc : 'Veritabanında bulunamadı' }}
+                      <p class="text-orange-600 pt-20 text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> {{ Activities.length > 0 ? Activities[5]?.location : 'Veritabanında bulunamadı' }}</p>
                       <p class="text-blue-800 pt-2  text-lg">Hour : 14.30-16-30</p>
                     </div>
-                    <div *ngIf="index === 3" class="text-lg">With this special event, we commemorate the literary legacy and art of Ömer Asaf. In-depth discussions on his works, poetry readings and workshops reflecting his creativity will be held.
-                      <p class="text-orange-600 pt-20  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> Papirus Library/İstanbul</p>
+                    <div *ngIf="index === 3" class="text-lg">{{ Activities.length > 0 ? Activities[2]?.desc : 'Veritabanında bulunamadı' }}
+                      <p class="text-orange-600 pt-20  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> {{ Activities.length > 0 ? Activities[2]?.location : 'Veritabanında bulunamadı' }}</p>
                       <p class="text-blue-800 pt-2  text-lg">Hour : 14.30-16-30</p>
                     </div>
-                    <div *ngIf="index === 4" class="text-lg">A fun event that offers participants the chance to paint their own unique ceramic pieces. In this activity, you will learn various painting techniques and be able to design your ceramic works using your imagination.
-                      <p class="text-orange-600 pt-20  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> Papirus Library/İstanbul</p>
+                    <div *ngIf="index === 4" class="text-lg">{{ Activities.length > 0 ? Activities[4]?.desc : 'Veritabanında bulunamadı' }}
+                      <p class="text-orange-600 pt-32  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span> {{ Activities.length > 0 ? Activities[4]?.location : 'Veritabanında bulunamadı' }}</p>
                       <p class="text-blue-800 pt-2  text-lg">Hour : 10.30-12-30</p>
                     </div>
-                    <div *ngIf="index === 5" class="text-lg">Located in the historical Çemberlitaş district of Istanbul, this library is dedicated to the famous Turkish writer Ahmet Hamdi Tanpınar. While it houses the authors works and the classics of Turkish literature, it is also located in a historical building.
-                      <p class="text-orange-600 pt-6  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span>Ahmet Hamdi Tanpınar Library/İstanbul</p>
+                    <div *ngIf="index === 5" class="text-lg">{{ Activities.length > 0 ? Activities[0]?.desc : 'Veritabanında bulunamadı' }}
+                      <p class="text-orange-600 pt-6  text-lg"> <span class="w-3 pr-1"><i class="fas fa-map-marker-alt text-orange-600"></i> </span>{{ Activities.length > 0 ? Activities[0]?.location : 'Veritabanında bulunamadı' }}</p>
                       <p class="text-blue-800 pt-2  text-lg">Hour : 11.00-12-30</p>
                     </div>
                   </div>

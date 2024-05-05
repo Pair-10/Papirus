@@ -1,6 +1,6 @@
 import { IUserResponse } from './../../../../models/user-response/userResponse';
 import { Component, Input, inject, input } from '@angular/core';
-import { SidebarComponent } from "../../../../shared/components/sidebar/sidebar.component";
+import { SidebarAdminComponent } from '../../../../shared/components/sidebar-admin/sidebar-admin.component';
 import { UserService } from '../../../../services/user/user.service';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
     standalone: true,
     templateUrl: './edit-users.component.html',
     styleUrl: './edit-users.component.css',
-    imports: [SidebarComponent, CommonModule, ReactiveFormsModule,RouterModule,FormsModule]
+    imports: [SidebarAdminComponent, CommonModule, ReactiveFormsModule,RouterModule,FormsModule]
 })
 export class EditUsersComponent {
 onPageChange(arg0: number) {
