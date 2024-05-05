@@ -34,11 +34,9 @@ export class LoginComponent {
    this.httpService.loginUser(user).subscribe((response)=>{
     
     try {      
-      console.log("Token:",response)
       localStorage.setItem("Token",response.accessToken.token)
-      console.log(user)
-      console.log(response.accessToken.token)
       this.navbarService.setLoggedIn(true)
+
       this.router.navigate(['/']);
       
     } catch (error) {

@@ -5,6 +5,9 @@ import { Component, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NavbarService } from '../../../services/navbar/navbar.service';
 import { TokenService } from '../../../core/services/token.service';
+import { UserService } from '../../../services/sidebar/user.service';
+import { NotificationService } from '../../../services/notification/notification.service';
+import { switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -16,12 +19,17 @@ import { TokenService } from '../../../core/services/token.service';
 export class NavbarComponent implements OnInit {
   navbarService=inject(NavbarService)
   tokenService=inject(TokenService)
+  userService = inject(UserService)
+  notificationService = inject(NotificationService)
   hamburgerMenuOpen = false;
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
-  isLoggedIn = false;
+  isLoggedIn: boolean = false;
   materialTypes: any[] = [];
-  
+  userId: any;
+  notificationId:any;
+  notifications: any[] = [];
+  showPopup: boolean = false;
   
   
   toggleMenu() {
@@ -33,63 +41,62 @@ export class NavbarComponent implements OnInit {
   toggleHamburgerMenu() {
     this.hamburgerMenuOpen = !this.hamburgerMenuOpen;
   }
-  bookcategories: any[]=[];
-  magazinecategories: any[]=[];
-  articlecategories: any[]=[];
+  bookcategories: any[] = [];
+  magazinecategories: any[] = [];
+  articlecategories: any[] = [];
   @Output() materialTypeSelected = new EventEmitter<string>();
   constructor(
     private router: Router,
     private listService: ListService
   ) { }
-  
-loadCategoryTypes() {
-  const categoryIds = ["f1c535cb-263f-47c8-1e5e-08dc61e8e461", "fa0be4d1-3580-4ddb-1e5f-08dc61e8e461", "7f15efda-deb4-438f-1e60-08dc61e8e461"];
-  
-  categoryIds.forEach(categoryId => {
-    this.listService.getCategoryTypes().subscribe(
+
+  loadCategoryTypes() {
+    const categoryIds = ["f1c535cb-263f-47c8-1e5e-08dc61e8e461", "fa0be4d1-3580-4ddb-1e5f-08dc61e8e461", "7f15efda-deb4-438f-1e60-08dc61e8e461"];
+
+    categoryIds.forEach(categoryId => {
+      this.listService.getCategoryTypes().subscribe(
+        (response) => {
+          this.processCategoryTypes(response, categoryId);
+        },
+        (error) => {
+          console.error('Error fetching category types:', error);
+        }
+      );
+    });
+  }
+
+  processCategoryTypes(response: any[], categoryId: string) {
+    const filteredItems = response.filter(item => item.categoryId === categoryId);
+    for (let item of filteredItems) {
+      this.loadMaterialTypes(item.materialTypeId, categoryId);
+    }
+  }
+
+  loadMaterialTypes(materialTypeId: string, categoryId: string) {
+    this.listService.getMaterialTypes(materialTypeId).subscribe(
       (response) => {
-        this.processCategoryTypes(response, categoryId);
+        const filteredItems = response.filter(item => item.id === materialTypeId);
+        const materialNames = filteredItems.map(item => item.name);
+        // Kategoriye göre doğru diziye atama yap
+        for (let i = 0; i < materialNames.length; i++) {
+          const materialName = materialNames[i];
+          if (categoryId === "f1c535cb-263f-47c8-1e5e-08dc61e8e461") {
+            if (!this.bookcategories.includes(materialName))
+              this.bookcategories.push(materialName);
+          } else if (categoryId === "fa0be4d1-3580-4ddb-1e5f-08dc61e8e461") {
+            if (!this.magazinecategories.includes(materialName))
+              this.magazinecategories.push(materialName);
+          } else if (categoryId === "7f15efda-deb4-438f-1e60-08dc61e8e461") {
+            if (!this.articlecategories.includes(materialName))
+              this.articlecategories.push(materialName);
+          }
+        }
       },
       (error) => {
-        console.error('Error fetching category types:', error);
+        console.error('Error fetching material types:', error);
       }
     );
-  });
-}
-
-processCategoryTypes(response: any[], categoryId: string) {
-  const filteredItems = response.filter(item => item.categoryId === categoryId);
-  for (let item of filteredItems) {
-    this.loadMaterialTypes(item.materialTypeId, categoryId);
   }
-}
-
-loadMaterialTypes(materialTypeId: string, categoryId: string) {
-  this.listService.getMaterialTypes(materialTypeId).subscribe(
-    (response) => {
-      const filteredItems = response.filter(item => item.id === materialTypeId);
-      const materialNames = filteredItems.map(item => item.name);
-      // Kategoriye göre doğru diziye atama yap
-      for (let i = 0; i < materialNames.length; i++) {
-        const materialName = materialNames[i];
-        if (categoryId === "f1c535cb-263f-47c8-1e5e-08dc61e8e461") {
-          if(!this.bookcategories.includes(materialName))
-            this.bookcategories.push(materialName);
-        } else if (categoryId === "fa0be4d1-3580-4ddb-1e5f-08dc61e8e461") {
-          if(!this.magazinecategories.includes(materialName))
-            this.magazinecategories.push(materialName);
-        } else if (categoryId === "7f15efda-deb4-438f-1e60-08dc61e8e461") {
-          if(!this.articlecategories.includes(materialName))
-            this.articlecategories.push(materialName);
-        }
-      }
-    },
-    (error) => {
-      console.error('Error fetching material types:', error);
-    }
-  );
-}
-
 
 //--------------------------------------
 checkToken() {
@@ -98,7 +105,27 @@ checkToken() {
     this.isLoggedIn = true;
   }
 }
-ngOnInit(): void {
+ngOnInit() {
+  this.loadCategoryTypes();
+  
+  this.userService.getUser().pipe(
+    switchMap(user => {
+      this.userId = user.id
+      return this.notificationService.getUserNotification();
+    })
+  ).subscribe(
+    response => {
+      response.items.find((veri:any)=>{
+        if(veri.userId === this.userId){
+          this.notificationService.getNotification(veri.notificationId).subscribe(
+            responses=>{
+              this.notifications.push(responses);
+            }
+          )
+        }
+      }) // Bildirimleri kullanabilirsiniz
+    }
+  );
   this.navbarService.isLoggedIn.subscribe(isLoggedIn => {
     this.isLoggedIn = isLoggedIn;
   });
@@ -113,8 +140,17 @@ selectCategory(categoryId: string,categoryType: string) {
 }
 
 
+
   onMaterialTypeClick(type: string) {
     this.materialTypeSelected.emit(type);
     this.router.navigate(['/material-list'], { queryParams: { type } });
-}
+  }
+
+  showNotificationPopup() {
+    this.showPopup = true;
+  }
+
+  closeNotificationPopup() {
+    this.showPopup = false;
+  }
 }

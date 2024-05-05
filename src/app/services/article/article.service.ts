@@ -10,14 +10,12 @@ import { jwtToken } from '../../jwttoken';
 export class ArticleService {
 
   constructor(private http:HttpClient) {}
-  token = jwtToken.jwt;
   private baseUrl = 'http://localhost:60805/api';
 
 
   // Makaleleri döndürür
   getArticles(): Observable<Article[]> {
-    const headers = this.token ? new HttpHeaders().set('Authorization', 'Bearer ' + this.token) : new HttpHeaders();
-    return this.http.get<any>(`${this.baseUrl}/Articles?PageIndex=0&PageSize=10`, { headers }).pipe(
+    return this.http.get<any>(`${this.baseUrl}/Articles?PageIndex=0&PageSize=10`).pipe(
       map( response =>{
         const articles: Article[] = response.items.map((item: any) => ({
           id: item.id,
@@ -28,6 +26,15 @@ export class ArticleService {
       })
     )
   }
-
- 
+  setArticles(article:any){
+    const articles = {
+      categoryId : article.categoryId,
+      materialId: article.materialId,
+      publicationName: article.publicationName
+    }
+    return this.http.post<any>(`${this.baseUrl}/Articles`,articles)
+  }
+  deleteArticle(article: any){
+    return this.http.delete<any>(`${this.baseUrl}/Articles/${article.id}`)
+  }
 }

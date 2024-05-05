@@ -1,20 +1,51 @@
 <div class="w-full h-auto md:h-screen bg-white py-6 md:py-16">
     <div class="md:max-w-[1350px] max-w-[600px] xl:m-auto m-6 grid grid-cols-4 gap-4 h-full">
         <!-- Sidebar -->
-        <div class="md:col-span-1 flex flex-col bg-gray-100 p-4 rounded-lg h-full overflow-y-auto">
-            <h1 class="text-center md:text-3xl text-sm font-bold">
-                {{ selectedMaterialType === 'book' ? 'Kitaplar' : (selectedMaterialType === 'magazine' ? 'Dergiler' :
-                'Makaleler') }}
-            </h1>
-            <ul class="mt-4 space-y-2">
-                <li *ngFor="let category of materialTypes">
-                    <button (click)="selectCategory(category)"
-                        class="text-left w-full py-2 px-3 rounded hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
-                        {{ category }}
-                    </button>
-                </li>
-            </ul>
-        </div>
+        <!-- Mobil listeleme menüsü -->
+<div class="md:hidden">
+    <!-- Menü açma düğmesi -->
+    <button (click)="toggleMenu()"
+        class="block w-full py-2 px-4 rounded-md text-left bg-gray-200 hover:bg-gray-300 focus:outline-none focus:bg-gray-300">
+        {{ selectedMaterialType === 'book' ? 'Kitaplar' : (selectedMaterialType === 'magazine' ? 'Dergiler' : 'Makaleler') }}
+        <svg *ngIf="!listMenuOpen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 inline-block align-text-bottom">
+            <path d="M19 9l-7 7-7-7"></path>
+        </svg>
+        <svg *ngIf="listMenuOpen" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 inline-block align-text-bottom">
+            <path d="M5 15l7-7 7 7"></path>
+        </svg>
+    </button>
+    <!-- Menü içeriği -->
+    <div *ngIf="listMenuOpen" class="bg-gray-100 rounded-lg mt-2 overflow-hidden">
+        <ul>
+            <li *ngFor="let category of materialTypes">
+                <button (click)="selectCategory(category)"
+                    class="block w-full py-2 px-4 rounded-md text-left hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+                    {{ category }}
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Büyük ekranlarda listeleme -->
+<div class="hidden md:block md:col-span-1 bg-gray-100 p-4 rounded-lg overflow-y-auto">
+    <h1 class="text-center text-3xl font-bold mb-4">
+        {{ selectedMaterialType === 'book' ? 'Kitaplar' : (selectedMaterialType === 'magazine' ? 'Dergiler' : 'Makaleler') }}
+    </h1>
+    <ul>
+        <li *ngFor="let category of materialTypes">
+            <button (click)="selectCategory(category)"
+                class="block w-full py-2 px-4 rounded-md text-left hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+                {{ category }}
+            </button>
+        </li>
+    </ul>
+</div>
+
+        
+        
 
         <!-- Ana bölüm -->
         <div class="col-span-3">
@@ -22,61 +53,64 @@
             <div *ngIf="selectedMaterialType === 'book'"
                 class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
                 <!-- Kartlar -->
-                <div *ngFor="let mergedItem of originalData" class="bg-white shadow-lg rounded-lg p-4 w-72">
+                <div *ngFor="let mergedItem of originalData"
+                    class="bg-white shadow-md rounded-lg p-4 w-72 hover:shadow-xl transition duration-300">
                     <div class="p-4">
-                        <img class="w-full h-56 object-cover rounded-t-lg" src="https://picsum.photos/100?random">
+                        <img class="w-full h-56 object-cover rounded-t-lg"
+                            src="https://picsum.photos/100?random&{{mergedItem.id}}">
                         <!-- ISBN -->
-                        <p class="text-gray-600">ISBN: {{ mergedItem.book.isbn }}</p>
-                        <!-- Daha fazla oku düğmesi -->
-                        <p>Kitap ismi: {{ mergedItem.material.materialName }}</p>
-                        <p>Dil: {{mergedItem.material.language}}</p>
-                        <p>Sayfa Sayısı: {{mergedItem.material.pageCount}}</p>
-                        <p>Adet: {{mergedItem.material.quantity}}</p>
-                        <button (click)="materialyazdir(mergedItem)" class="mt-4 bg-blue-500 text-white px-4 py-2  rounded hover:bg-blue-600">Daha fazla
-                            oku</button>
-                        <!-- Material bilgileri -->
+                        <p class="text-gray-600 font-medium mt-2">ISBN: {{ mergedItem.book.isbn }}</p>
+                        <!-- Kitap ismi -->
+                        <p class="text-lg font-semibold">{{ mergedItem.material.materialName }}</p>
+                        <p class="text-sm text-gray-600">Dil: {{mergedItem.material.language}}</p>
+                        <p class="text-sm text-gray-600">Sayfa Sayısı: {{mergedItem.material.pageCount}}</p>
+                        <p class="text-sm text-gray-600">Adet: {{mergedItem.material.quantity}}</p>
+                        <button (click)="materialyazdir(mergedItem)"
+                            class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Daha
+                            fazla oku</button>
                     </div>
                 </div>
-
-
             </div>
-
+        
             <!-- Dergileri listelemek için döngü -->
             <div *ngIf="selectedMaterialType === 'magazine'"
                 class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
                 <!-- Dergi kartları -->
-                <div *ngFor="let magazine of originalData2" class="bg-white shadow-lg rounded-lg p-4 w-72">
+                <div *ngFor="let magazine of originalData2"
+                    class="bg-white shadow-md rounded-lg p-4 w-72 hover:shadow-xl transition duration-300">
                     <!-- Dergi resmi  -->
-                    <img class="w-full h-56 object-cover rounded-t-lg" src="https://picsum.photos/100?random">
+                    <img class="w-full h-56 object-cover rounded-t-lg"
+                        src="https://picsum.photos/100?random&{{magazine.id}}">
                     <!-- Dergi başlığı -->
-                    <h3 class="text-xl font-bold mt-2">{{ magazine.material.materialName }}</h3>
-                    <!-- Yazar 
-                    <p class="text-gray-600">Yazar: {{ magazine.author }}</p>-->
+                    <h3 class="text-xl font-semibold mt-2">{{ magazine.material.materialName }}</h3>
                     <!-- ISSN -->
-                    <p class="text-gray-600">ISSN: {{ magazine.magazine.issn }}</p>
+                    <p class="text-sm text-gray-600">ISSN: {{ magazine.magazine.issn }}</p>
                     <!-- Sayı -->
-                    <p class="text-gray-600">Sayı: {{ magazine.magazine.issue }}</p>
-                    <!-- Daha fazla oku düğmesi -->
-                    <button (click)="materialyazdir(magazine)" class="mt-4 bg-blue-500 text-white px-4 py-2  rounded hover:bg-blue-600">Daha fazla
-                        oku</button>
+                    <p class="text-sm text-gray-600">Sayı: {{ magazine.magazine.issue }}</p>
+                    <button (click)="materialyazdir(magazine)"
+                        class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Daha
+                        fazla oku</button>
                 </div>
             </div>
-
+        
             <!-- Makaleleri listelemek için döngü -->
             <div *ngIf="selectedMaterialType === 'article'"
                 class="flex justify-center items-center flex-wrap overflow-y-auto md:h-[88vh] h-screen gap-4">
                 <!-- Makale kartları -->
-                <div *ngFor="let article of originalData3" class="bg-white shadow-lg rounded-lg p-4 w-72">
+                <div *ngFor="let article of originalData3"
+                    class="bg-white shadow-md rounded-lg p-4 w-72 hover:shadow-xl transition duration-300">
                     <!-- Makale resmi -->
-                    <img class="w-full h-56 object-cover rounded-t-lg" src="https://picsum.photos/100?random">
+                    <img class="w-full h-56 object-cover rounded-t-lg"
+                        src="https://picsum.photos/100?random&{{article.id}}">
                     <!-- Makale başlığı -->
-                    <h3 class="text-xl font-bold mt-2">{{ article.material.materialName }}</h3>
-                    <p class="text-lg">{{article.material.pageCount}}</p>
-                    <!-- Daha fazla oku düğmesi -->
-                    <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Daha fazla
-                        oku</button>
+                    <h3 class="text-xl font-semibold mt-2">{{ article.material.materialName }}</h3>
+                    <p class="text-sm text-gray-600">{{article.material.pageCount}}</p>
+                    <button (click)="materialyazdir(article)"
+                        class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Daha
+                        fazla oku</button>
                 </div>
             </div>
         </div>
+        
     </div>
 </div>
