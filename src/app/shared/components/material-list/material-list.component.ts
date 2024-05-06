@@ -60,7 +60,7 @@ export class MaterialListComponent implements OnInit {
       this.selectedMaterialType = params['type'] || 'book';
       this.categoryname = params['categoryId'];
       this.selectedCategory = this.categoryname !== undefined ? this.categoryname : "";
-      this.loadMaterials(this.categoryname);
+      this.loadMaterials();
       this.loadCategoryTypes();
     });
   }
@@ -306,7 +306,7 @@ export class MaterialListComponent implements OnInit {
   }
   
 
-  loadMaterials(deneme:string) {
+  loadMaterials() {
     if (this.selectedMaterialType === 'book') {
       this.loadBooksAndMaterials();
     } else if (this.selectedMaterialType === 'magazine') {

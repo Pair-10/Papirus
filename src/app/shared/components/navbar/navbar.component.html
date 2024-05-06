@@ -2,24 +2,35 @@
   <div class="md:max-w-[1350px] mx-auto max-w-[768px] w-full h-full flex justify-between items-center">
     <i class="fas fa-book mt-1 sm:text-2xl text-xl text-yellow-500"></i>
     <h1 class="sm:text-4xl text-2xl text-white cursor-pointer" [routerLink]="['/']">Papirus</h1>
-    <form class="max-w-md mx-auto relative flex items-center">
-      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-      <div class="flex items-center">
-        <input type="search" id="default-search"
-          class="block lg:w-[400px] w-40 sm:w-60 md:h-10 h-6 p-4 text-sm text-gray-900 border border-gray-300 bg-gray-50 pl-10"
-          placeholder="Search..." required />
-        <svg
-          class="absolute inset-y-0 left-0 w-5 h-5 text-gray-500 dark:text-gray-400 md:mt-3 md:ml-3 mt-2 ml-2 pointer-events-none"
-          aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-        </svg>
-        <button type="submit" class="text-white h-10 bg-blue-900 md:font-medium text-sm md:px-4 px-1 md:py-2 md:ml-1">
-          Search
-        </button>
+    <div class="max-w-md mx-auto relative">
+      <div class="flex flex-col">
+        <form class="relative flex items-center">
+          <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+          <div class="flex items-center relative">
+            <input type="search" id="default-search" [(ngModel)]="searchTerm" (ngModelChange)="search($event)" [ngModelOptions]="{standalone: true}"
+              class="block lg:w-[400px] w-40 sm:w-60 md:h-10 h-6 p-4 text-sm text-gray-900 border border-gray-300 bg-gray-50 pl-10"
+              placeholder="Search..." required />
+            <svg
+              class="absolute inset-y-0 left-0 w-5 h-5 text-gray-500 dark:text-gray-400 md:mt-3 md:ml-3 mt-2 ml-2 pointer-events-none"
+              aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+            </svg>
+            <button type="submit" class="text-white h-10 bg-blue-900 md:font-medium text-sm md:px-4 px-1 md:py-2 md:ml-1">
+              Search
+            </button>
+          </div>
+        </form>
+    
+        <div *ngIf="searchedItems.length > 0 && searchTerm.trim() !== ''" class="absolute w-full mt-12 z-50">
+          <ul class="bg-gray-100 border text-black border-gray-300 rounded-md p-4">
+            <li *ngFor="let material of searchedItems" class="py-2 cursor-pointer" (click)="goToMaterialDetail(material.id)">{{ material.materialName }}</li>
+          </ul>
+        </div>
       </div>
-    </form>
-
+    </div>
+    
+    
     <div class="md:flex hidden">
 
       <div *ngIf="isLoggedIn" class="flex items-center gap-4">
