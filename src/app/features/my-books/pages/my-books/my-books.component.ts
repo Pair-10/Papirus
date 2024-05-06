@@ -1,7 +1,6 @@
 import { MyMaterialService } from './../../../../services/my-material/my-material.service';
 import { Component, OnInit, inject } from '@angular/core';
 import { SidebarComponent } from "../../../../shared/components/sidebar/sidebar.component";
-import { UserService } from '../../../../services/sidebar/user.service';
 import { MyBorrowedMaterials } from '../../../../models/my-borrowed-materials/borrowed-materials';
 import { MaterialService } from '../../../../services/material/material.service';
 import { forkJoin, mergeMap } from 'rxjs';
@@ -9,6 +8,7 @@ import { Material } from '../../../../models/material/material';
 import { CommonModule } from '@angular/common';
 import { BorrowMaterialService } from '../../../../services/borrow-material/borrow-material.service';
 import { ReturnedService } from '../../../../services/returned/returned.service';
+import { UserService } from '../../../../services/user/user.service';
 
 @Component({
     selector: 'app-my-books',

@@ -1,13 +1,12 @@
-
 import { ListService } from './../../../services/list/list.service';
 import { CommonModule } from '@angular/common';
 import { Component, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NavbarService } from '../../../services/navbar/navbar.service';
 import { TokenService } from '../../../core/services/token.service';
-import { UserService } from '../../../services/sidebar/user.service';
 import { NotificationService } from '../../../services/notification/notification.service';
 import { switchMap } from 'rxjs';
+import { UserService } from '../../../services/user/user.service';
 
 @Component({
   selector: 'app-navbar',

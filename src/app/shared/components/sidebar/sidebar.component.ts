@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { UserService } from '../../../services/sidebar/user.service';
+
 import { NavbarService } from '../../../services/navbar/navbar.service';
+import { UserService } from '../../../services/user/user.service';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
