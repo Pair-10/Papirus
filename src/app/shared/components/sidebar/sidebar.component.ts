@@ -38,6 +38,9 @@ export class SidebarComponent {
   navigateToEditProfile() {
     this.router.navigate(['profile/edit-profile']);
   }
+  navigateToEditUser(){
+    this.router.navigate(['/edit-user']);
+  }
   navigateToMyBook() {
     this.router.navigate(['profile/my-materials']);
   }

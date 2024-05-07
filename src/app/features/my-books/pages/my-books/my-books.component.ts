@@ -54,7 +54,6 @@ export class MyBooksComponent implements OnInit {
 
     teslimEt(gelenveri: any){
         let eslesenVeri :any =[];
-        console.log(gelenveri);
         eslesenVeri = this.borrowedMaterials.find(veri => veri.materialId === gelenveri.id)
         if (eslesenVeri) {
             eslesenVeri.isReturned = true;
@@ -62,6 +61,7 @@ export class MyBooksComponent implements OnInit {
         this.borrowMaterialService.updateBorrowedMaterial(eslesenVeri).subscribe(
             response => {
                 this.returnedService.setReturned(eslesenVeri).subscribe();
+                this.ngOnInit();
             }
         )
     }

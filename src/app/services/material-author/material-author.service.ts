@@ -25,6 +25,12 @@ export class MaterialAuthorService implements OnInit {
       })
     );
   }
-
+  setMaterialAuthor(materialId: string, authorId: string){
+    const body = {
+      materialId : materialId,
+      authorId : authorId
+    }
+    return this.http.post<any>(`${this.baseUrl}/MaterialAuthors`, body)
+  }
 
 }

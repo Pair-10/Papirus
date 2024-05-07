@@ -26,6 +26,7 @@ export const routes: Routes =
 [
     { path: '', component: MainComponent },
     { path: 'material-detail', component: MaterialDetailComponent },
+    { path: 'material-detail/:materialId', component: MaterialDetailComponent },
     { path: 'material-list', component: MaterialListComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },

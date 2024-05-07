@@ -25,5 +25,11 @@ export class MaterialPublisherService {
       })
     );
   }
-
+  setMaterialPublisher(materialId: string, publisherId: string){
+    const body = {
+      materialId : materialId,
+      puslisherId : publisherId
+    }
+    return this.http.post<any>(`${this.baseUrl}/MaterialPublishers`, body)
+  }
 }
