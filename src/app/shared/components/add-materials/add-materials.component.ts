@@ -85,6 +85,16 @@ export class AddMaterialsComponent implements OnInit {
     )
   }
   
+
+  onFileSelected(event: any) {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      // Burada dosyayı işleyebilirsiniz
+      console.log(selectedFile);
+    }
+  }
+
+
   setOtherMaterial(formValue: any, formType: string){
     this.listService.setCategoryTypes(formValue.materialId,formValue.categoryId,formValue.materialTypeName).subscribe();
     this.materialPublisherService.setMaterialPublisher(formValue.materialId, formValue.publisherId).subscribe();
