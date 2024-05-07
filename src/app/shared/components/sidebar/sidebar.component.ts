@@ -27,19 +27,19 @@ export class SidebarComponent {
     this.getUser();
   }
   navigateToPenalties() {
-    this.router.navigate(['/penalty']);
+    this.router.navigate(['profile/penalty']);
   }
   navigateToActivity() {
-    this.router.navigate(['/activity']);
+    this.router.navigate(['profile/activity']);
   }
   navigateToHelp() {
     this.router.navigate(['/help']);
   }
   navigateToEditProfile() {
-    this.router.navigate(['/edit-profile']);
+    this.router.navigate(['profile/edit-profile']);
   }
   navigateToMyBook() {
-    this.router.navigate(['/my-materials']);
+    this.router.navigate(['profile/my-materials']);
   }
   navigateToAddMaterials(){
     this.router.navigate(['/add-materials']);
