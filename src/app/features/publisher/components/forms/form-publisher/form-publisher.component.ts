@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   import { SidebarComponent } from "../../../../../shared/components/sidebar/sidebar.component";
 //   const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3ZDY5MjM5LTVjNjQtNGJkMS05ODljLTM2OWM1OGNkNzJhYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imt5c0BreXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNDc0MDQ3NywiZXhwIjoxNzE0ODAwNDc3LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.MQO3qNj0-2d4xrtSUF-xu1ocLzlp5tPZ6lui5sMi1qIGMk4JIyrLFqo7rJrd9N1F8aLl-KkDhpBQwsPsNY84cA";
 import { token } from '../../../services/constants';
+
 @Component({
   selector: 'app-form-publisher',
   standalone: true,
@@ -85,21 +86,16 @@ export class FormPublisherComponent implements OnInit{
   }
 
   updateUserData(): void {
-      // Kullanıcı verileri güncelle
-      if (this.userForm.valid) {
-          const formData = this.userForm.value;
-        //   const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3ZDY5MjM5LTVjNjQtNGJkMS05ODljLTM2OWM1OGNkNzJhYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imt5c0BreXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNDc0MDQ3NywiZXhwIjoxNzE0ODAwNDc3LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.MQO3qNj0-2d4xrtSUF-xu1ocLzlp5tPZ6lui5sMi1qIGMk4JIyrLFqo7rJrd9N1F8aLl-KkDhpBQwsPsNY84cA";
-          const headers = { Authorization: `Bearer ${token}` };
-          this.httpClient.put(`http://localhost:60805/api/Publishers/`, formData, { headers }).subscribe((response: any) => {
-              console.log("API Response:", response);
-              
-          }, error => {
-              console.error("Error updating user data:", error);
-          });
-      } else {
-          console.log("Form is not valid.");
-      }
-  }
+    // Kullanıcı verileri kaydediliyor
+    const formData = this.userForm.value;
+  //   const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3ZDY5MjM5LTVjNjQtNGJkMS05ODljLTM2OWM1OGNkNzJhYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imt5c0BreXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNDc0MDQ3NywiZXhwIjoxNzE0ODAwNDc3LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.MQO3qNj0-2d4xrtSUF-xu1ocLzlp5tPZ6lui5sMi1qIGMk4JIyrLFqo7rJrd9N1F8aLl-KkDhpBQwsPsNY84cA";
+    const headers = { Authorization: `Bearer ${token}` };
+    this.httpClient.put('http://localhost:60805/api/Publishers', formData, { headers }).subscribe((response: any) => {
+        console.log("API Response:", response);
+    }, error => {
+        console.error("Error saving user data:", error);
+    });
+}
   
 
   isDeleting: boolean = false;
@@ -125,6 +121,7 @@ deleteUserData(): void {
         this.isDeleting = false; // Hata oluştuğunda flag'i sıfırla
     });
 }
+
 
   ngOnInit(): void {
       // Sayfa yüklendiğinde kullanıcı verileri getiriliyor

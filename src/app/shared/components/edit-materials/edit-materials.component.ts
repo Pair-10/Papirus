@@ -2,7 +2,7 @@ import { MagazineService } from './../../../services/magazine/magazine.service';
 import { BookService } from './../../../services/book/book.service';
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { SidebarComponent } from '../sidebar/sidebar.component';
+import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component';
 import { MaterialService } from '../../../services/material/material.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ArticleService } from '../../../services/article/article.service';
@@ -13,7 +13,7 @@ import { UserService } from '../../../services/user/user.service';
 @Component({
   selector: 'app-edit-materials',
   standalone: true,
-  imports: [CommonModule, SidebarComponent, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, SidebarAdminComponent, ReactiveFormsModule, FormsModule],
   templateUrl: './edit-materials.component.html',
   styleUrl: './edit-materials.component.css'
 })

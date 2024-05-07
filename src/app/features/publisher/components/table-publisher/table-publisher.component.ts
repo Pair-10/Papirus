@@ -16,11 +16,23 @@ export class TablePublisherComponent implements OnInit{
   Users: any[] = [];
   selectedAuthor: any = null;
   searchTerm: string = ''
+  filteredUsers: any[] = [];////
   
   constructor(private httpClient: HttpClient,private CommanModule:CommonModule,private JwtTokenService:JwtTokenService) {}
   
+////
+filterUsers(event: any): void {
+  const searchTerm = event.target.value || ''; // 'event.target.value' null olabilir, bu yüzden null check yap
+  if (searchTerm.trim() !== '') {
+    this.filteredUsers = this.Users.filter(user =>
+      user.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  } else {
+    this.filteredUsers = [...this.Users];
+  }
+}
 
- 
+  ////
 
 
   fetchUsers(): void {
@@ -29,6 +41,7 @@ export class TablePublisherComponent implements OnInit{
       this.httpClient.get('http://localhost:60805/api/Publishers?PageIndex=0&PageSize=10', { headers }).subscribe((data: any) => {
           console.log("API Response:", data); // API yanıtını konsola yazdır
          this.Users = data.items; // API yanıtının içinden 'items' adlı öğeyi kullanarak kullanıcıları alın
+         this.filteredUsers = [...this.Users]; // Tüm kullanıcıları filtrelenmiş kullanıcılar listesine kopyala////
      }, error => {
           console.error("Error fetching users:", error); // Hata durumunda konsola yazdır
       });
@@ -41,5 +54,6 @@ export class TablePublisherComponent implements OnInit{
 
   ngOnInit(): void {
       this.fetchUsers();
+      this.filteredUsers = [...this.Users];////
   }
 }
