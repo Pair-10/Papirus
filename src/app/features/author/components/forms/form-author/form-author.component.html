@@ -7,9 +7,9 @@
 
       <form [formGroup]="userForm" (ngSubmit)="saveUserData()">
         <div class="mb-4 ml-10">AuthorID: <span class="ml-3"></span>
-        <input type="text" formControlName="id" (input)="fetchUserById()" class="bg-blue-200 border border-gray-600 text-black "></div>
-        <div class="mb-4 ml-10">Name:<span class="ml-10"></span>  <input type="text" formControlName="name"class="text-center bg-gray-200"></div>
-        <div class="mb-4 ml-10">Surname:<span class="ml-5"></span> <input type="text" formControlName="surname"class="text-center bg-gray-200"></div>
+        <input type="text" formControlName="id" (input)="fetchUserById()" class="bg-blue-200 border border-gray-600 text-black rounded-full"></div>
+        <div class="mb-4 ml-10">Name:<span class="ml-10"></span>  <input type="text" formControlName="name"class="text-center bg-gray-200 rounded-full"></div>
+        <div class="mb-4 ml-10">Surname:<span class="ml-5"></span> <input type="text" formControlName="surname"class="text-center bg-gray-200 rounded-full"></div>
         <!-- <div class="mt-4 ml-10 ">Bio:<span class="ml-16"></span> <input type="text" formControlName="bio" class="text-center bg-gray-200"></div>  -->
     
         
@@ -17,7 +17,7 @@
         <div class="mt-4 ml-2 md:ml-10 flex items-center">
           <label for="bio" class="pr-2 md:pr-16">Bio:</label>
           <div class="relative w-full md:w-48">
-            <textarea id="bio" formControlName="bio" class="text-center bg-gray-200 py-1 px-2 w-full text-left focus:outline-none focus:border-blue-500"></textarea>
+            <textarea id="bio" formControlName="bio" class="text-center bg-gray-200 py-1 px-2 w-full text-left focus:outline-none focus:border-blue-500 rounded-t-lg "></textarea>
           </div>
         </div>
         
@@ -46,7 +46,7 @@
         <div class=" md:ml-10  md:items-start">
           <label for="webSite" class="font-bold ml-20  md:mr-16">Website:</label>
           <div class="relative mt-5 ">
-              <input type="text" id="webSite" formControlName="webSite" class=" text-center bg-gray-200 py-1 px-2 w-full focus:outline-none focus:border-blue-500">
+              <input type="text" id="webSite" formControlName="webSite" class=" text-center bg-gray-200 py-1 px-2 w-full focus:outline-none focus:border-blue-500 rounded-full">
               <a [href]="userForm.get('webSite')?.value" target="_blank" class="absolute inset-y-0 right-0 flex items-center px-2 bg-gray-200 hover:bg-gray-300 cursor-pointer">
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zM9 13V7h2v6H9zm2-8V5h-2v2h2z" />
