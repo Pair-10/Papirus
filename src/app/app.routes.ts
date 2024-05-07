@@ -28,6 +28,7 @@ export const routes: Routes =
     { path: '', component: MainComponent },
     { path: 'book-detail', component: BookDetailComponent },
     { path: 'material-detail', component: MaterialDetailComponent },
+    { path: 'material-detail/:materialId', component: MaterialDetailComponent },
     { path: 'penalty', component: PenaltyComponent },
     { path: 'add-materials', component: AddMaterialsComponent },
     { path: 'edit-materials', component: EditMaterialsComponent },

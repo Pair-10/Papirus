@@ -13,7 +13,6 @@ export class ArticleService {
   private baseUrl = 'http://localhost:60805/api';
 
 
-  // Makaleleri döndürür
   getArticles(): Observable<Article[]> {
     return this.http.get<any>(`${this.baseUrl}/Articles?PageIndex=0&PageSize=10`).pipe(
       map( response =>{
@@ -30,11 +29,14 @@ export class ArticleService {
     const articles = {
       categoryId : article.categoryId,
       materialId: article.materialId,
-      publicationName: article.publicationName
+      publictionName: article.publicationName
     }
     return this.http.post<any>(`${this.baseUrl}/Articles`,articles)
   }
   deleteArticle(article: any){
     return this.http.delete<any>(`${this.baseUrl}/Articles/${article.id}`)
+  }
+  getArticle(){
+    return this.http.get<any>(`${this.baseUrl}/Articles?PageIndex=0&PageSize=50`)
   }
 }
