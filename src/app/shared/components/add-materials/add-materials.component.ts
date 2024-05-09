@@ -1,7 +1,7 @@
 import { AuthorService } from './../../../services/author/author.service';
 import { MagazineService } from '../../../services/magazine/magazine.service';
 import { Component, OnInit, inject } from '@angular/core';
-import { SidebarComponent } from '../sidebar/sidebar.component';
+import { SidebarAdminComponent } from '../sidebar-admin/sidebar-admin.component';
 import { FormBuilder, FormsModule, NgForm, ReactiveFormsModule } from '@angular/forms';
 import { MaterialService } from '../../../services/material/material.service';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,7 @@ import { MaterialAuthorService } from '../../../services/material-author/materia
 @Component({
   selector: 'app-add-materials',
   standalone: true,
-  imports: [SidebarComponent,ReactiveFormsModule,CommonModule,FormsModule],
+  imports: [SidebarAdminComponent,ReactiveFormsModule,CommonModule,FormsModule],
   templateUrl: './add-materials.component.html',
   styleUrl: './add-materials.component.css'
 })

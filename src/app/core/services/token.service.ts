@@ -6,8 +6,8 @@ import { Injectable } from '@angular/core';
 export class TokenService {
   constructor() {}
 
-  setToken(Token: string) {
-    localStorage.setItem('Token', Token);
+  setToken(token: string) {
+    localStorage.setItem('Token', token);
   }
 
   getToken() {
@@ -15,6 +15,6 @@ export class TokenService {
   }
 
   hasToken(): boolean {
-    return this.getToken() != "";
+    return this.getToken() != null;
   }
 }

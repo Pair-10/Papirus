@@ -15,7 +15,24 @@ import { token } from '../../../../publisher/services/constants';
 export class TableAuthorComponent implements OnInit{
   Users: any[] = [];
   selectedAuthor: any = null;//
+  filteredUsers: any[] = [];////
   constructor(private httpClient: HttpClient,private CommanModule:CommonModule,private JwtTokenService:JwtTokenService) {}
+
+////
+filterUsers(event: any): void {
+  const searchTerm = event.target.value.trim().toLowerCase(); // Arama terimini küçük harfe dönüştür ve boşlukları temizle
+  if (searchTerm !== '') {
+    this.filteredUsers = this.Users.filter(user => {
+      const fullName = `${user.name.toLowerCase()} ${user.surname.toLowerCase()}`; // İsim ve soyisimleri birleştir
+      return fullName.includes(searchTerm); // Birleşik metni arama terimine göre kontrol et
+    });
+  } else {
+    this.filteredUsers = [...this.Users];
+  }
+}
+
+  ////
+
 
 
   fetchUsers(): void {
@@ -23,7 +40,8 @@ export class TableAuthorComponent implements OnInit{
       const headers = { Authorization: `Bearer ${token}` };
       this.httpClient.get('http://localhost:60805/api/Authors?PageIndex=0&PageSize=10', { headers }).subscribe((data: any) => {
           console.log("API Response:", data); // API yanıtını konsola yazdır
-         this.Users = data.items; // API yanıtının içinden 'items' adlı öğeyi kullanarak kullanıcıları alın
+         this.Users = data.items; // API yanıtının içinden 'items' adlı öğeyi kullanarak kullanıcıları al
+         this.filteredUsers = [...this.Users]; // Tüm kullanıcıları filtrelenmiş kullanıcılar listesine kopyala////
      }, error => {
           console.error("Error fetching users:", error); // Hata durumunda konsola yazdır
       });
@@ -36,5 +54,6 @@ export class TableAuthorComponent implements OnInit{
 
   ngOnInit(): void {
       this.fetchUsers();
+      this.filteredUsers = [...this.Users];////
   }
 }

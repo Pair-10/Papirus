@@ -12,27 +12,31 @@ export class SidebarAdminComponent {
   constructor(private router: Router) {}
 
   navigateToPenalties() {
-    this.router.navigate(['/penalty-admin']);
+    this.router.navigate(['profile-admin/penalty-admin']);
   }
   navigateToActivity() {
-    this.router.navigate(['/activity']);
+    this.router.navigate(['profile-admin/activity']);
   }
   navigateToHelp() {
-    this.router.navigate(['/help']);
+    this.router.navigate(['profile-admin/help']);
   }
   navigateToEditProfile() {
-    this.router.navigate(['/edit-profile']);
+    this.router.navigate(['profile-admin/edit-profile']);
+  }
+
+  navigateToEditUser() {
+    this.router.navigate(['profile-admin/edit-user']);
   }
   navigateToAddMaterial() {
-    this.router.navigate(['/add-materials']);
+    this.router.navigate(['profile-admin/add-materials']);
   }
   navigateToEditMaterial() {
-    this.router.navigate(['/edit-materials']);
+    this.router.navigate(['profile-admin/edit-materials']);
   }
   navigateToPublisher() {
-    this.router.navigate(['/publisher']);
+    this.router.navigate(['profile-admin/publisher']);
   }
   navigateToAuthor() {
-    this.router.navigate(['/author']);
+    this.router.navigate(['profile-admin/author']);
   }
 }
