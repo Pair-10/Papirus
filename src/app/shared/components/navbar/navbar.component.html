@@ -2,31 +2,65 @@
   <div class="md:max-w-[1350px] mx-auto max-w-[768px] w-full h-full flex justify-between items-center">
     <i class="fas fa-book mt-1 sm:text-2xl text-xl text-yellow-500"></i>
     <h1 class="sm:text-4xl text-2xl text-white cursor-pointer" [routerLink]="['/']">Papirus</h1>
-    <form class="max-w-md mx-auto relative flex items-center">
-      <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-      <div class="flex items-center">
-        <input type="search" id="default-search"
-          class="block lg:w-[400px] w-40 sm:w-60 md:h-10 h-6 p-4 text-sm text-gray-900 border border-gray-300 bg-gray-50 pl-10"
-          placeholder="Search..." required />
-        <svg
-          class="absolute inset-y-0 left-0 w-5 h-5 text-gray-500 dark:text-gray-400 md:mt-3 md:ml-3 mt-2 ml-2 pointer-events-none"
-          aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-        </svg>
-        <button type="submit" class="text-white h-10 bg-blue-900 md:font-medium text-sm md:px-4 px-1 md:py-2 md:ml-1">
-          Search
-        </button>
+    <div class="max-w-md mx-auto relative">
+      <div class="flex flex-col">
+        <form class="relative flex items-center">
+          <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+          <div class="flex items-center relative">
+            <input type="search" id="default-search" [(ngModel)]="searchTerm" (ngModelChange)="search($event)" [ngModelOptions]="{standalone: true}"
+              class="block lg:w-[400px] w-40 sm:w-60 md:h-10 h-6 p-4 text-sm text-gray-900 border border-gray-300 bg-gray-50 pl-10"
+              placeholder="Search..." required />
+            <svg
+              class="absolute inset-y-0 left-0 w-5 h-5 text-gray-500 dark:text-gray-400 md:mt-3 md:ml-3 mt-2 ml-2 pointer-events-none"
+              aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+            </svg>
+            <button type="submit" class="text-white h-10 bg-blue-900 md:font-medium text-sm md:px-4 px-1 md:py-2 md:ml-1">
+              Search
+            </button>
+          </div>
+        </form>
+    
+        <div *ngIf="searchedItems.length > 0 && searchTerm.trim() !== ''" class="absolute w-full mt-12 z-50">
+          <ul class="bg-gray-100 border text-black border-gray-300 rounded-md p-4">
+            <li *ngFor="let material of searchedItems" class="py-2 cursor-pointer" (click)="goToMaterialDetail(material.id)">{{ material.materialName }}</li>
+          </ul>
+        </div>
       </div>
-    </form>
-
+    </div>
+    
+    
     <div class="md:flex hidden">
+
       <div *ngIf="isLoggedIn" class="flex items-center gap-4">
         <!-- Alışveriş sepeti ikonu -->
         <i class="fas fa-shopping-cart text-white text-2xl ml-4 cursor-pointer"></i>
 
         <!-- Bildirim zili -->
-        <i class="fas fa-bell text-white text-2xl ml-4 cursor-pointer"></i>
+        <div class="relative">
+          <i (click)="showNotificationPopup()" class="fas fa-bell text-white text-2xl ml-4 cursor-pointer"></i>
+        </div>
+
+        <!-- Bildirim popup -->
+        <div *ngIf="showPopup" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+          <div class="bg-white text-center text-black rounded-lg p-8">
+            <ng-container *ngIf="notifications.length > 0; else noNotifications">
+              <ul>
+                <li *ngFor="let notification of notifications" class="mb-4">
+                  <h2 class="text-lg font-bold mb-4">{{ notification.notificationType }}</h2>
+                  <p class="font-semibold">{{ notification.notificationDesc }}</p>
+                </li>
+              </ul>
+            </ng-container>
+            <ng-template #noNotifications>
+              <p class="text-lg font-bold mb-4">Bildiriminiz Yok</p>
+            </ng-template>
+            <button (click)="closeNotificationPopup()"
+              class="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Close</button>
+          </div>
+        </div>
+
 
         <!-- Profil fotoğrafı -->
         <img src="https://picsum.photos/50" alt="Profil Fotoğrafı" class="w-10 h-10 rounded-full ml-4 cursor-pointer"
@@ -35,11 +69,12 @@
         <!-- Profil yönetim penceresi -->
         <div *ngIf="isMenuOpen" class="absolute top-16 bg-white text-black border p-4 rounded shadow-lg z-10">
           <ul>
-            <li class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono text-lg">
-              <a href="#">Hesabım</a>
+            <li [routerLink]="['/my-materials']" (click)="toggleMenu()"
+              class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono text-lg">
+              <a class="cursor-pointer">Hesabım</a>
             </li>
             <li class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono font-bold text-lg">
-              <a href="#">Çıkış Yap</a>
+              <a href="#" (click)="toggleMenu()">Çıkış Yap</a>
             </li>
           </ul>
         </div>
@@ -54,10 +89,10 @@
 
     <!-- Kullanıcı giriş yapmamışsa gösterilecek -->
     <div *ngIf="!isLoggedIn" class="md:flex hidden lg:gap-4">
-      <button class="bg-blue-900 text-white lg:px-4 px-2 lg:py-2 py-1 rounded">
+      <button class="bg-blue-900 text-white lg:px-4 px-2 lg:py-2 py-1 rounded" [routerLink]="['/login']">
         Giriş Yap
       </button>
-      <button class="bg-blue-700 text-white px-4 py-2 rounded">Kayıt Ol</button>
+      <button class="bg-blue-700 text-white px-4 py-2 rounded" [routerLink]="['/register']">Kayıt Ol</button>
     </div>
     <!-- Mobil menü -->
     <div *ngIf="hamburgerMenuOpen" class="absolute top-[80px] w-full h-auto">
@@ -67,15 +102,18 @@
           <button class="bg-red-600 text-white px-4 py-2 mt-4 rounded">Çıkış Yap</button>
         </div>
         <div *ngIf="!isLoggedIn" class="text-center">
-          <button class="bg-blue-900 text-white px-4 py-2 rounded">
+          <button class="bg-blue-900 text-white px-4 py-2 rounded" [routerLink]="['/login']">
             Giriş Yap
           </button>
-          <button class="bg-blue-700 text-white px-4 py-2 ml-4 rounded">Kayıt Ol</button>
+          <button class="bg-blue-700 text-white px-4 py-2 ml-4 rounded" [routerLink]="['/register']">Kayıt Ol</button>
         </div>
         <ul class="text-2xl text-center mt-2 font-mono font-bold">
-          <li [routerLink]="['/material-list']" [queryParams]="{ type: 'book' }" class="border-b-2 border-gray-300 pb-1">Kitap</li>
-          <li [routerLink]="['/material-list']" [queryParams]="{ type: 'magazine' }" class="border-b-2 border-gray-300 pb-1">Dergi</li>
-          <li [routerLink]="['/material-list']" [queryParams]="{ type: 'article' }" class="border-b-2 border-gray-300 pb-1">Makale</li>
+          <li [routerLink]="['/material-list']" [queryParams]="{ type: 'book' }"
+            class="border-b-2 border-gray-300 pb-1">Kitap</li>
+          <li [routerLink]="['/material-list']" [queryParams]="{ type: 'magazine' }"
+            class="border-b-2 border-gray-300 pb-1">Dergi</li>
+          <li [routerLink]="['/material-list']" [queryParams]="{ type: 'article' }"
+            class="border-b-2 border-gray-300 pb-1">Makale</li>
         </ul>
       </div>
     </div>
@@ -85,42 +123,51 @@
   <div class="hidden md:flex bg-blue-950 items-center justify-center">
     <ul class="flex gap-6 text-xl">
       <!-- Kitap -->
-      <li class="font-mono font-bold border-r pr-4 relative" (mouseover)="onHover(0, true)" (mouseleave)="onHover(0, false)">
-        <a class="cursor-pointer" routerLink="/material-list"  (click)="onMaterialTypeClick('book')">
+      <li class="font-mono font-bold border-r pr-4 relative" (mouseover)="onHover(0, true)"
+        (mouseleave)="onHover(0, false)">
+        <a class="cursor-pointer" routerLink="/material-list" (click)="onMaterialTypeClick('book')">
           Kitap
         </a>
         <!-- Hover edildiğinde gösterilecek kutucuk -->
-        <div *ngIf="isHovered[0]" class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg">
+        <div *ngIf="isHovered[0]"
+          class="absolute top-full w-40 h-auto bg-white text-black border p-4 rounded shadow-lg">
           <!-- Kutucuk içeriği -->
-          <button *ngFor="let category of bookcategories; let i = index" (click)="selectCategory(category, 'book')" style="display: block;">
+          <button *ngFor="let category of bookcategories; let i = index" (click)="selectCategory(category, 'book')"
+            class="block border-b-2">
             {{ category }}
-        </button>
+          </button>
         </div>
       </li>
 
       <!-- Dergi -->
-      <li class="font-mono font-bold border-r pr-4 relative" (mouseover)="onHover(1, true)" (mouseleave)="onHover(1, false)">
-        <a class="cursor-pointer" routerLink="/material-list"  (click)="onMaterialTypeClick('magazine')">
+      <li class="font-mono font-bold border-r pr-4 relative" (mouseover)="onHover(1, true)"
+        (mouseleave)="onHover(1, false)">
+        <a class="cursor-pointer" routerLink="/material-list" (click)="onMaterialTypeClick('magazine')">
           Dergi
         </a>
         <!-- Hover edildiğinde gösterilecek kutucuk -->
-        <div *ngIf="isHovered[1]" class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg">
+        <div *ngIf="isHovered[1]"
+          class="absolute top-full w-40 h-auto bg-white text-black border p-4 rounded shadow-lg">
           <!-- Kutucuk içeriği -->
-          <button *ngFor="let category of magazinecategories; let i = index" (click)="selectCategory(category,'magazine')" style="display: block;">
+          <button *ngFor="let category of magazinecategories; let i = index"
+            (click)="selectCategory(category,'magazine')" class="block border-b-2">
             {{ category }}
           </button>
         </div>
       </li>
 
       <!-- Makale -->
-      <li class="font-mono font-bold border-r pr-4 relative" (mouseover)="onHover(2, true)" (mouseleave)="onHover(2, false)">
-        <a class="cursor-pointer" routerLink="/material-list"  (click)="onMaterialTypeClick('article')">
+      <li class="font-mono font-bold border-r pr-4 relative" (mouseover)="onHover(2, true)"
+        (mouseleave)="onHover(2, false)">
+        <a class="cursor-pointer" routerLink="/material-list" (click)="onMaterialTypeClick('article')">
           Makale
         </a>
         <!-- Hover edildiğinde gösterilecek kutucuk -->
-        <div *ngIf="isHovered[2]" class="absolute top-full w-80 h-72 bg-white text-black border p-4 rounded shadow-lg">
+        <div *ngIf="isHovered[2]"
+          class="absolute top-full w-40 h-auto bg-white text-black border p-4 rounded shadow-lg">
           <!-- Kutucuk içeriği -->
-          <button *ngFor="let category of articlecategories; let i = index" (click)="selectCategory(category,'article')" style="display: block;">
+          <button *ngFor="let category of articlecategories; let i = index" (click)="selectCategory(category,'article')"
+            class="block border-b-2">
             {{ category }}
           </button>
         </div>

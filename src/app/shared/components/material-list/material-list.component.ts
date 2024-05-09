@@ -8,9 +8,9 @@ import { Material } from '../../../models/material/material';
 import { ArticleService } from './../../../services/article/article.service';
 import { MagazineService } from './../../../services/magazine/magazine.service';
 import { BookService } from './../../../services/book/book.service';
-import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component,  OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { categoryType } from '../../../models/categoryType/categoryType';
 import { catchError, forkJoin, map, of, switchMap } from 'rxjs';
 
@@ -40,9 +40,11 @@ export class MaterialListComponent implements OnInit {
   categoryId: string = '';
   materialTypeId: string = '';
   categoryname: string = '';
+  listMenuOpen: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private bookService: BookService,
     private magazineService: MagazineService,
     private articleService: ArticleService,
@@ -58,7 +60,7 @@ export class MaterialListComponent implements OnInit {
       this.selectedMaterialType = params['type'] || 'book';
       this.categoryname = params['categoryId'];
       this.selectedCategory = this.categoryname !== undefined ? this.categoryname : "";
-      this.loadMaterials(this.categoryname);
+      this.loadMaterials();
       this.loadCategoryTypes();
     });
   }
@@ -113,7 +115,15 @@ export class MaterialListComponent implements OnInit {
     );
   }
   //--------------------------------------------------------
+  materialyazdir(material: any) {
+    this.router.navigate(['/material-detail'], { state: { material } });
+  }
 
+  toggleMenu(){
+    this.listMenuOpen = !this.listMenuOpen;
+  }
+
+  //--------------------------------------------------------
   selectCategory(categoryName: string) {
     this.selectedCategory = "";
     this.listservice.getMaterialType(categoryName).pipe(
@@ -296,7 +306,7 @@ export class MaterialListComponent implements OnInit {
   }
   
 
-  loadMaterials(deneme:string) {
+  loadMaterials() {
     if (this.selectedMaterialType === 'book') {
       this.loadBooksAndMaterials();
     } else if (this.selectedMaterialType === 'magazine') {

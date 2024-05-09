@@ -10,15 +10,13 @@ export class CategoryTypeService {
 
   constructor( private http: HttpClient) {}
 
-    token = jwtToken.jwt;
     private baseUrl = 'http://localhost:60805/api';
 
 
    
     getCategoryType(materialId: string, categoryId: string): Observable<any[]> {
-      const headers = this.token ? new HttpHeaders().set('Authorization', 'Bearer ' + this.token) : new HttpHeaders();
       const url = `${this.baseUrl}/CategoryTypes?PageIndex=0&PageSize=10`;
-      return this.http.get<any>(url, { headers }).pipe(
+      return this.http.get<any>(url).pipe(
         map(veri => {
           const filteredItems = veri.items.filter((item: any) =>
             item.materialId === materialId && item.categoryId === categoryId
