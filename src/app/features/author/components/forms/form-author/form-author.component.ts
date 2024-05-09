@@ -148,5 +148,12 @@ deleteUserData(): void {
       });
   }
 
-
+  onInputFocus(event: any) {
+    event.target.classList.add('input-focus');
+  }
+  
+  onInputBlur(event: any) {
+    event.target.classList.remove('input-focus');
+  }
+  
 }
