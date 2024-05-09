@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
   // userService=inject(UserService);
 penaltyService=inject(PenaltyService);
 
+
   profileForm = this.formBuilder.group({
     id: [''],
     userId: [''],
@@ -32,8 +33,27 @@ penaltyService=inject(PenaltyService);
     penaltyPrice: [],
     materialID:[],
     });
-
+    
+    totalPenaltyPrice: number = 0;
+  totalPenaltyDays: number = 0;
    constructor(private renderer: Renderer2, private el: ElementRef) {}
+
+   calculateTotalPenalties() {
+    // Get the values from the form controls
+    const penaltyDays = this.profileForm.get('totalPenaltyDays')?.value;
+    const penaltyPrice = this.profileForm.get('penaltyPrice')?.value;
+  
+    // Update the total penalty days and price only if they are valid numbers
+    if (penaltyDays  &&  penaltyPrice ) {
+      this.totalPenaltyDays = penaltyDays;
+      this.totalPenaltyPrice = penaltyPrice;
+    }
+  }
+  
+  
+  
+  
+  
 
 
    onSubmit() {
@@ -55,7 +75,7 @@ penaltyService=inject(PenaltyService);
       this.penaltyService.getUser().subscribe((result)=>{
       
        this.profileForm.patchValue(result);
-       
+       this.calculateTotalPenalties();
         
       })
       

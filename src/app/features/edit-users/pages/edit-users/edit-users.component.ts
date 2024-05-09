@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IFullUser } from '../../../../models/fullUser/fullUser';
 import { RouterModule } from '@angular/router';
+import { SidebarComponent } from '../../../../shared/components/sidebar/sidebar.component';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { RouterModule } from '@angular/router';
     standalone: true,
     templateUrl: './edit-users.component.html',
     styleUrl: './edit-users.component.css',
-    imports: [SidebarAdminComponent, CommonModule, ReactiveFormsModule,RouterModule,FormsModule]
+    imports: [SidebarAdminComponent, CommonModule, ReactiveFormsModule,RouterModule,FormsModule,SidebarComponent]
 })
 export class EditUsersComponent {
 onPageChange(arg0: number) {
@@ -55,7 +56,6 @@ throw new Error('Method not implemented.');
     ngOnInit() {
         this.userService.getAllUsers().subscribe((result) => {
             this.userList = result;
-            console.log(this.userList); // API'den gelen verilerin user listesine atanmış hali
         });
 
     }
@@ -86,7 +86,6 @@ throw new Error('Method not implemented.');
           phoneNumber: user.phoneNumber
         }
       );
-       console.log("User id : ",this.profileForm.value.id)
       }
     
 

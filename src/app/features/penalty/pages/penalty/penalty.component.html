@@ -1,166 +1,155 @@
-
-<!-- <app-navbar></app-navbar> -->
-<div class="bg-[#F8F8F8] m-h-screen">
-  <div class="container mx-auto ">
-    <div class="pt-4 ">
-      <div class="grid grid-cols-4 gap-4 mt-12 pr-2 h-192 mb-5">
-       <app-sidebar></app-sidebar><!--left menu profil fields-->
-        
-        <div class="bg-[#f5f5f5] text-black pt-5 col-span-3 flex flex-col items-center space-y--3 rounded-lg max-h-[800px] overflow-y-auto ">
-  
-
-<div class="bg-[#f5f5f5] text-black md:w-3/4 mx-auto flex flex-col">  </div>
-
-<div class="pt-4 mx-auto mx-auto pb-10 w-full sm:w-full md:w-2/3 pl-5 pr-5">
-  <div class="mb-7 container mx-auto p-2 max-w-xs sm:max-w-xs  rounded-lg mt-5 shadow-xl transform hover:scale-105 transition duration-300 ease-in-out" >
-    <h1 class="text-blue-700 text-lg font-bold text-center">My Penalties</h1>
-</div>
-
-  <!-- Penalty History Table responsive wrapper -->
-  <div class="overflow-y-auto bg-gray-300 dark:bg-neutral-700 max-h-[500px] rounded-3xl p-1 w-full">
-    <!-- Search input -->
-    <div id="animatedDiv" class="relative m-1 mb-3 mr-5  float-left mt-1 pt-0.5 pr-0.5 rounded-lg">
-      <label for="inputSearch" class="sr-only">Search </label>
-      <input id="inputSearch" type="text" placeholder="Search..." class="block w-64 rounded-lg border dark:border-none dark:bg-neutral-600 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400" />
-      <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transform">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 text-neutral-500 dark:text-neutral-200">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-        </svg>
-      </span>
-    </div>
-
-              <!-- Filter settings-->
-  <div class="relative m-[2px] mb-3 float-right hidden sm:block mt-1">
-    <label for="inputFilter" class="sr-only">Filter</label>
-    <select id="inputFilter" class="block w-40 rounded-lg border dark:border-none dark:bg-neutral-600 p-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400">
-      <option value="1" selected>Last week</option>
-      <option value="2">Last month</option>
-      <option value="3">Yesterday</option>
-      <option value="4">Last 7 days</option>
-      <option value="5">Last 30 days</option>
-    </select>
-  </div>
-            <table class="min-w-full text-left text-xs whitespace-nowrap max-w-[200px] mx-auto">
-              <thead class="uppercase tracking-wider border-b-2 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
-                <tr>
-                  <th scope="col" class="px-6 py-3">ID</th>
-                  <!-- <th scope="col" class="px-6 py-3">User ID</th> -->
-                  <th scope="col" class="px-6 py-3">Returned ID</th>
-                  <th scope="col" class="px-6 py-3">Penalty Status</th>
-                  <th scope="col" class="px-6 py-3">Total Penalty Days</th>
-                  <th scope="col" class="px-6 py-3">Penalty Price</th>
-                  <th scope="col" class="px-6 py-3">materialID</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
-                  <th scope="row" class="px-6 py-3">{{ profileForm.value.id }}</th>
-                  <!-- <th scope="row" class="px-6 py-3">{{ profileForm.value.userId }}</th> -->
-                  <td class="px-6 py-3">{{ profileForm.value.returnedId }}</td>
-                  <!-- <td class="px-6 py-3">{{ profileForm.value.penaltyStatus }}</td> -->
-                  <td class="px-6 py-3">
-                    <!-- Durumu kontrol et ve metni yazdır -->
-                    <ng-container *ngIf="profileForm.value; else inactive">Active</ng-container>
-                    <ng-template #inactive>inactive</ng-template>
-                  </td>
-                  <td class="px-6 py-3">{{ profileForm.value.totalPenaltyDays }}</td>
-                  <td class="px-6 py-3">{{ profileForm.value.penaltyPrice}} ₺</td>
-                  <td class="px-6 py-3">{{ profileForm.value.materialID }}</td>
-                  
-                </tr>
-              </tbody>
-          
-            <!-- Table footer -->
-<tfoot class="border-t-2 dark:border-neutral-600 bg-neutral-50 hover:bg-yellow-200">
-  <tr>
-  <th class="px-6 py-3">Total:</th>
-  <th class="px-6 py-3"></th>
-  <td class="px-6 py-3"></td>
-  <td class="px-6 py-3 font-bold" id="totalPenaltyPrice">0.00₺</td>
-  <td class="px-6 py-3 font-bold" id="totalPenaltyDays">0.00₺</td>
-  <td class="px-6 py-3"></td>
-  <!-- <td class="px-6 py-3">170.00₺</td>  -->
-
-  <td class="px-6 py-3"></td>
-  </tr>
-  </tfoot>
-  </table>
-
-  <nav class="flex items-center justify-between text-sm" aria-label="Page navigation example">
-      <p>
-        Showing <strong>1-5</strong> of <strong>10</strong>
-      </p>
-  
-      <ul class="list-style-none flex">
-        <li>
-          <a
-            class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
-            href="#!"
-          >
-            Previous
-          </a>
-        </li>
-        <li>
-          <a
-            class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
-            href="#!"
-          >
-            1
-          </a>
-        </li>
-        <li aria-current="page">
-          <a
-            class="relative block rounded bg-blue-100 px-3 py-1.5 text-sm font-medium text-blue-700 transition-all duration-300"
-            href="#!"
-          >
-            2
-            <span class="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]">
-              (current)
-            </span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
-            href="#!"
-          >
-            3
-          </a>
-        </li>
-        <li>
-          <a
-            class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
-            href="#!"
-          >
-            Next
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-            </div>
-     
-            
-  
-
-            
-            
+<div class="flex flex-col items-center content-start">
+  <div
+    class=" text-black pt-5 col-span-3 flex flex-col items-center space-y--3 rounded-lg max-h-[800px] overflow-y-auto ">
 
 
+   
 
+    <div class="pt-4 mx-auto mx-auto pb-10 w-full sm:w-full md:w-2/3 pl-5 pr-5">
+      <div
+        class="mb-7 container mx-auto p-2 max-w-xs sm:max-w-xs  rounded-lg mt-5 shadow-xl transform hover:scale-105 transition duration-300 ease-in-out">
+        <h1 class="text-blue-700 text-lg font-bold text-center">My Penalties</h1>
+      </div>
 
-
-
-            
-  
+      <!-- Penalty History Table responsive wrapper -->
+      <div class="overflow-y-auto bg-gray-300 dark:bg-neutral-700 max-h-[500px] rounded-3xl p-1 w-full">
+        <!-- Search input -->
+        <div id="animatedDiv" class="relative m-1 mb-3 mr-5  float-left mt-1 pt-0.5 pr-0.5 rounded-lg">
+          <label for="inputSearch" class="sr-only">Search </label>
+          <input id="inputSearch" type="text" placeholder="Search..."
+            class="block w-64 rounded-lg border dark:border-none dark:bg-neutral-600 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400" />
+          <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transform">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="h-4 w-4 text-neutral-500 dark:text-neutral-200">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+          </span>
         </div>
-        
+
+        <!-- Filter settings-->
+        <!-- <div class="relative m-[2px] mb-3 float-right hidden sm:block mt-1">
+          <label for="inputFilter" class="sr-only">Filter</label>
+          <select id="inputFilter"
+            class="block w-40 rounded-lg border dark:border-none dark:bg-neutral-600 p-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400">
+            <option value="1" selected>Last week</option>
+            <option value="2">Last month</option>
+            <option value="3">Yesterday</option>
+            <option value="4">Last 7 days</option>
+            <option value="5">Last 30 days</option>
+          </select>
+        </div> -->
+        <table class="min-w-full text-left text-xs whitespace-nowrap max-w-[200px] mx-auto">
+          <thead class="uppercase tracking-wider border-b-2 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
+            <tr>
+              <!-- <th scope="col" class="px-6 py-3">ID</th>
+              <th scope="col" class="px-6 py-3">User ID</th>
+              <th scope="col" class="px-6 py-3">Returned ID</th> -->
+              
+              <th scope="col" class="px-6 py-3">Penalty Status</th>
+              <th scope="col" class="px-6 py-3">Total Penalty Days</th>
+              <th scope="col" class="px-6 py-3">Penalty Price</th>
+              <th scope="col" class="px-6 py-3">Material ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
+              <!-- <th scope="row" class="px-6 py-3">{{ profileForm.value.id }}</th>
+              <th scope="row" class="px-6 py-3">{{ profileForm.value.userId }}</th>
+              <td class="px-6 py-3">{{ profileForm.value.returnedId }}</td> -->
+              <td class="px-6 py-3">
+                <!-- Durumu kontrol et ve metni yazdır -->
+                <ng-container *ngIf="profileForm.value.penaltyStatus; else inactive">Active</ng-container>
+                <ng-template #inactive>inactive</ng-template>
+              </td>
+              <td class="px-6 py-3">{{ profileForm.value.totalPenaltyDays }}</td>
+              <td class="px-6 py-3">{{ profileForm.value.penaltyPrice }}₺</td>
+              <td class="px-6 py-3">{{ profileForm.value.materialID }}</td>
+            </tr>
+          </tbody>
+
+          
+
+          <!-- Table footer -->
+          <tfoot class="border-t-2 dark:border-neutral-600 bg-neutral-50 hover:bg-yellow-200">
+            <tr>
+              <th class="px-6 py-3">Total:</th>
+              <td class="px-6 py-3 font-bold">{{ totalPenaltyDays | number }}</td>
+              <td class="px-6 py-3 font-bold">{{ totalPenaltyPrice  }}₺</td>
+           
+              
+
+              <th class="px-6 py-3"></th>
+
+              <td class="px-6 py-3"></td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <nav class="flex items-center justify-between text-sm" aria-label="Page navigation example">
+          <p>
+            Showing <strong>1-5</strong> of <strong>10</strong>
+          </p>
+
+          <ul class="list-style-none flex">
+            <li>
+              <a class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                href="#!">
+                Previous
+              </a>
+            </li>
+            <li>
+              <a class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                href="#!">
+                1
+              </a>
+            </li>
+            <li aria-current="page">
+              <a class="relative block rounded bg-blue-100 px-3 py-1.5 text-sm font-medium text-blue-700 transition-all duration-300"
+                href="#!">
+                2
+                <span
+                  class="absolute -m-px h-px w-px overflow-hidden whitespace-nowrap border-0 p-0 [clip:rect(0,0,0,0)]">
+                  (current)
+                </span>
+              </a>
+            </li>
+            <li>
+              <a class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                href="#!">
+                3
+              </a>
+            </li>
+            <li>
+              <a class="relative block rounded bg-transparent px-3 py-1.5 text-sm text-neutral-600 transition-all duration-300 hover:bg-neutral-100 dark:text-white dark:hover:bg-neutral-700 dark:hover:text-white"
+                href="#!">
+                Next
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </div>
-  </div>
-  
-  
+
+
 
 
   <!-- <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="max-w-md mx-auto">
@@ -179,12 +168,3 @@
 
     <button type="submit" class="text-white mt-8 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save Changes</button>
   </form>   -->
-  
-  
-   
-   
-  
-  
-  
-  
-  
