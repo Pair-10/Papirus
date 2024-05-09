@@ -77,9 +77,21 @@
             </select>
           </div>
           <div class="mb-4">
-            <label class="block">Material Type Name</label>
+            <label class="block">Material Type</label>
             <select name="materialTypeName" class="mt-1 block w-full" ngModel>
               <option *ngFor="let material of materialTypeNames" [ngValue]="material.id">{{ material.name }}</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block">Author</label>
+            <select name="authorId" class="mt-1 block w-full" ngModel>
+              <option *ngFor="let author of authors" [ngValue]="author.id">{{ author.name }} {{author.surname}}</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block">Publisher</label>
+            <select name="publisherId" class="mt-1 block w-full" ngModel>
+              <option *ngFor="let publisher of publishers" [ngValue]="publisher.id">{{ publisher.name }}</option>
             </select>
           </div>
           <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
@@ -110,9 +122,21 @@
             </select>
           </div>
           <div class="mb-4">
-            <label class="block">Material Type Name</label>
+            <label class="block">Material Type</label>
             <select name="materialTypeName" class="mt-1 block w-full" ngModel>
               <option *ngFor="let material of materialTypeNames" [ngValue]="material.id">{{ material.name }}</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block">Author</label>
+            <select name="authorId" class="mt-1 block w-full" ngModel>
+              <option *ngFor="let author of authors" [ngValue]="author.id">{{ author.name }} {{author.surname}}</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block">Publisher</label>
+            <select name="publisherId" class="mt-1 block w-full" ngModel>
+              <option *ngFor="let publisher of publishers" [ngValue]="publisher.id">{{ publisher.name }}</option>
             </select>
           </div>
           <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">
@@ -139,9 +163,21 @@
             </select>
           </div>
           <div class="mb-4">
-            <label class="block">Material Type Name</label>
+            <label class="block">Material Type</label>
             <select name="materialTypeName" class="mt-1 block w-full" ngModel>
               <option *ngFor="let material of materialTypeNames" [ngValue]="material.id">{{ material.name }}</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block">Author</label>
+            <select name="authorId" class="mt-1 block w-full" ngModel>
+              <option *ngFor="let author of authors" [ngValue]="author.id">{{ author.name }} {{author.surname}}</option>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label class="block">Publisher</label>
+            <select name="publisherId" class="mt-1 block w-full" ngModel>
+              <option *ngFor="let publisher of publishers" [ngValue]="publisher.id">{{ publisher.name }}</option>
             </select>
           </div>
           <button type="submit" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">

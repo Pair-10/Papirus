@@ -10,6 +10,7 @@ export class BorrowMaterialService {
   constructor(private http: HttpClient) { }
 
   borrowMaterialService(material: any): Observable<any> {
+    console.log(material.selectedDate);
     const body = {
       materialId : material.material,
       userId: material.user,

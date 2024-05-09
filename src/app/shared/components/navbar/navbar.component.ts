@@ -111,7 +111,6 @@ checkToken() {
 }
 ngOnInit() {
   this.loadCategoryTypes();
-  
   this.userService.getUser().pipe(
     switchMap(user => {
       this.userId = user.id
@@ -147,6 +146,8 @@ ngOnInit() {
   }
   goToMaterialDetail(materialId: string) {
     this.router.navigateByUrl(`/material-detail/${materialId}`);
+    this.searchedItems = [];
+    this.searchTerm = "";
   }
 
 selectCategory(categoryId: string,categoryType: string) {

@@ -139,7 +139,7 @@ export class MaterialDetailComponent implements OnInit {
       return;
     }
     let formData = this.borrowForm.value;
-
+    
     this.borrowService.borrowMaterialService(formData).subscribe(
       (response) => {
         console.log('Ödünç alma işlemi gerçekleşti.');

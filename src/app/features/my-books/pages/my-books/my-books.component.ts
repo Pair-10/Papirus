@@ -25,6 +25,7 @@ export class MyBooksComponent implements OnInit {
     returnedService = inject(ReturnedService)
     borrowedMaterials: MyBorrowedMaterials[] = [];
     transformedMaterials: Material[] = [];
+    filteredMaterials: Material[] = [];
     userid: any;
     ngOnInit(): void {
         this.userService.getUser().subscribe(
@@ -46,6 +47,7 @@ export class MyBooksComponent implements OnInit {
                             material.isReturned = borrowedMaterial.isReturned;
                             return material;
                         });
+                        this.filteredMaterials = this.transformedMaterials.slice();
                     }
                 );
             }
@@ -64,6 +66,22 @@ export class MyBooksComponent implements OnInit {
                 this.ngOnInit();
             }
         )
+    }
+    searchItems(event: any): void {
+        const query: string = event.target.value.trim(); // Get the value of the input and trim it
+    
+        if (!query) {
+            // If query is empty, show all materials
+            this.filteredMaterials = this.transformedMaterials.slice();
+            return;
+        }
+    
+        // Filter materials based on the query
+        this.filteredMaterials = this.transformedMaterials.filter(material =>
+            material.materialName.toLowerCase().includes(query.toLowerCase()) ||
+            material.language.toLowerCase().includes(query.toLowerCase()) ||
+            material.pageCount.toString().toLowerCase().includes(query.toLowerCase())
+        );
     }
     
 }
