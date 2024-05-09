@@ -7,6 +7,7 @@ import { TokenService } from '../../../core/services/token.service';
 import { NotificationService } from '../../../services/notification/notification.service';
 import { switchMap } from 'rxjs';
 import { UserService } from '../../../services/user/user.service';
+import { JwtService } from '../../../services/jwt/jwt.service';
 
 @Component({
   selector: 'app-navbar',
@@ -16,8 +17,10 @@ import { UserService } from '../../../services/user/user.service';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent implements OnInit {
-  navbarService=inject(NavbarService)
-  tokenService=inject(TokenService)
+
+  jwtService = inject(JwtService)
+  navbarService = inject(NavbarService)
+  tokenService = inject(TokenService)
   userService = inject(UserService)
   notificationService = inject(NotificationService)
   hamburgerMenuOpen = false;
@@ -26,11 +29,14 @@ export class NavbarComponent implements OnInit {
   isLoggedIn: boolean = false;
   materialTypes: any[] = [];
   userId: any;
-  notificationId:any;
+  notificationId: any;
   notifications: any[] = [];
   showPopup: boolean = false;
+  token = this.tokenService.getToken();
+  decodedJwt = this.jwtService.getDecodedAccessToken(this.token!);
+  roles:string[] = this.decodedJwt["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
   
-  
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
@@ -48,7 +54,23 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private listService: ListService
   ) { }
+  roleCheck() {
+   
+      this.roles.forEach((item)=>{
+       if(item=="Admin"){
+        this.router.navigate(['profile-admin']);
+       }
+       if(item==""){
+        this.router.navigate(['profile']);
+       }
+          
+      
 
+      })
+
+   
+   
+  }
   loadCategoryTypes() {
     const categoryIds = ["f1c535cb-263f-47c8-1e5e-08dc61e8e461", "fa0be4d1-3580-4ddb-1e5f-08dc61e8e461", "7f15efda-deb4-438f-1e60-08dc61e8e461"];
 
@@ -97,46 +119,46 @@ export class NavbarComponent implements OnInit {
     );
   }
 
-//--------------------------------------
-checkToken() {
-  const token = this.tokenService.getToken();
-  if (token) {
-    this.isLoggedIn = true;
-  }
-}
-ngOnInit() {
-  this.loadCategoryTypes();
-  
-  this.userService.getUser().pipe(
-    switchMap(user => {
-      this.userId = user.id
-      return this.notificationService.getUserNotification();
-    })
-  ).subscribe(
-    response => {
-      response.items.find((veri:any)=>{
-        if(veri.userId === this.userId){
-          this.notificationService.getNotification(veri.notificationId).subscribe(
-            responses=>{
-              this.notifications.push(responses);
-            }
-          )
-        }
-      }) // Bildirimleri kullanabilirsiniz
+  //--------------------------------------
+  checkToken() {
+    const token = this.tokenService.getToken();
+    if (token) {
+      this.isLoggedIn = true;
     }
-  );
-  this.navbarService.isLoggedIn.subscribe(isLoggedIn => {
-    this.isLoggedIn = isLoggedIn;
-  });
-  this.checkToken()
+  }
+  ngOnInit() {
+    this.loadCategoryTypes();
+
+    this.userService.getUser().pipe(
+      switchMap(user => {
+        this.userId = user.id
+        return this.notificationService.getUserNotification();
+      })
+    ).subscribe(
+      response => {
+        response.items.find((veri: any) => {
+          if (veri.userId === this.userId) {
+            this.notificationService.getNotification(veri.notificationId).subscribe(
+              responses => {
+                this.notifications.push(responses);
+              }
+            )
+          }
+        }) // Bildirimleri kullanabilirsiniz
+      }
+    );
+    this.navbarService.isLoggedIn.subscribe(isLoggedIn => {
+      this.isLoggedIn = isLoggedIn;
+    });
+    this.checkToken()
   };
 
 
 
 
-selectCategory(categoryId: string,categoryType: string) {
-  this.router.navigate(['/material-list'], { queryParams: { type: categoryType, categoryId: categoryId } });
-}
+  selectCategory(categoryId: string, categoryType: string) {
+    this.router.navigate(['/material-list'], { queryParams: { type: categoryType, categoryId: categoryId } });
+  }
 
 
 

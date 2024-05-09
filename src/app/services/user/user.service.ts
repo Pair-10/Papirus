@@ -17,7 +17,7 @@ export class UserService {
   http = inject(HttpClient)
   jwtService = inject(JwtService)
   tokenService = inject(TokenService)
-  token = this.tokenService.getToken();
+  token = this.tokenService.getToken(); 
   decodedJwt = this.jwtService.getDecodedAccessToken(this.token!);
   nameIdentifier = this.decodedJwt["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
 

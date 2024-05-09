@@ -31,11 +31,11 @@ export const routes: Routes =
     { path: 'register', component: RegisterComponent },
 
 
-    {path:'profile',component:ProfileComponent,children:[
+    {path:'profile',loadChildren:()=>import('./features/edit-profile/pages/edit-profile/edit-profile.component').then((c)=>c.EditProfileComponent),component:ProfileComponent,children:[
         {path:'edit-profile',component:EditProfileComponent},
         {path:'my-materials',component:MyBooksComponent},
-        { path: 'penalty', component: PenaltyComponent },
-        { path: 'activity', component: ActivityComponent },
+        {path: 'penalty', component: PenaltyComponent },
+        {path: 'activity', component: ActivityComponent },
         {path:'help',component:HelpComponent}
     ]},
     {path:'profile-admin',component:ProfileAdminComponent,children:[
