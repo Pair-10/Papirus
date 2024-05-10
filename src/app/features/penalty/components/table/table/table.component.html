@@ -4,7 +4,9 @@
     <!-- Search input -->
     <div id="animatedDiv" class="relative m-1 mb-3 mr-5  float-left mt-1 pt-0.5 pr-0.5 rounded-lg">
       <label for="inputSearch" class="sr-only">Search </label>
-      <input id="inputSearch" type="text" placeholder="Search..." class="block w-64 rounded-lg border dark:border-none dark:bg-neutral-600 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400" />
+      <!-- <input id="inputSearch" type="text" placeholder="Search..." class="block w-64 rounded-lg border dark:border-none dark:bg-neutral-600 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400" />
+       -->
+       <input id="inputSearch" type="text" placeholder="Search..." class="block w-64 rounded-lg border dark:border-none dark:bg-neutral-600 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400" (input)="filterUsers($event)">
       <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transform">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 text-neutral-500 dark:text-neutral-200">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
@@ -49,19 +51,30 @@ Payment Date
 <th scope="col" class="px-6 py-3">
 Status
 </th>
+
+<th scope="col" class="px-6 py-3">
+  MAterialID
+  </th>
 </tr>
 </thead>
 <tbody>
 <!-- Verileri Angular ile doldur -->
-<tr *ngFor="let penalty of Users" class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
+<!-- <tr *ngFor="let penalty of Users" class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">-->
+  <tr *ngFor="let penalty of filteredUsers" class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200"> 
 <th scope="row" class="px-6 py-3">{{ penalty.id }}</th>
 <th scope="row" class="px-6 py-3">{{ penalty.userId }}</th>
 <td class="px-6 py-3">{{ penalty.returnedId }}</td>
 <td class="px-6 py-3">{{ penalty.penaltyPrice }}₺</td>
 <td class="px-6 py-3">{{ penalty.totalPenaltyDays
 }}</td>
-<td class="px-6 py-3">{{ penalty.penaltyStatus }}</td>
 
+<td class="px-6 py-3">
+  <!-- Durumu kontrol et ve metni yazdır -->
+  <ng-container *ngIf="penalty.penaltyStatus; else inactive">Active</ng-container>
+  <ng-template #inactive>inactive</ng-template>
+</td>
+<td class="px-6 py-3">{{ penalty.materialID
+}}</td>
 </tr>
 </tbody>
 
@@ -73,8 +86,12 @@ Status
 <th class="px-6 py-3">Total:</th>
 <th class="px-6 py-3"></th>
 <td class="px-6 py-3"></td>
+<!--<td class="px-6 py-3">170.00₺</td><!--Total PENALTY Price-->
+<td class="px-6 py-3 font-bold" id="totalPenaltyPrice">0.00₺</td>
+<td class="px-6 py-3 font-bold" id="totalPenaltyDays">0.00₺</td>
 <td class="px-6 py-3"></td>
-<td class="px-6 py-3">170.00₺</td><!--Total PENALTY Price-->
+
+<td class="px-6 py-3"></td>
 <td class="px-6 py-3"></td>
 </tr>
 </tfoot>

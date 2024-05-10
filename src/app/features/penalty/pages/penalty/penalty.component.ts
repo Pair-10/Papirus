@@ -8,6 +8,8 @@ import { PenaltyService } from '../../services/penalty.service';
 // import { IFullUser } from '../../../pnlty/pages/pnlty/fullUser'
 import { addPenaltyRequest } from '../../models/addPenaltyRequest';
 import { CommonModule } from '@angular/common';
+
+
  @Component({
    selector: 'app-penalty',
    standalone: true,
@@ -16,16 +18,19 @@ import { CommonModule } from '@angular/common';
    styleUrls: ['./penalty.component.css'],
  })
  export class PenaltyComponent {
+  materialNames: { [key: string]: string } = {};/////
   formBuilder=inject(FormBuilder);
   // userService=inject(UserService);
 penaltyService=inject(PenaltyService);
+
   profileForm = this.formBuilder.group({
     id: [''],
     userId: [''],
     returnedId: [''],
     penaltyStatus: [],
     totalPenaltyDays: [],
-    penaltyPrice: []
+    penaltyPrice: [],
+    materialID:[],
     });
 
    constructor(private renderer: Renderer2, private el: ElementRef) {}
@@ -38,7 +43,8 @@ penaltyService=inject(PenaltyService);
      returnedId: this.profileForm.value.returnedId!,
      penaltyStatus:this.profileForm.value.penaltyStatus!, 
      totalPenaltyDays:  this.profileForm.value.totalPenaltyDays!, 
-     penaltyPrice: this.profileForm.value.penaltyPrice!
+     penaltyPrice: this.profileForm.value.penaltyPrice!,
+     materialID:this.profileForm.value.materialID!,
    };
    
        
@@ -49,8 +55,10 @@ penaltyService=inject(PenaltyService);
       this.penaltyService.getUser().subscribe((result)=>{
       
        this.profileForm.patchValue(result);
+       
         
       })
+      
     
   }
 

@@ -7,11 +7,14 @@ import { TokenService } from '../../../core/services/token.service';
 import { NotificationService } from '../../../services/notification/notification.service';
 import { switchMap } from 'rxjs';
 import { UserService } from '../../../services/user/user.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialService } from '../../../services/material/material.service';
+
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet],
+  imports: [CommonModule, RouterLink, RouterOutlet,ReactiveFormsModule,FormsModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -20,6 +23,7 @@ export class NavbarComponent implements OnInit {
   tokenService=inject(TokenService)
   userService = inject(UserService)
   notificationService = inject(NotificationService)
+  materialService = inject(MaterialService)
   hamburgerMenuOpen = false;
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
@@ -29,8 +33,9 @@ export class NavbarComponent implements OnInit {
   notificationId:any;
   notifications: any[] = [];
   showPopup: boolean = false;
-  
-  
+  searchTerm: string = '';
+  searchedItems:any[] = [];
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
@@ -106,7 +111,6 @@ checkToken() {
 }
 ngOnInit() {
   this.loadCategoryTypes();
-  
   this.userService.getUser().pipe(
     switchMap(user => {
       this.userId = user.id
@@ -122,7 +126,7 @@ ngOnInit() {
             }
           )
         }
-      }) // Bildirimleri kullanabilirsiniz
+      })
     }
   );
   this.navbarService.isLoggedIn.subscribe(isLoggedIn => {
@@ -131,8 +135,20 @@ ngOnInit() {
   this.checkToken()
   };
 
-
-
+  search(event: any) {
+    if(event != ""){
+      this.materialService.getMaterialDynamic(event).subscribe(
+        response =>{
+          this.searchedItems = response.items
+        }
+      )
+    }
+  }
+  goToMaterialDetail(materialId: string) {
+    this.router.navigateByUrl(`/material-detail/${materialId}`);
+    this.searchedItems = [];
+    this.searchTerm = "";
+  }
 
 selectCategory(categoryId: string,categoryType: string) {
   this.router.navigate(['/material-list'], { queryParams: { type: categoryType, categoryId: categoryId } });

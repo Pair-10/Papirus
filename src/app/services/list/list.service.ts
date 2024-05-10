@@ -13,13 +13,13 @@ private baseUrl = 'http://localhost:60805/api';
 
 
 getCategoriess(): Observable<any[]> {
-return this.http.get<any>('http://localhost:60805/api/Categories?PageIndex=0&PageSize=10').pipe(
+return this.http.get<any>('http://localhost:60805/api/Categories?PageIndex=0&PageSize=1000').pipe(
   map(response => response.items)
 );
 }
 
 getCategoryTypes(): Observable<any[]> {
-return this.http.get<any>(`${this.baseUrl}/CategoryTypes?PageIndex=0&PageSize=10`).pipe(
+return this.http.get<any>(`${this.baseUrl}/CategoryTypes?PageIndex=0&PageSize=1000`).pipe(
   map(response => {
     return response.items
   })
@@ -27,12 +27,12 @@ return this.http.get<any>(`${this.baseUrl}/CategoryTypes?PageIndex=0&PageSize=10
 }
 
 getMaterialTypes(materialTypeId: string): Observable<any[]> {
-return this.http.get<any>(`${this.baseUrl}/MaterialTypes?PageIndex=0&PageSize=10&MaterialTypeId=${materialTypeId}`).pipe(
+return this.http.get<any>(`${this.baseUrl}/MaterialTypes?PageIndex=0&PageSize=1000&MaterialTypeId=${materialTypeId}`).pipe(
   map(response => response.items)
 );
 }
 getMaterialTypeNames(){
-  return this.http.get<any>(`${this.baseUrl}/MaterialTypes?PageIndex=0&PageSize=20`)
+  return this.http.get<any>(`${this.baseUrl}/MaterialTypes?PageIndex=0&PageSize=1000`)
 }
 
 setCategoryTypes(materialId:any,categoryId:any,materialTypeId:any){
@@ -45,7 +45,7 @@ setCategoryTypes(materialId:any,categoryId:any,materialTypeId:any){
 }
 
 getMaterialType(materialTypeName: string): Observable<any[]> {
-  return this.http.get<any>(`${this.baseUrl}/MaterialTypes?PageIndex=0&PageSize=10`).pipe(
+  return this.http.get<any>(`${this.baseUrl}/MaterialTypes?PageIndex=0&PageSize=1000`).pipe(
       switchMap((response: any) => {
           const itemsArray = response.items; // items dizisini al
           // materialTypeName ile eşleşen öğeyi bul

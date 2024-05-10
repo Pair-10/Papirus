@@ -15,7 +15,7 @@ export class PublisherService {
   }
 
   getPublisher(publisherId: string){
-    return this.http.get<any>(`${this.baseUrl}/Publishers?PageIndex=0&PageSize=10`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/Publishers?PageIndex=0&PageSize=20`).pipe(
       map(response => {
         const publisher: Publisher[] = response.items.map((item: any) => ({
           id: item.id,
@@ -28,6 +28,8 @@ export class PublisherService {
       })
     );
   }
-
-
+  getPublishers(){
+    return this.http.get<any>(`${this.baseUrl}/Publishers?PageIndex=0&PageSize=20`)
+  }
+  
 }
