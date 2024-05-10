@@ -139,6 +139,7 @@ ngOnInit() {
     if(event != ""){
       this.materialService.getMaterialDynamic(event).subscribe(
         response =>{
+          console.log(response.items);
           this.searchedItems = response.items
         }
       )

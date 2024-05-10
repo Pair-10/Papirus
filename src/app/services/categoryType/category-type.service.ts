@@ -15,7 +15,7 @@ export class CategoryTypeService {
 
    
     getCategoryType(materialId: string, categoryId: string): Observable<any[]> {
-      const url = `${this.baseUrl}/CategoryTypes?PageIndex=0&PageSize=10`;
+      const url = `${this.baseUrl}/CategoryTypes?PageIndex=0&PageSize=1000`;
       return this.http.get<any>(url).pipe(
         map(veri => {
           const filteredItems = veri.items.filter((item: any) =>

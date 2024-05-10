@@ -26,43 +26,50 @@ export class MyBooksComponent implements OnInit {
     borrowedMaterials: MyBorrowedMaterials[] = [];
     transformedMaterials: Material[] = [];
     filteredMaterials: Material[] = [];
-    userid: any;
     ngOnInit(): void {
         this.userService.getUser().subscribe(
             response => {
-                this.userid = response.id;
+                /*kullanıcı adı tokendan çekilerek getMyMaterials servisinden
+                bu kullanıcıya ait olan ödünç alınan materyaller getirilir.
+                */
                 this.myMaterialService.getMyMaterials(response.id).pipe(
                     mergeMap(responses => {
                         this.borrowedMaterials = responses;
                         return forkJoin(
                             this.borrowedMaterials.map(veri =>
+                                /*ödünç alınan materyallerin özelliklerini alabilmek için
+                                materyallerin id leri getMaterialsByMaterialId servisine yollanır
+                                */
                                 this.materialService.getMaterialsByMaterialId(veri.materialId)
                             )
                         );
                     })
                 ).subscribe(
                     transformedResponses => {
+                        /* getMaterialsByMaterialId servisinden gelen sonuçlar değişkenlere atanır
+                        daha sonra bu değişkenler html kısmında listelenir 
+                        */
                         this.transformedMaterials = transformedResponses.map((material, index) => {
                             const borrowedMaterial = this.borrowedMaterials[index];
                             material.isReturned = borrowedMaterial.isReturned;
                             return material;
                         });
-                        this.filteredMaterials = this.transformedMaterials.slice();
+                        this.filteredMaterials = this.transformedMaterials;
                     }
                 );
             }
         );
     }
 
-    teslimEt(gelenveri: any){
-        let eslesenVeri :any =[];
-        eslesenVeri = this.borrowedMaterials.find(veri => veri.materialId === gelenveri.id)
-        if (eslesenVeri) {
-            eslesenVeri.isReturned = true;
+    return(comingData: any){
+        let matchingData :any =[];
+        matchingData = this.borrowedMaterials.find(veri => veri.materialId === comingData.id)
+        if (matchingData) {
+            matchingData.isReturned = true;
         }
-        this.borrowMaterialService.updateBorrowedMaterial(eslesenVeri).subscribe(
+        this.borrowMaterialService.updateBorrowedMaterial(matchingData).subscribe(
             response => {
-                this.returnedService.setReturned(eslesenVeri).subscribe();
+                this.returnedService.setReturned(matchingData).subscribe();
                 this.ngOnInit();
             }
         )
@@ -71,12 +78,10 @@ export class MyBooksComponent implements OnInit {
         const query: string = event.target.value.trim(); // Get the value of the input and trim it
     
         if (!query) {
-            // If query is empty, show all materials
             this.filteredMaterials = this.transformedMaterials.slice();
             return;
         }
     
-        // Filter materials based on the query
         this.filteredMaterials = this.transformedMaterials.filter(material =>
             material.materialName.toLowerCase().includes(query.toLowerCase()) ||
             material.language.toLowerCase().includes(query.toLowerCase()) ||
