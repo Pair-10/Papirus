@@ -32,9 +32,7 @@ export class NavbarComponent implements OnInit {
   notificationId: any;
   notifications: any[] = [];
   showPopup: boolean = false;
-  token = this.tokenService.getToken();
-  decodedJwt = this.jwtService.getDecodedAccessToken(this.token!);
-  roles:string[] = this.decodedJwt["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+ 
   
 
   toggleMenu() {
@@ -54,22 +52,32 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private listService: ListService
   ) { }
+
   roleCheck() {
-   
-      this.roles.forEach((item)=>{
-       if(item=="Admin"){
-        this.router.navigate(['profile-admin']);
-       }
-       if(item==""){
-        this.router.navigate(['profile']);
-       }
-          
-      
-
-      })
-
-   
-   
+    const token= this.tokenService.getToken();
+    const decodedJwt = this.jwtService.getDecodedAccessToken(token!);
+    const roles:string[] = decodedJwt["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    let isAdmin = false;
+    if(roles==undefined){
+      console.log("bu:",roles)
+      this.router.navigate(['profile/edit-profile'])
+    }
+    else{
+      console.log("bu2:",roles)
+         roles.forEach(item => {
+        if (item == "Admin") {
+            isAdmin = true;
+        }
+    });
+    
+    if (isAdmin) {
+        this.router.navigate(['profile-admin/edit-profile']);
+    } else {
+        this.router.navigate(['profile/edit-profile']);
+    }
+    }
+ 
+    
   }
   loadCategoryTypes() {
     const categoryIds = ["f1c535cb-263f-47c8-1e5e-08dc61e8e461", "fa0be4d1-3580-4ddb-1e5f-08dc61e8e461", "7f15efda-deb4-438f-1e60-08dc61e8e461"];
@@ -126,10 +134,10 @@ export class NavbarComponent implements OnInit {
       this.isLoggedIn = true;
     }
   }
-  ngOnInit() {
-    this.loadCategoryTypes();
+  async ngOnInit() {
+    await this.loadCategoryTypes();
 
-    this.userService.getUser().pipe(
+    await this.userService.getUser().pipe(
       switchMap(user => {
         this.userId = user.id
         return this.notificationService.getUserNotification();
@@ -147,10 +155,10 @@ export class NavbarComponent implements OnInit {
         }) // Bildirimleri kullanabilirsiniz
       }
     );
-    this.navbarService.isLoggedIn.subscribe(isLoggedIn => {
+    await this.navbarService.isLoggedIn.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
     });
-    this.checkToken()
+    await this.checkToken()
   };
 
 
