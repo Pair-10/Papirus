@@ -12,7 +12,7 @@ export class MaterialService {
   constructor(private http: HttpClient) { }
   private baseUrl = 'http://localhost:60805/api';
   getCategoryTypes(): Observable<any[]> {
-    return this.http.get<any>(`${this.baseUrl}/Materials?PageIndex=0&PageSize=10`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/Materials?PageIndex=0&PageSize=1000`).pipe(
       map(response => {
         return response.items;
       })
@@ -20,6 +20,7 @@ export class MaterialService {
     }
   
     getMaterialsByMaterialId(materialId: string): Observable<Material> {
+      /* Gelen materialid ye göre materyal geri döndürülür */
       return this.http.get<any>(`${this.baseUrl}/Materials/${materialId}`).pipe(
         map(response => {
           const material: Material = {
@@ -36,7 +37,7 @@ export class MaterialService {
       );
     }
     getMaterial(){
-      return this.http.get<any>(`${this.baseUrl}/Materials?PageIndex=0&PageSize=20`).pipe(
+      return this.http.get<any>(`${this.baseUrl}/Materials?PageIndex=0&PageSize=1000`).pipe(
         map(response =>{
           return response
         })
@@ -85,6 +86,6 @@ export class MaterialService {
           filters: []
         }
       };
-      return this.http.post<any>(`${this.baseUrl}/Materials/dynamic?PageIndex=0&PageSize=50`,body)
+      return this.http.post<any>(`${this.baseUrl}/Materials/dynamic?PageIndex=0&PageSize=1000`,body)
     }
 }

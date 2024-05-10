@@ -35,7 +35,7 @@ export class AddMaterialsComponent implements OnInit {
   materials: any[] = [{}];
   authors: any[] = [{}];
   publishers: any[] = [{}];
-  erisim : boolean = false;
+  erisim : boolean = true;
   selectedOption: string = '';
   materialTypeNames : any;
   

@@ -138,17 +138,20 @@ export class MaterialDetailComponent implements OnInit {
       console.error('Form geçersiz, lütfen tüm alanları doldurun.');
       return;
     }
+    //oluşturulan formun içindeki verileri değişkene atama
+    //içine tokendan kullanıcı id si ve seçime göre materyal eklendi
+    //sadece iade tarihini kullanıcı seçecek
     let formData = this.borrowForm.value;
-
-    this.borrowService.borrowMaterialService(formData).subscribe(
-      (response) => {
+    
+    this.borrowService.borrowMaterialService(formData).subscribe({
+      next: (response) => {
         console.log('Ödünç alma işlemi gerçekleşti.');
         this.popup();
       },
-      (error) => {
+      error: (error) => {
         console.error('Ödünç alma sırasında bir hata oluştu. ', error);
       }
-    );
+    });
   }
   materialAuthor(materialId: any) {
     const date = new Date(this.material.material.publicationDate);

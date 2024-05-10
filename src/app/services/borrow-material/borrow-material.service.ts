@@ -15,7 +15,7 @@ export class BorrowMaterialService {
       userId: material.user,
       deadline: material.selectedDate
     }
-    return this.http.post(`${this.baseUrl}/BorrowedMaterials?PageIndex=0&PageSize=20`, body);
+    return this.http.post(`${this.baseUrl}/BorrowedMaterials`, body);
   }
   updateBorrowedMaterial(borrowedMaterial: any){
     const updatedData = {

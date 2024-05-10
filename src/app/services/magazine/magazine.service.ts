@@ -13,7 +13,7 @@ export class MagazineService {
   private baseUrl = 'http://localhost:60805/api';
 
   getMagazines(): Observable<Magazine[]> {
-    return this.http.get<any>(`${this.baseUrl}/Magazines?PageIndex=0&PageSize=10`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/Magazines?PageIndex=0&PageSize=1000`).pipe(
         map(response => {
             const magazines: Magazine[] = response.items.map((item: any) => ({
                 id: item.id,
@@ -40,7 +40,7 @@ deleteMagazine(magazine: any){
 }
 
 getMagazine(){
-  return this.http.get<any>(`${this.baseUrl}/Magazines?PageIndex=0&PageSize=50`)
+  return this.http.get<any>(`${this.baseUrl}/Magazines?PageIndex=0&PageSize=1000`)
 }
 
 }
