@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { NavbarService } from '../../../services/navbar/navbar.service';
 
 @Component({
   selector: 'app-sidebar-admin',
@@ -9,7 +10,9 @@ import { Router } from '@angular/router';
   styleUrl: './sidebar-admin.component.css'
 })
 export class SidebarAdminComponent {
+  navbarService=inject(NavbarService)
   constructor(private router: Router) {}
+
 
   navigateToPenalties() {
     this.router.navigate(['profile-admin/penalty-admin']);
@@ -38,5 +41,10 @@ export class SidebarAdminComponent {
   }
   navigateToAuthor() {
     this.router.navigate(['profile-admin/author']);
+  }
+  navigateToSignOut() {
+    this.navbarService.setLoggedIn(false)
+    this.router.navigate(['/']);
+    localStorage.removeItem("Token")
   }
 }
