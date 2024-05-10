@@ -8,11 +8,12 @@ import { NotificationService } from '../../../services/notification/notification
 import { switchMap } from 'rxjs';
 import { UserService } from '../../../services/user/user.service';
 import { JwtService } from '../../../services/jwt/jwt.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet],
+  imports: [CommonModule, RouterLink, RouterOutlet,ReactiveFormsModule,FormsModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -23,6 +24,7 @@ export class NavbarComponent implements OnInit {
   tokenService = inject(TokenService)
   userService = inject(UserService)
   notificationService = inject(NotificationService)
+  materialService = inject(MaterialService)
   hamburgerMenuOpen = false;
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
@@ -32,8 +34,13 @@ export class NavbarComponent implements OnInit {
   notificationId: any;
   notifications: any[] = [];
   showPopup: boolean = false;
+<<<<<<< HEAD
  
   
+=======
+  searchTerm: string = '';
+  searchedItems:any[] = [];
+>>>>>>> c123bca5089600cd222e38d2be6ffca46bb1d405
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -127,11 +134,40 @@ export class NavbarComponent implements OnInit {
     );
   }
 
+<<<<<<< HEAD
   //--------------------------------------
   checkToken() {
     const token = this.tokenService.getToken();
     if (token) {
       this.isLoggedIn = true;
+=======
+//--------------------------------------
+checkToken() {
+  const token = this.tokenService.getToken();
+  if (token) {
+    this.isLoggedIn = true;
+  }
+}
+ngOnInit() {
+  this.loadCategoryTypes();
+  
+  this.userService.getUser().pipe(
+    switchMap(user => {
+      this.userId = user.id
+      return this.notificationService.getUserNotification();
+    })
+  ).subscribe(
+    response => {
+      response.items.find((veri:any)=>{
+        if(veri.userId === this.userId){
+          this.notificationService.getNotification(veri.notificationId).subscribe(
+            responses=>{
+              this.notifications.push(responses);
+            }
+          )
+        }
+      })
+>>>>>>> c123bca5089600cd222e38d2be6ffca46bb1d405
     }
   }
   async ngOnInit() {
@@ -161,8 +197,18 @@ export class NavbarComponent implements OnInit {
     await this.checkToken()
   };
 
-
-
+  search(event: any) {
+    if(event != ""){
+      this.materialService.getMaterialDynamic(event).subscribe(
+        response =>{
+          this.searchedItems = response.items
+        }
+      )
+    }
+  }
+  goToMaterialDetail(materialId: string) {
+    this.router.navigateByUrl(`/material-detail/${materialId}`);
+  }
 
   selectCategory(categoryId: string, categoryType: string) {
     this.router.navigate(['/material-list'], { queryParams: { type: categoryType, categoryId: categoryId } });

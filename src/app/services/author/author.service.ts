@@ -15,7 +15,7 @@ export class AuthorService {
   }
 
   getAuthor(authorId: string){
-    return this.http.get<any>(`${this.baseUrl}/Authors?PageIndex=0&PageSize=10`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/Authors?PageIndex=0&PageSize=20`).pipe(
       map(response => {
         const author: Author[] = response.items.map((item: any) => ({
           id: item.id,
@@ -28,6 +28,8 @@ export class AuthorService {
       })
     );
   }
-
+  getAuthors(){
+    return this.http.get<any>(`${this.baseUrl}/Authors?PageIndex=0&PageSize=20`)
+  }
 
 }

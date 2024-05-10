@@ -68,4 +68,23 @@ export class MaterialService {
     deleteMaterial(material: any){
       return this.http.delete<any>(`${this.baseUrl}/Materials/${material.id}`)
     }
+
+    getMaterialDynamic(value: string){
+      const body = {
+        sort: [
+          {
+            field: 'MaterialName',
+            dir: 'asc'
+          }
+        ],
+        filter: {
+          field: 'MaterialName',
+          operator: 'contains',
+          value: value,
+          logic: 'and',
+          filters: []
+        }
+      };
+      return this.http.post<any>(`${this.baseUrl}/Materials/dynamic?PageIndex=0&PageSize=50`,body)
+    }
 }
