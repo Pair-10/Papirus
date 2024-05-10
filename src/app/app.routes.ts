@@ -1,3 +1,4 @@
+import { authGuard } from './core/guards/auth.guard';
 import { Routes } from '@angular/router';
 import { MainComponent } from './shared/components/main/main.component';
 import { PenaltyComponent } from './features/penalty/pages/penalty/penalty.component'; //penalty
@@ -26,19 +27,20 @@ export const routes: Routes =
 [
     { path: '', component: MainComponent },
     { path: 'material-detail', component: MaterialDetailComponent },
+    { path: 'material-detail/:materialId', component: MaterialDetailComponent },
     { path: 'material-list', component: MaterialListComponent },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
 
 
-    {path:'profile',loadChildren:()=>import('./features/edit-profile/pages/edit-profile/edit-profile.component').then((c)=>c.EditProfileComponent),component:ProfileComponent,children:[
+    {path:'profile',component:ProfileComponent,children:[
         {path:'edit-profile',component:EditProfileComponent},
         {path:'my-materials',component:MyBooksComponent},
         {path: 'penalty', component: PenaltyComponent },
         {path: 'activity', component: ActivityComponent },
         {path:'help',component:HelpComponent}
     ]},
-    {path:'profile-admin',component:ProfileAdminComponent,children:[
+    {path:'profile-admin',component:ProfileAdminComponent,canActivate: [authGuard], data: { requiredRoles: ['Admin']},children:[
         {path:'edit-profile',component:EditProfileComponent},
         {path:'edit-user',component:EditUsersComponent},
         { path: 'add-materials', component: AddMaterialsComponent },

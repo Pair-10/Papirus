@@ -64,21 +64,18 @@
                 {{user.phoneNumber}}
               </td>
               <td class="px-6 py-4">
-                <button (click)="openPopup()" class="text-gray-500 hover:text-gray-700">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0zM12 14v5m0 0v-5m0 5h5m-5 0H7a5 5 0 00-5 5v7a2 2 0 002 2h18a2 2 0 002-2v-7a5 5 0 00-5-5h-5a5 5 0 00-5 5z" />
-                  </svg>
-                </button>
+              
+                <button (click)="openPopup()"
+                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 mb-2 md:mb-0 md:mr-2">
+                Edit
+              </button>
               </td>
               <td class="px-6 py-4">
-                <button (click)="deleteUser(user.id)" class="text-red-500 hover:text-red-700">
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
+                <button (click)="deleteUser(user.id)"
+                class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
+                Delete
+              </button>
+          
               </td>
             </tr>
           </tbody>
@@ -120,12 +117,21 @@
               class="block py-2.5 px-0 w-full text-xl text-blue-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
               required />
           </div>
-
+          <div class="flex gap-5 mt-10">
+            <button (click)="closePopup()"
+            class="text-white mt-8 bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl w-full sm:w-auto px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 justify-center">
+            Cancel
+        </button>
+    
           <button type="submit"
             class="text-white mt-8 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 justify-center">Save
-            Changes</button>
+            Changes
+          </button>
+          </div>
+        
         </form>
 
       </div>
     </div>
   </div>
+

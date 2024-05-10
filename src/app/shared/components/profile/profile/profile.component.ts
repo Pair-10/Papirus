@@ -10,8 +10,5 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
   styleUrl: './profile.component.css'
 })
 export class ProfileComponent {
-  ngOnInit(){
-    ProfileComponent
-  
-  }
+
 }

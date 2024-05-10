@@ -8,11 +8,12 @@ import { NotificationService } from '../../../services/notification/notification
 import { switchMap } from 'rxjs';
 import { UserService } from '../../../services/user/user.service';
 import { JwtService } from '../../../services/jwt/jwt.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet],
+  imports: [CommonModule, RouterLink, RouterOutlet,ReactiveFormsModule,FormsModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -23,6 +24,7 @@ export class NavbarComponent implements OnInit {
   tokenService = inject(TokenService)
   userService = inject(UserService)
   notificationService = inject(NotificationService)
+  materialService = inject(MaterialService)
   hamburgerMenuOpen = false;
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
@@ -32,10 +34,13 @@ export class NavbarComponent implements OnInit {
   notificationId: any;
   notifications: any[] = [];
   showPopup: boolean = false;
-  token = this.tokenService.getToken();
-  decodedJwt = this.jwtService.getDecodedAccessToken(this.token!);
-  roles:string[] = this.decodedJwt["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+<<<<<<< HEAD
+ 
   
+=======
+  searchTerm: string = '';
+  searchedItems:any[] = [];
+>>>>>>> c123bca5089600cd222e38d2be6ffca46bb1d405
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -54,22 +59,32 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private listService: ListService
   ) { }
+
   roleCheck() {
-   
-      this.roles.forEach((item)=>{
-       if(item=="Admin"){
-        this.router.navigate(['profile-admin']);
-       }
-       if(item==""){
-        this.router.navigate(['profile']);
-       }
-          
-      
-
-      })
-
-   
-   
+    const token= this.tokenService.getToken();
+    const decodedJwt = this.jwtService.getDecodedAccessToken(token!);
+    const roles:string[] = decodedJwt["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    let isAdmin = false;
+    if(roles==undefined){
+      console.log("bu:",roles)
+      this.router.navigate(['profile/edit-profile'])
+    }
+    else{
+      console.log("bu2:",roles)
+         roles.forEach(item => {
+        if (item == "Admin") {
+            isAdmin = true;
+        }
+    });
+    
+    if (isAdmin) {
+        this.router.navigate(['profile-admin/edit-profile']);
+    } else {
+        this.router.navigate(['profile/edit-profile']);
+    }
+    }
+ 
+    
   }
   loadCategoryTypes() {
     const categoryIds = ["f1c535cb-263f-47c8-1e5e-08dc61e8e461", "fa0be4d1-3580-4ddb-1e5f-08dc61e8e461", "7f15efda-deb4-438f-1e60-08dc61e8e461"];
@@ -119,17 +134,46 @@ export class NavbarComponent implements OnInit {
     );
   }
 
+<<<<<<< HEAD
   //--------------------------------------
   checkToken() {
     const token = this.tokenService.getToken();
     if (token) {
       this.isLoggedIn = true;
+=======
+//--------------------------------------
+checkToken() {
+  const token = this.tokenService.getToken();
+  if (token) {
+    this.isLoggedIn = true;
+  }
+}
+ngOnInit() {
+  this.loadCategoryTypes();
+  
+  this.userService.getUser().pipe(
+    switchMap(user => {
+      this.userId = user.id
+      return this.notificationService.getUserNotification();
+    })
+  ).subscribe(
+    response => {
+      response.items.find((veri:any)=>{
+        if(veri.userId === this.userId){
+          this.notificationService.getNotification(veri.notificationId).subscribe(
+            responses=>{
+              this.notifications.push(responses);
+            }
+          )
+        }
+      })
+>>>>>>> c123bca5089600cd222e38d2be6ffca46bb1d405
     }
   }
-  ngOnInit() {
-    this.loadCategoryTypes();
+  async ngOnInit() {
+    await this.loadCategoryTypes();
 
-    this.userService.getUser().pipe(
+    await this.userService.getUser().pipe(
       switchMap(user => {
         this.userId = user.id
         return this.notificationService.getUserNotification();
@@ -147,14 +191,24 @@ export class NavbarComponent implements OnInit {
         }) // Bildirimleri kullanabilirsiniz
       }
     );
-    this.navbarService.isLoggedIn.subscribe(isLoggedIn => {
+    await this.navbarService.isLoggedIn.subscribe(isLoggedIn => {
       this.isLoggedIn = isLoggedIn;
     });
-    this.checkToken()
+    await this.checkToken()
   };
 
-
-
+  search(event: any) {
+    if(event != ""){
+      this.materialService.getMaterialDynamic(event).subscribe(
+        response =>{
+          this.searchedItems = response.items
+        }
+      )
+    }
+  }
+  goToMaterialDetail(materialId: string) {
+    this.router.navigateByUrl(`/material-detail/${materialId}`);
+  }
 
   selectCategory(categoryId: string, categoryType: string) {
     this.router.navigate(['/material-list'], { queryParams: { type: categoryType, categoryId: categoryId } });

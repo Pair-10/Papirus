@@ -22,7 +22,8 @@ export class BorrowMaterialService {
       id: borrowedMaterial.id,
       materialId: borrowedMaterial.materialId,
       userId: borrowedMaterial.userId,
-      isReturned: borrowedMaterial.isReturned
+      isReturned: borrowedMaterial.isReturned,
+      deadline: borrowedMaterial.deadline
     }
     return this.http.put(`${this.baseUrl}/BorrowedMaterials`, updatedData);
   }
