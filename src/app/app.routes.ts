@@ -21,6 +21,7 @@ import { EditMaterialsComponent } from './shared/components/edit-materials/edit-
 import { ProfileComponent } from './shared/components/profile/profile/profile.component';
 import { BookComponent } from './features/book-will-be-deleted/components/book/book.component';
 import { ProfileAdminComponent } from './shared/components/profile-admin/profile-admin/profile-admin.component';
+import { roleGuard } from './guards/role.guard';
 
 export const routes: Routes = 
 [
@@ -39,7 +40,7 @@ export const routes: Routes =
         { path: 'activity', component: ActivityComponent },
         {path:'help',component:HelpComponent}
     ]},
-    {path:'profile-admin',component:ProfileAdminComponent,children:[
+    {path:'profile-admin',component:ProfileAdminComponent,canActivate: [roleGuard], data: { requiredRoles: ['Admin']},children:[
         {path:'edit-profile',component:EditProfileComponent},
         {path:'edit-user',component:EditUsersComponent},
         { path: 'add-materials', component: AddMaterialsComponent },
