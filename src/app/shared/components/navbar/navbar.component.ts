@@ -77,11 +77,9 @@ export class NavbarComponent implements OnInit {
     const roles:string[] = decodedJwt["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
     let isAdmin = false;
     if(roles==undefined){
-      console.log("bu:",roles)
       this.router.navigate(['profile/edit-profile'])
     }
     else{
-      console.log("bu2:",roles)
          roles.forEach(item => {
         if (item == "Admin") {
             isAdmin = true;
