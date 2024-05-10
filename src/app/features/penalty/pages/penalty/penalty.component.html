@@ -3,8 +3,6 @@
     class=" text-black pt-5 col-span-3 flex flex-col items-center space-y--3 rounded-lg max-h-[800px] overflow-y-auto ">
 
 
-   
-
     <div class="pt-4 mx-auto mx-auto pb-10 w-full sm:w-full md:w-2/3 pl-5 pr-5">
       <div
         class="mb-7 container mx-auto p-2 max-w-xs sm:max-w-xs  rounded-lg mt-5 shadow-xl transform hover:scale-105 transition duration-300 ease-in-out">
@@ -28,7 +26,7 @@
         </div>
 
         <!-- Filter settings-->
-        <div class="relative m-[2px] mb-3 float-right hidden sm:block mt-1">
+        <!-- <div class="relative m-[2px] mb-3 float-right hidden sm:block mt-1">
           <label for="inputFilter" class="sr-only">Filter</label>
           <select id="inputFilter"
             class="block w-40 rounded-lg border dark:border-none dark:bg-neutral-600 p-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400">
@@ -38,38 +36,50 @@
             <option value="4">Last 7 days</option>
             <option value="5">Last 30 days</option>
           </select>
-        </div>
+        </div> -->
         <table class="min-w-full text-left text-xs whitespace-nowrap max-w-[200px] mx-auto">
           <thead class="uppercase tracking-wider border-b-2 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
             <tr>
-              <th scope="col" class="px-6 py-3">ID</th>
+              <!-- <th scope="col" class="px-6 py-3">ID</th>
               <th scope="col" class="px-6 py-3">User ID</th>
-              <th scope="col" class="px-6 py-3">Returned ID</th>
+              <th scope="col" class="px-6 py-3">Returned ID</th> -->
+              
               <th scope="col" class="px-6 py-3">Penalty Status</th>
               <th scope="col" class="px-6 py-3">Total Penalty Days</th>
               <th scope="col" class="px-6 py-3">Penalty Price</th>
+              <th scope="col" class="px-6 py-3">Material ID</th>
             </tr>
           </thead>
           <tbody>
             <tr
               class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
-              <th scope="row" class="px-6 py-3">{{ profileForm.value.id }}</th>
+              <!-- <th scope="row" class="px-6 py-3">{{ profileForm.value.id }}</th>
               <th scope="row" class="px-6 py-3">{{ profileForm.value.userId }}</th>
-              <td class="px-6 py-3">{{ profileForm.value.returnedId }}</td>
-              <td class="px-6 py-3">{{ profileForm.value.penaltyStatus }}</td>
+              <td class="px-6 py-3">{{ profileForm.value.returnedId }}</td> -->
+              <td class="px-6 py-3">
+                <!-- Durumu kontrol et ve metni yazdır -->
+                <ng-container *ngIf="profileForm.value.penaltyStatus; else inactive">Active</ng-container>
+                <ng-template #inactive>inactive</ng-template>
+              </td>
               <td class="px-6 py-3">{{ profileForm.value.totalPenaltyDays }}</td>
               <td class="px-6 py-3">{{ profileForm.value.penaltyPrice }}₺</td>
+              <td class="px-6 py-3">{{ profileForm.value.materialID }}</td>
             </tr>
           </tbody>
+
+          
 
           <!-- Table footer -->
           <tfoot class="border-t-2 dark:border-neutral-600 bg-neutral-50 hover:bg-yellow-200">
             <tr>
               <th class="px-6 py-3">Total:</th>
+              <td class="px-6 py-3 font-bold">{{ totalPenaltyDays | number }}</td>
+              <td class="px-6 py-3 font-bold">{{ totalPenaltyPrice  }}₺</td>
+           
+              
+
               <th class="px-6 py-3"></th>
-              <td class="px-6 py-3"></td>
-              <td class="px-6 py-3"></td>
-              <td class="px-6 py-3">170.00₺</td><!--Total PENALTY Price-->
+
               <td class="px-6 py-3"></td>
             </tr>
           </tfoot>
@@ -119,20 +129,6 @@
         </nav>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   </div>

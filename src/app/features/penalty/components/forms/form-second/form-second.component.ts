@@ -299,20 +299,24 @@ saveUserData(): void {
 
 
 
- updateUserData(): void {
-     if (this.userForm.valid) {
-         const formData = this.userForm.value;
-         formData.penaltyStatus = formData.penaltyStatus.toLowerCase() === 'active' ? true : false;
-         const headers = { Authorization: `Bearer ${token}` };
-         this.httpClient.put(`http://localhost:60805/api/Penalties/`, formData, { headers }).subscribe((response: any) => {
-             console.log("API Response:", response);
-         }, error => {
-             console.error("Error updating user data:", error);
-         });
-     } else {
-         console.log("Form is not valid.");
-    }
- }
+updateUserData() {
+    if (this.userForm.valid) {
+        const formData = this.userForm.value;
+        // penaltyStatus alanının bir dize olduğundan emin olun
+        if (typeof formData.penaltyStatus === 'string') {
+            // Dize olduğunda toLowerCase() işlemini uygulayın
+            formData.penaltyStatus = formData.penaltyStatus.toLowerCase();
+        }
+        const headers = { Authorization: `Bearer ${token}` };
+        this.httpClient.put(`http://localhost:60805/api/Penalties/`, formData, { headers }).subscribe((response: any) => {
+            console.log("API Response:", response);
+        }, error => {
+            console.error("Error updating user data:", error);
+        });
+    } else {
+        console.log("Form is not valid.");
+   }
+}
 
 
 

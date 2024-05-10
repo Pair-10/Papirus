@@ -111,7 +111,7 @@ export class TableComponent implements OnInit{
 
   fetchUsers(): void {
     const headers = { Authorization: `Bearer ${token}` };
-    this.httpClient.get('http://localhost:60805/api/Penalties?PageIndex=0&PageSize=4', { headers }).subscribe((data: any) => {
+    this.httpClient.get('http://localhost:60805/api/Penalties?PageIndex=0&PageSize=6', { headers }).subscribe((data: any) => {
       console.log("API Response:", data); 
       this.Users = data.items;
       this.filteredUsers = [...this.Users]; 

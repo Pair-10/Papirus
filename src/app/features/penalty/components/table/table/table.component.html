@@ -14,7 +14,7 @@
       </span>
     </div>
   <!-- Filter settings-->
-  <div class="relative m-[2px] mb-3 float-right hidden sm:block mt-1">
+  <!-- <div class="relative m-[2px] mb-3 float-right hidden sm:block mt-1">
     <label for="inputFilter" class="sr-only">Filter</label>
     <select id="inputFilter" class="block w-40 rounded-lg border dark:border-none dark:bg-neutral-600 p-2 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400">
       <option value="1" selected>Last week</option>
@@ -23,7 +23,7 @@
       <option value="4">Last 7 days</option>
       <option value="5">Last 30 days</option>
     </select>
-  </div>
+  </div> -->
 
   <!-- Table -->
   <table class="min-w-full text-left text-xs whitespace-nowrap max-w-[200px] mx-auto">
@@ -39,9 +39,9 @@
 <th scope="col" class="px-6 py-3">
 UserID
 </th>
-<th scope="col" class="px-6 py-3">
+<!-- <th scope="col" class="px-6 py-3">
 ReturnedID
-</th>
+</th> -->
 <th scope="col" class="px-6 py-3">
 Penalty Price
 </th>
@@ -63,7 +63,7 @@ Status
   <tr *ngFor="let penalty of filteredUsers" class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200"> 
 <th scope="row" class="px-6 py-3">{{ penalty.id }}</th>
 <th scope="row" class="px-6 py-3">{{ penalty.userId }}</th>
-<td class="px-6 py-3">{{ penalty.returnedId }}</td>
+<!-- <td class="px-6 py-3">{{ penalty.returnedId }}</td> -->
 <td class="px-6 py-3">{{ penalty.penaltyPrice }}₺</td>
 <td class="px-6 py-3">{{ penalty.totalPenaltyDays
 }}</td>

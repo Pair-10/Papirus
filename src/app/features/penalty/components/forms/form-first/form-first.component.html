@@ -21,11 +21,11 @@
   
       <div class="mb-4 ml-10">PenaltyID: <span class="ml-7"></span>
       <input type="text" formControlName="id" (input)="fetchUserById()" class="bg-pink-100 border border-gray-600 text-black rounded-full"></div>
-      <div class="mb-4 ml-10">ReturnID:<span class="ml-9"></span>  <input type="text" formControlName="returnedId"class="text-center bg-gray-200 rounded-full"></div>
+      <!-- <div class="mb-4 ml-10">ReturnID:<span class="ml-9"></span>  <input type="text" formControlName="returnedId"class="text-center bg-gray-200 rounded-full"></div> -->
       <!-- <div class="mb-4 ml-10">Status:<span class="ml-14"></span> <input type="text" formControlName="penaltyStatus"class="text-center bg-gray-200 rounded-full"></div> -->
       <div class="mb-4 ml-10">
         <label for="statusInput">Status:</label>
-        <input id="statusInput" type="text" [value]="penaltyStatusControl?.value ? 'Active' : 'Inactive'" readonly class="ml-12 bg-gray-200 rounded-full px-2 py-1 text-center">
+        <input id="statusInput" type="text" [value]="penaltyStatusControl?.value ? 'Active' : 'Inactive'" readonly class="bg-gray-400 border border-gray-400 text-white text-center rounded-full ml-14">
     </div>
     
     
