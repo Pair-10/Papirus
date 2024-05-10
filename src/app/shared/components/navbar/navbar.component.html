@@ -54,7 +54,7 @@
               </ul>
             </ng-container>
             <ng-template #noNotifications>
-              <p class="text-lg font-bold mb-4">Bildiriminiz Yok</p>
+              <p class="text-lg font-bold mb-4">You Have No Notification</p>
             </ng-template>
             <button (click)="closeNotificationPopup()"
               class="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Close</button>
@@ -71,10 +71,12 @@
           <ul>
             <li (click)="roleCheck()"
               class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono text-lg">
-              <a  class="cursor-pointer">Hesabım</a>
+
+              <a class="cursor-pointer">My Account</a>
+
             </li>
             <li class="hover:bg-blue-700 hover:text-white p-2 rounded font-mono font-bold text-lg">
-              <a href="#" (click)="toggleMenu()">Çıkış Yap</a>
+              <a href="#" (click)="toggleMenu()">Sign Out</a>
             </li>
           </ul>
         </div>
@@ -90,30 +92,30 @@
     <!-- Kullanıcı giriş yapmamışsa gösterilecek -->
     <div *ngIf="!isLoggedIn" class="md:flex hidden lg:gap-4">
       <button class="bg-blue-900 text-white lg:px-4 px-2 lg:py-2 py-1 rounded" [routerLink]="['/login']">
-        Giriş Yap
+        Sign In
       </button>
-      <button class="bg-blue-700 text-white px-4 py-2 rounded" [routerLink]="['/register']">Kayıt Ol</button>
+      <button class="bg-blue-700 text-white px-4 py-2 rounded" [routerLink]="['/register']">Register</button>
     </div>
     <!-- Mobil menü -->
     <div *ngIf="hamburgerMenuOpen" class="absolute top-[80px] w-full h-auto">
       <div class="bg-white h-full w-full p-4 bg-opacity-100 z-50 text-black md:hidden">
         <div *ngIf="isLoggedIn" class="text-center">
-          <h1 class="text-2xl">Hesabım</h1>
-          <button class="bg-red-600 text-white px-4 py-2 mt-4 rounded">Çıkış Yap</button>
+          <h1 class="text-2xl">Account</h1>
+          <button class="bg-red-600 text-white px-4 py-2 mt-4 rounded">Sign Out</button>
         </div>
         <div *ngIf="!isLoggedIn" class="text-center">
           <button class="bg-blue-900 text-white px-4 py-2 rounded" [routerLink]="['/login']">
-            Giriş Yap
+            Sign In
           </button>
-          <button class="bg-blue-700 text-white px-4 py-2 ml-4 rounded" [routerLink]="['/register']">Kayıt Ol</button>
+          <button class="bg-blue-700 text-white px-4 py-2 ml-4 rounded" [routerLink]="['/register']">Register</button>
         </div>
         <ul class="text-2xl text-center mt-2 font-mono font-bold">
           <li [routerLink]="['/material-list']" [queryParams]="{ type: 'book' }"
-            class="border-b-2 border-gray-300 pb-1">Kitap</li>
+            class="border-b-2 border-gray-300 pb-1">Book</li>
           <li [routerLink]="['/material-list']" [queryParams]="{ type: 'magazine' }"
-            class="border-b-2 border-gray-300 pb-1">Dergi</li>
+            class="border-b-2 border-gray-300 pb-1">Magazine</li>
           <li [routerLink]="['/material-list']" [queryParams]="{ type: 'article' }"
-            class="border-b-2 border-gray-300 pb-1">Makale</li>
+            class="border-b-2 border-gray-300 pb-1">Article</li>
         </ul>
       </div>
     </div>
@@ -126,7 +128,7 @@
       <li class="font-mono font-bold border-r pr-4 relative" (mouseover)="onHover(0, true)"
         (mouseleave)="onHover(0, false)">
         <a class="cursor-pointer" routerLink="/material-list" (click)="onMaterialTypeClick('book')">
-          Kitap
+          Book
         </a>
         <!-- Hover edildiğinde gösterilecek kutucuk -->
         <div *ngIf="isHovered[0]"
@@ -143,7 +145,7 @@
       <li class="font-mono font-bold border-r pr-4 relative" (mouseover)="onHover(1, true)"
         (mouseleave)="onHover(1, false)">
         <a class="cursor-pointer" routerLink="/material-list" (click)="onMaterialTypeClick('magazine')">
-          Dergi
+         Magazine
         </a>
         <!-- Hover edildiğinde gösterilecek kutucuk -->
         <div *ngIf="isHovered[1]"
@@ -160,7 +162,7 @@
       <li class="font-mono font-bold border-r pr-4 relative" (mouseover)="onHover(2, true)"
         (mouseleave)="onHover(2, false)">
         <a class="cursor-pointer" routerLink="/material-list" (click)="onMaterialTypeClick('article')">
-          Makale
+          Article
         </a>
         <!-- Hover edildiğinde gösterilecek kutucuk -->
         <div *ngIf="isHovered[2]"
