@@ -64,13 +64,13 @@ AddressID
 
 <!-- <tr *ngFor="let author of Users" class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200"> 
   -->
-<tr *ngFor="let author of filteredUsers" class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
-<th scope="row" class="px-6 py-3">{{ author.id }}</th>
-<td class="px-6 py-3">{{ author.name }}</td>
-<td class="px-6 py-3">{{ author.webSite }}</td>
-<td class="px-6 py-3">{{ author.phoneNumber
+<tr *ngFor="let publisher of filteredUsers" class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
+<th scope="row" class="px-6 py-3">{{ publisher.id }}</th>
+<td class="px-6 py-3">{{ publisher.name }}</td>
+<td class="px-6 py-3">{{ publisher.webSite }}</td>
+<td class="px-6 py-3">{{ publisher.phoneNumber
 }}</td>
-<td class="px-6 py-3">{{ author.addressId }}</td>
+<td class="px-6 py-3">{{ publisher.addressId }}</td>
 
 </tr>
 </tbody>

@@ -1,3 +1,4 @@
+
 <div class="pb-3 bg-[#f2f2f2] bg-blue-950 text-gray-300 container mx-auto pt-4 border-2 border-[#1C39BB] rounded-lg shadow-2xl text-blue-900 font-medium " style="border-radius: 20px;">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
@@ -5,9 +6,13 @@
 
             <form [formGroup]="userForm" (ngSubmit)="saveUserData()">
                 
-                <div class="mb-4 pl-4 py-2 text-sm bg-gradient-to-r from-blue-200 via-gray-200 to-blue-300 text-blue-950 shadow-lg rounded-r-full transform hover:scale-110 transition duration-300 ease-in-out w-full md:w-1/2 cursor-pointer">
+                <!-- <div class="mb-4 pl-4 py-2 text-sm bg-gradient-to-r from-blue-200 via-gray-200 to-blue-300 text-blue-950 shadow-lg rounded-r-full transform hover:scale-110 transition duration-300 ease-in-out w-full md:w-1/2 cursor-pointer">
                     <label class="pr-2">Material ID:</label>
                     <input type="text" formControlName="materialID" class="text-center text-sm bg-gray-200 text-black bg-gradient-to-r from-blue-200 via-gray-200 to-blue-300 text-blue-950 shadow-lg rounded-r-full transform rounded-full">
+                </div> -->
+                <div class="mb-4 pl-4 py-2 text-sm bg-gradient-to-r from-blue-200 via-gray-200 to-blue-300 text-blue-950 shadow-lg rounded-r-full transform hover:scale-110 transition duration-300 ease-in-out w-full md:w-1/2 cursor-pointer">
+                    <label class="pr-2">Material Name:</label>
+                    <input type="text" formControlName="materialName" class="text-center text-sm bg-gray-200 text-black bg-gradient-to-r from-blue-200 via-gray-200 to-blue-300 text-blue-950 shadow-lg rounded-r-full transform rounded-full">
                 </div>
 
                 <!-- <div class="mb-4 pl-4 py-2  text-sm bg-gradient-to-r from-blue-200 via-gray-200 to-blue-300 text-blue-950 shadow-lg rounded-r-full transform hover:scale-110 transition duration-300 ease-in-out w-1/2 cursor-pointer">
