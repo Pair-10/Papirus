@@ -35,7 +35,7 @@ export class AddMaterialsComponent implements OnInit {
   materials: any[] = [{}];
   authors: any[] = [{}];
   publishers: any[] = [{}];
-  erisim : boolean = true;
+  access : boolean = true;
   selectedOption: string = '';
   materialTypeNames : any;
   
@@ -75,7 +75,7 @@ export class AddMaterialsComponent implements OnInit {
     this.materialService.setMaterial(this.materialForm.value).subscribe(
       (response) =>{
         this.materialId = response.id;
-        this.erisim = false;
+        this.access = false;
         this.materialService.getMaterial().subscribe(
           (responses)=>{
             this.materials = responses.items;

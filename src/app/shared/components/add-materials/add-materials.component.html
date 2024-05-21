@@ -45,15 +45,15 @@
       </form>
       <div class="mt-6 flex space-x-4">
         <label class="flex items-center space-x-2">
-          <input type="radio" name="option" value="book" [(ngModel)]="selectedOption" [disabled]="erisim">
+          <input type="radio" name="option" value="book" [(ngModel)]="selectedOption" [disabled]="access">
           <span>Kitap</span>
         </label>
         <label class="flex items-center space-x-2">
-          <input type="radio" name="option" value="magazine" [(ngModel)]="selectedOption" [disabled]="erisim">
+          <input type="radio" name="option" value="magazine" [(ngModel)]="selectedOption" [disabled]="access">
           <span>Dergi</span>
         </label>
         <label class="flex items-center space-x-2">
-          <input type="radio" name="option" value="article" [(ngModel)]="selectedOption" [disabled]="erisim">
+          <input type="radio" name="option" value="article" [(ngModel)]="selectedOption" [disabled]="access">
           <span>Makale</span>
         </label>
       </div>
