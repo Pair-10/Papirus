@@ -1,171 +1,11 @@
-// import { Component, OnInit } from '@angular/core';
-//   import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-//   import { HttpClient } from '@angular/common/http';
-//   import { CommonModule } from '@angular/common';
-//   import { SidebarComponent } from "../../../../../shared/components/sidebar/sidebar.component";
-//   import { token } from '../../../../publisher/services/constants';
-
-// @Component({
-//   selector: 'app-form-second',
-//   standalone: true,
-//   imports: [CommonModule, ReactiveFormsModule, SidebarComponent],
-//   templateUrl: './form-second.component.html',
-//   styleUrls: ['./form-second.component.css']
-// })
-// export class FormSecondComponent implements OnInit{
-//   userForm: FormGroup;
-//   Users: any[] = [];
-
-//   constructor(
-//       private fb: FormBuilder,
-//       private httpClient: HttpClient
-//   ) {
-//       this.userForm = this.fb.group({
-//           id: [''],
-//           returnedId: [''],
-//           penaltyStatus: [''],
-//           totalPenaltyDays: [''],
-//           userId: [''],
-//           penaltyPrice: [''],
-//           materialID:[''],
-//       });
-//   }
-
-//   fetchUsers(): void {
-//       // HTTP isteği yapılarak kullanıcı verileri getiriliyor
-//     //   const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3ZDY5MjM5LTVjNjQtNGJkMS05ODljLTM2OWM1OGNkNzJhYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imt5c0BreXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNDY2MjExOCwiZXhwIjoxNzE0NzIyMTE4LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.9JVvCCWXwGkfWV2WiyCWVtOkqsKSUZqsFbANWKq-4iZlcvunObBIVySacOCCuLf32ZGIW14jj9AQrjIVwZWdxA";
-//       const headers = { Authorization: `Bearer ${token}` };
-//       this.httpClient.get('http://localhost:60805/api/Penalties?PageIndex=0&PageSize=2', { headers }).subscribe((data: any) => {
-//           console.log("API Response:", data);
-//           this.Users = data.items;
-//           if (this.Users.length > 0) {
-//               const user = this.Users[1];
-//               this.userForm.patchValue({
-//                   id: user.id,
-//                   returnedId: user.returnedId,
-//                   penaltyStatus: user.penaltyStatus,
-//                   totalPenaltyDays: user.totalPenaltyDays,
-//                   userId: user.userId,
-//                   penaltyPrice: user.penaltyPrice,
-//                   materialID:user.materialID
-//               });
-//           }
-//       }, error => {
-//           console.error("Error fetching users:", error);
-//       });
-//   }
-
-//   fetchUserById(): void {
-//       const id = this.userForm.get('id')?.value;
-//       // Burada id değeri kullanılarak API'den kullanıcı verilerini getir
-//       // API'den gelen verileri form alanlarına doldur
-//     //   const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3ZDY5MjM5LTVjNjQtNGJkMS05ODljLTM2OWM1OGNkNzJhYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imt5c0BreXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNDY2MjExOCwiZXhwIjoxNzE0NzIyMTE4LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.9JVvCCWXwGkfWV2WiyCWVtOkqsKSUZqsFbANWKq-4iZlcvunObBIVySacOCCuLf32ZGIW14jj9AQrjIVwZWdxA";
-//       const headers = { Authorization: `Bearer ${token}` };
-//       this.httpClient.get(`http://localhost:60805/api/Penalties/${id}`, { headers }).subscribe((userData: any) => {
-//           this.userForm.patchValue({
-//               returnedId: userData.returnedId,
-//               penaltyStatus: userData.penaltyStatus,
-//               totalPenaltyDays: userData.totalPenaltyDays,
-//               userId: userData.userId,
-//               penaltyPrice: userData.penaltyPrice,
-//               materialID:userData.materialID
-//           });
-//       }, error => {
-//           console.error("Error fetching user data:", error);
-//       });
-//   }
-
-//   saveUserData(): void {
-//       // Kullanıcı verileri kaydı
-//       const formData = this.userForm.value;
-//     //   const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3ZDY5MjM5LTVjNjQtNGJkMS05ODljLTM2OWM1OGNkNzJhYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imt5c0BreXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNDY2MjExOCwiZXhwIjoxNzE0NzIyMTE4LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.9JVvCCWXwGkfWV2WiyCWVtOkqsKSUZqsFbANWKq-4iZlcvunObBIVySacOCCuLf32ZGIW14jj9AQrjIVwZWdxA";
-//       const headers = { Authorization: `Bearer ${token}` };
-//       this.httpClient.post('http://localhost:60805/api/Penalties', formData, { headers }).subscribe((response: any) => {
-//           console.log("API Response:", response);
-//       }, error => {
-//           console.error("Error saving user data:", error);
-//       });
-//   }
-
-//   updateUserData(): void {
-//       // Kullanıcı verileri güncelle
-//       if (this.userForm.valid) {
-//           const formData = this.userForm.value;
-//         //   const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3ZDY5MjM5LTVjNjQtNGJkMS05ODljLTM2OWM1OGNkNzJhYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imt5c0BreXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNDY2MjExOCwiZXhwIjoxNzE0NzIyMTE4LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.9JVvCCWXwGkfWV2WiyCWVtOkqsKSUZqsFbANWKq-4iZlcvunObBIVySacOCCuLf32ZGIW14jj9AQrjIVwZWdxA";
-//           const headers = { Authorization: `Bearer ${token}` };
-//           this.httpClient.put(`http://localhost:60805/api/Penalties/`, formData, { headers }).subscribe((response: any) => {
-//               console.log("API Response:", response);
-//               // Güncelleme başarılı olduğunda gerekli işlemleri burada yapabilirsiniz
-//           }, error => {
-//               console.error("Error updating user data:", error);
-//           });
-//       } else {
-//           console.log("Form is not valid.");
-//       }
-//   }
-
-
-// ///silme islemi
-// isDeleting: boolean = false;
-
-// deleteUserData(): void {
-//     if (this.isDeleting) {
-//         return; // İşlem zaten devam ediyorsa, tekrarlanmasını önle
-//     }
-//     this.isDeleting = true; // İşlemi başlat
-
-//     const id = this.userForm.get('id')?.value;
-//     // const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3ZDY5MjM5LTVjNjQtNGJkMS05ODljLTM2OWM1OGNkNzJhYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imt5c0BreXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNDY2MjExOCwiZXhwIjoxNzE0NzIyMTE4LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.9JVvCCWXwGkfWV2WiyCWVtOkqsKSUZqsFbANWKq-4iZlcvunObBIVySacOCCuLf32ZGIW14jj9AQrjIVwZWdxA";
-//     const headers = { Authorization: `Bearer ${token}` };
-
-//     // HTTP DELETE isteği yap
-//     this.httpClient.delete(`http://localhost:60805/api/Penalties/${id}`, { headers }).subscribe((response: any) => {
-//         console.log("Kullanıcı verileri başarıyla silindi:", response);
-//         // Başarılı silme işleminden sonra formu temizle veya başka gerekli işlemleri gerçekleştir
-//         this.userForm.reset();
-//         this.isDeleting = false; // İşlem tamamlandıktan sonra flag'i sıfırla
-//     }, error => {
-//         console.error("Kullanıcı verilerini silerken hata oluştu:", error);
-//         this.isDeleting = false; // Hata oluştuğunda flag'i sıfırla
-//     });
-// }
-
-// ///
-
-
-
-//   ngOnInit(): void {
-//       // Sayfa yüklendiğinde kullanıcı verileri getiriliyor
-//       this.fetchUsers();
-    
-//       // id alanının değeri değiştiğinde tetiklenecek olan yöntem
-//       this.userForm.get('id')?.valueChanges.subscribe((id) => {
-//           // id alanı değiştiğinde, bu yöntem otomatik olarak çalışacak
-//           // id değeri değiştiğinde diğer alanlar otomatik olarak güncellenecek
-//           // Örneğin, id alanı değiştiğinde API'ye gidip yeni kullanıcı verilerini getirebiliriz
-//           this.httpClient.get(`http://localhost:60805/api/Penalties/${id}`).subscribe((userData: any) => {
-//               this.userForm.patchValue({
-//                   returnedId: userData.returnedId,
-//                   penaltyStatus: userData.penaltyStatus,
-//                   totalPenaltyDays: userData.totalPenaltyDays,
-//                   userId: userData.userId,
-//                   penaltyPrice: userData.penaltyPrice,
-//                   materialID:userData.materialID
-//               });
-//           }, error => {
-//               console.error("Error fetching user data:", error);
-//           });
-//       });
-//   }
-
-
-// }
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule,AbstractControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { SidebarComponent } from "../../../../../shared/components/sidebar/sidebar.component";
 import { token } from '../../../../publisher/services/constants';
+import { forkJoin } from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Component({
 selector: 'app-form-second',
@@ -191,87 +31,102 @@ constructor(
         userId: [''],
         penaltyPrice: [''],
         materialID:[''],
+        materialName:[''],
     }); 
-  
-    
 }
-
-//   fetchUsers(): void {
-//       // HTTP isteği yapılarak kullanıcı verileri getiriliyor
-//     //   const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3ZDY5MjM5LTVjNjQtNGJkMS05ODljLTM2OWM1OGNkNzJhYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imt5c0BreXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNDY2MjExOCwiZXhwIjoxNzE0NzIyMTE4LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.9JVvCCWXwGkfWV2WiyCWVtOkqsKSUZqsFbANWKq-4iZlcvunObBIVySacOCCuLf32ZGIW14jj9AQrjIVwZWdxA";
-//       const headers = { Authorization: `Bearer ${token}` };
-//       this.httpClient.get('http://localhost:60805/api/Penalties?PageIndex=0&PageSize=2', { headers }).subscribe((data: any) => {
-//           console.log("API Response:", data);
-//           this.Users = data.items;
-//           if (this.Users.length > 0) {
-//               const user = this.Users[0];
-//               this.userForm.patchValue({
-//                   id: user.id,
-//                   returnedId: user.returnedId,
-//                   penaltyStatus: user.penaltyStatus,
-//                   totalPenaltyDays: user.totalPenaltyDays,
-//                   userId: user.userId,
-//                   penaltyPrice: user.penaltyPrice,
-//                   materialID:user.materialID
-//               });
-//           }
-//       }, error => {
-//           console.error("Error fetching users:", error);
-//       });
-//   }
 
 fetchUsers(): void {
-  const headers = { Authorization: `Bearer ${token}` };
-  this.httpClient.get('http://localhost:60805/api/Penalties?PageIndex=0&PageSize=2', { headers }).subscribe((data: any) => {
-      console.log("API Response:", data);
-      this.Users = data.items;
-      if (this.Users.length > 0) {
-          const user = this.Users[1];
-          // Veritabanından gelen true/false değerlerini 'Active' veya 'Inactive' olarak ayarla
-          user.penaltyStatus = user.penaltyStatus ? 'Active' : 'Inactive';
-          this.userForm.patchValue({
-              id: user.id,
-              returnedId: user.returnedId,
-              penaltyStatus: user.penaltyStatus,
-              totalPenaltyDays: user.totalPenaltyDays,
-              userId: user.userId,
-              penaltyPrice: user.penaltyPrice,
-              materialID: user.materialID
-              
-          });
-      }
-  }, error => {
-      console.error("Error fetching users:", error);
-  });
-}
-
-
-
-
-fetchUserById(): void {
-    const id = this.userForm.get('id')?.value;
-    // Burada id değeri kullanılarak API'den kullanıcı verilerini getir
-    // API'den gelen verileri form alanlarına doldu
-  //   const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3ZDY5MjM5LTVjNjQtNGJkMS05ODljLTM2OWM1OGNkNzJhYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imt5c0BreXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNDY2MjExOCwiZXhwIjoxNzE0NzIyMTE4LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.9JVvCCWXwGkfWV2WiyCWVtOkqsKSUZqsFbANWKq-4iZlcvunObBIVySacOCCuLf32ZGIW14jj9AQrjIVwZWdxA";
     const headers = { Authorization: `Bearer ${token}` };
-    this.httpClient.get(`http://localhost:60805/api/Penalties/${id}`, { headers }).subscribe((userData: any) => {
-        this.userForm.patchValue({
-            returnedId: userData.returnedId,
-            penaltyStatus: userData.penaltyStatus,
-            totalPenaltyDays: userData.totalPenaltyDays,
-            userId: userData.userId,
-            penaltyPrice: userData.penaltyPrice,
-            materialID:userData.materialID
+    this.httpClient.get('http://localhost:60805/api/Penalties?PageIndex=0&PageSize=4', { headers }).subscribe((data: any) => {
+        console.log("API Response:", data);
+        this.Users = data.items;
+        // Kullanıcı verilerini aldıktan sonra malzeme adlarını almak için bir dizi oluşturur
+        const materialNameObservables: Observable<any>[] = [];
+        this.Users.forEach((user: any) => {
+            const id = user.materialID;
+            if (id) {
+                // Malzeme adını almak için bir gözlem oluşturur
+                const materialNameObservable = this.httpClient.get(`http://localhost:60805/api/Materials/${id}`);  
+                materialNameObservables.push(materialNameObservable);
+            }
+        });
+        forkJoin(materialNameObservables).subscribe((materialNames: any[]) => {
+            materialNames.forEach((material, index) => {
+                console.log(`Material for user at index ${index}:`, material);
+                const userIndex = this.Users.findIndex(user => user.materialID === material.id);
+                // Materyalin malzeme idsi ile malzeme adını eşleştirir
+                if (userIndex !== -1) {
+                    // Malzeme adının atamasını yapar
+                    this.Users[userIndex].materialName = material.materialName; 
+                }
+            });
+            console.log("Users after adding material names:", this.Users);
+            // Forma verileri doldurur
+            if (this.Users.length > 0) {
+                //sayfa ilk açıldığında default olarak 1.index verilerle doldurur formu 
+                const user = this.Users[1];
+                //veritabanından true/false olarak gelen değerleri active/inactive şeklinde getirir forma
+                user.penaltyStatus = user.penaltyStatus ? 'Active' : 'Inactive';
+                this.userForm.patchValue({
+                    id: user.id,
+                    returnedId: user.returnedId,
+                    penaltyStatus: user.penaltyStatus,
+                    totalPenaltyDays: user.totalPenaltyDays,
+                    userId: user.userId,
+                    penaltyPrice: user.penaltyPrice,
+                    materialID: user.materialID,
+                    materialName: user.materialName
+                });
+                // materialName alanını da form içine ekler
+                this.userForm.controls['materialName'].setValue(user.materialName);
+            }
         });
     }, error => {
-        console.error("Error fetching user data:", error);
+        console.error("Error fetching users:", error);
     });
 }
 
+fetchUserById(): void {
+    const id = this.userForm.get('id')?.value;
+    const headers = { Authorization: `Bearer ${token}` };
+    
+    this.httpClient.get(`http://localhost:60805/api/Penalties/${id}`, { headers }).subscribe(
+        (userData: any) => {
+            // Kullanıcı verilerini form üzerine doldurur
+            this.userForm.patchValue({
+                returnedId: userData.returnedId,
+                penaltyStatus: userData.penaltyStatus ? 'Active' : 'Inactive',
+                totalPenaltyDays: userData.totalPenaltyDays,
+                userId: userData.userId,
+                penaltyPrice: userData.penaltyPrice,
+                materialID: userData.materialID,
+                materialName: userData.materialName,
+            });
+
+            // Materyal adını almak için materialID varsa istek atar
+            const materialID = userData.materialID;
+            if (materialID) {
+                this.httpClient.get(`http://localhost:60805/api/Materials/${materialID}`, { headers }).subscribe(
+                    (materialData: any) => {
+                        this.userForm.patchValue({
+                            materialName: materialData.materialName
+                        });
+                    },
+                    error => {
+                        console.error("Error fetching material data:", error);
+                    }
+                );
+            }
+        },
+        error => {
+            console.error("Error fetching user data:", error);
+        }
+    );
+}
+
+
 saveUserData(): void {
-    // Kullanıcı verileri kaydet
     const formData = this.userForm.value;
-  //   const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3ZDY5MjM5LTVjNjQtNGJkMS05ODljLTM2OWM1OGNkNzJhYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imt5c0BreXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNDY2MjExOCwiZXhwIjoxNzE0NzIyMTE4LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.9JVvCCWXwGkfWV2WiyCWVtOkqsKSUZqsFbANWKq-4iZlcvunObBIVySacOCCuLf32ZGIW14jj9AQrjIVwZWdxA";
     const headers = { Authorization: `Bearer ${token}` };
     this.httpClient.post('http://localhost:60805/api/Penalties', formData, { headers }).subscribe((response: any) => {
         console.log("API Response:", response);
@@ -280,85 +135,113 @@ saveUserData(): void {
     });
 }
 
-//  updateUserData(): void {
-//      // Kullanıcı verileri güncelle
-//      if (this.userForm.valid) {
-//          const formData = this.userForm.value;
-//        //   const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3ZDY5MjM5LTVjNjQtNGJkMS05ODljLTM2OWM1OGNkNzJhYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imt5c0BreXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNDY2MjExOCwiZXhwIjoxNzE0NzIyMTE4LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.9JVvCCWXwGkfWV2WiyCWVtOkqsKSUZqsFbANWKq-4iZlcvunObBIVySacOCCuLf32ZGIW14jj9AQrjIVwZWdxA";
-//         const headers = { Authorization: `Bearer ${token}` };
-//          this.httpClient.put(`http://localhost:60805/api/Penalties/`, formData, { headers }).subscribe((response: any) => {
-//              console.log("API Response:", response);
-//              // Güncelleme başarılı olduğunda gerekli işlemleri burada yapabilirsiniz
-//         }, error => {
-//              console.error("Error updating user data:", error);
-//          });
-//     } else {
-//          console.log("Form is not valid.");
-//      }
-//  }
-
-
-
-updateUserData() {
+updateUserData(): void {
     if (this.userForm.valid) {
+      const formData = this.userForm.value;
+      const headers = { Authorization: `Bearer ${token}` };
+  
+      if (formData.penaltyStatus !== null) {
+        formData.penaltyStatus = formData.penaltyStatus.toLowerCase() === 'active' ? true : false;
+  
+        this.httpClient.put(`http://localhost:60805/api/Penalties/`, formData, { headers }).subscribe(
+          (response: any) => {
+            console.log("Penalty API Response:", response);
+            this.showPenaltyInfo(response);
+          },
+          (error: any) => {
+            console.error("Error updating penalty data:", error);
+          }
+        );
+      }
+  
+      if (this.userForm.valid) {
         const formData = this.userForm.value;
-        // penaltyStatus alanının bir dize olduğundan emin olun
-        if (typeof formData.penaltyStatus === 'string') {
-            // Dize olduğunda toLowerCase() işlemini uygulayın
-            formData.penaltyStatus = formData.penaltyStatus.toLowerCase();
-        }
         const headers = { Authorization: `Bearer ${token}` };
-        this.httpClient.put(`http://localhost:60805/api/Penalties/`, formData, { headers }).subscribe((response: any) => {
-            console.log("API Response:", response);
-        }, error => {
-            console.error("Error updating user data:", error);
-        });
-    } else {
+    
+        // Materyale güncelleme isteği yollar
+        const materialUpdateData = {
+          id: formData.materialID,
+          materialName: formData.materialName.toLowerCase(),
+          publicationDate: formData.publicationDate,
+          language: formData.language,
+          pageCount: formData.pageCount,
+          status: formData.status,
+          quantity: formData.quantity
+        };
+    
+        this.httpClient.put(`http://localhost:60805/api/Materials/${formData.materialID}`, materialUpdateData, { headers }).subscribe(
+          (response: any) => {
+            console.log("Material API Response:", response);
+            this.showMaterialInfo(response);
+          },
+          (error) => {
+            console.error("Error updating material data:", error);
+          }
+        );
+      } else {
         console.log("Form is not valid.");
-   }
+      }
+    }
+  }
+
+showPenaltyInfo(response: any): void {
+    console.log("Showing penalty info:", response);
+}
+
+showMaterialInfo(response: any): void {
+    console.log("Showing material info:", response);
 }
 
 
-
-
-///silme islemi
+//silme işlemi
 isDeleting: boolean = false;
-
 deleteUserData(): void {
     if (this.isDeleting) {
-        return; // İşlem zaten devam ediyorsa, tekrarlanmasını önle
+        return; // Silme işlemi zaten devam ediyorsa tekrarlanmasını önler
     }
-    this.isDeleting = true; // İşlemi başlat
+    this.isDeleting = true; // Silme işlemi başlatır
 
-    const id = this.userForm.get('id')?.value;
-  //   const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6ImQ3ZDY5MjM5LTVjNjQtNGJkMS05ODljLTM2OWM1OGNkNzJhYyIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Imt5c0BreXMiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNDY2MjExOCwiZXhwIjoxNzE0NzIyMTE4LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.9JVvCCWXwGkfWV2WiyCWVtOkqsKSUZqsFbANWKq-4iZlcvunObBIVySacOCCuLf32ZGIW14jj9AQrjIVwZWdxA";
+    const formData = this.userForm.value;
+    const id = formData.id;
     const headers = { Authorization: `Bearer ${token}` };
 
-    // HTTP DELETE isteği yap
-    this.httpClient.delete(`http://localhost:60805/api/Penalties/${id}`, { headers }).subscribe((response: any) => {
-        console.log("Kullanıcı verileri başarıyla silindi:", response);
-        // Başarılı silme işleminden sonra formu temizle veya başka gerekli işlemleri gerçekleştir
-        this.userForm.reset();
-        this.isDeleting = false; // İşlem tamamlandıktan sonra flag'i sıfırla
-    }, error => {
-        console.error("Kullanıcı verilerini silerken hata oluştu:", error);
-        this.isDeleting = false; // Hata oluştuğunda flag'i sıfırla
-    });
+    if (formData.penaltyStatus !== null) {
+        // Ceza verisi silme işlemi
+        this.httpClient.delete(`http://localhost:60805/api/Penalties/${id}`, { headers }).subscribe((response: any) => {
+            console.log("Penalty data successfully deleted:", response);
+            this.userForm.reset(); // Formu sıfırlar
+            this.isDeleting = false; 
+        }, error => {
+            console.error("Error deleting penalty data:", error);
+            this.isDeleting = false; 
+        });
+
+    } else if (formData.materialName != null) {
+        // Materyal verisini silme işlemi
+        this.httpClient.delete(`http://localhost:60805/api/Materials/${id}`, { headers }).subscribe((response: any) => {
+            console.log("Material data successfully deleted:", response);
+            this.userForm.reset(); 
+            this.isDeleting = false; 
+        }, error => {
+            console.error("Error deleting material data:", error);
+            this.isDeleting = false; 
+        });
+
+    } else {
+        console.log("No valid data to delete.");
+        this.isDeleting = false; 
+    }
 }
 
-///
 
 
 
 ngOnInit(): void {
-    // Sayfa yüklendiğinde kullanıcı verileri getir
+    // Sayfa yüklendiğinde kullanıcı verileri getirir
     this.fetchUsers();
-  
     // id alanının değeri değiştiğinde tetiklenecek olan yöntem
     this.userForm.get('id')?.valueChanges.subscribe((id) => {
-        // id alanı değiştiğinde otomatik olarak çalışacak
-        // id değeri değiştiğinde diğer alanlar otomatik olarak güncellenecek
-        // Örneğin, id alanı değiştiğinde API'ye gidip yeni kullanıcı verilerini getir
+        // id değeri değiştiğinde diğer alanlar otomatik olarak günceller
         this.httpClient.get(`http://localhost:60805/api/Penalties/${id}`).subscribe((userData: any) => {
             this.userForm.patchValue({
                 returnedId: userData.returnedId,

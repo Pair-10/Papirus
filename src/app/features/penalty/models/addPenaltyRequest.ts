@@ -7,4 +7,5 @@ export interface addPenaltyRequest {
 	totalPenaltyDays: number;
 	penaltyStatus: boolean;
     materialID:string;
+    materialName:string;
 }
