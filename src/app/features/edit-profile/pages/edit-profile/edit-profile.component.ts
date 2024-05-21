@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { SidebarComponent } from "../../../../shared/components/sidebar/sidebar.component";
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { UserService } from '../../../../services/sidebar/user.service';
+import { FormBuilder,ReactiveFormsModule } from '@angular/forms';
+
 import { IFullUser } from '../../../../models/fullUser/fullUser';
+import { UserService } from '../../../../services/user/user.service';
 
 @Component({
     selector: 'app-edit-profile',
@@ -32,6 +33,10 @@ export class EditProfileComponent {
             email: this.profileForm.value.email!,
             phoneNumber: this.profileForm.value.phoneNumber!
         };
+        this.userService.updateUser(user).subscribe((result)=>{
+            console.log(result)
+        })
+        this.ngOnInit()
     }
     ngOnInit(){
           this.userService.getUser().subscribe((result)=>{

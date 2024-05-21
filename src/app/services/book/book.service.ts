@@ -19,9 +19,8 @@ export class BookService implements OnInit {
 
   
 
-  // Tüm kitapları döndürür
   getBooks(): Observable<Book[]> {
-    return this.http.get<any>(`${this.baseUrl}/Books?PageIndex=0&PageSize=10`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/Books?PageIndex=0&PageSize=1000`).pipe(
       map(response => {
         const books: Book[] = response.items.map((item: any) => ({
           id: item.id,
@@ -44,6 +43,10 @@ export class BookService implements OnInit {
   }
   deleteBook(book: any){
     return this.http.delete<any>(`${this.baseUrl}/Books/${book.id}`)
+  }
+
+  getBook(){
+    return this.http.get<any>(`${this.baseUrl}/Books?PageIndex=0&PageSize=1000`)
   }
   
 }

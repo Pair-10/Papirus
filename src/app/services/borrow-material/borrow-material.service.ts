@@ -15,14 +15,15 @@ export class BorrowMaterialService {
       userId: material.user,
       deadline: material.selectedDate
     }
-    return this.http.post(`${this.baseUrl}/BorrowedMaterials?PageIndex=0&PageSize=20`, body);
+    return this.http.post(`${this.baseUrl}/BorrowedMaterials`, body);
   }
   updateBorrowedMaterial(borrowedMaterial: any){
     const updatedData = {
       id: borrowedMaterial.id,
       materialId: borrowedMaterial.materialId,
       userId: borrowedMaterial.userId,
-      isReturned: borrowedMaterial.isReturned
+      isReturned: borrowedMaterial.isReturned,
+      deadline: borrowedMaterial.deadline
     }
     return this.http.put(`${this.baseUrl}/BorrowedMaterials`, updatedData);
   }

@@ -1,18 +1,21 @@
-
 import { ListService } from './../../../services/list/list.service';
 import { CommonModule } from '@angular/common';
 import { Component, Output, EventEmitter, OnInit, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { NavbarService } from '../../../services/navbar/navbar.service';
 import { TokenService } from '../../../core/services/token.service';
-import { UserService } from '../../../services/sidebar/user.service';
 import { NotificationService } from '../../../services/notification/notification.service';
 import { switchMap } from 'rxjs';
+import { UserService } from '../../../services/user/user.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialService } from '../../../services/material/material.service';
+import { JwtService } from '../../../services/jwt/jwt.service';
+
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterOutlet],
+  imports: [CommonModule, RouterLink, RouterOutlet,ReactiveFormsModule,FormsModule],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -20,7 +23,9 @@ export class NavbarComponent implements OnInit {
   navbarService=inject(NavbarService)
   tokenService=inject(TokenService)
   userService = inject(UserService)
+  jwtService = inject(JwtService)
   notificationService = inject(NotificationService)
+  materialService = inject(MaterialService)
   hamburgerMenuOpen = false;
   isMenuOpen = false;
   isHovered: boolean[] = [false, false, false];
@@ -30,8 +35,9 @@ export class NavbarComponent implements OnInit {
   notificationId:any;
   notifications: any[] = [];
   showPopup: boolean = false;
-  
-  
+  searchTerm: string = '';
+  searchedItems:any[] = [];
+
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
@@ -49,6 +55,7 @@ export class NavbarComponent implements OnInit {
     private router: Router,
     private listService: ListService
   ) { }
+  
 
   loadCategoryTypes() {
     const categoryIds = ["f1c535cb-263f-47c8-1e5e-08dc61e8e461", "fa0be4d1-3580-4ddb-1e5f-08dc61e8e461", "7f15efda-deb4-438f-1e60-08dc61e8e461"];
@@ -64,6 +71,27 @@ export class NavbarComponent implements OnInit {
       );
     });
   }
+  roleCheck() {
+    const token= this.tokenService.getToken();
+    const decodedJwt = this.jwtService.getDecodedAccessToken(token!);
+    const roles:string[] = decodedJwt["http://schemas.microsoft.com/ws/2008/06/identity/claims/role"];
+    let isAdmin = false;
+    if(roles==undefined){
+      this.router.navigate(['profile/edit-profile'])
+    }
+    else{
+         roles.forEach(item => {
+        if (item == "Admin") {
+            isAdmin = true;
+        }
+    });
+
+    if (isAdmin) {
+        this.router.navigate(['profile-admin/edit-profile']);
+    } else {
+        this.router.navigate(['profile/edit-profile']);
+    }
+    }}
 
   processCategoryTypes(response: any[], categoryId: string) {
     const filteredItems = response.filter(item => item.categoryId === categoryId);
@@ -107,7 +135,6 @@ checkToken() {
 }
 ngOnInit() {
   this.loadCategoryTypes();
-  
   this.userService.getUser().pipe(
     switchMap(user => {
       this.userId = user.id
@@ -123,7 +150,7 @@ ngOnInit() {
             }
           )
         }
-      }) // Bildirimleri kullanabilirsiniz
+      })
     }
   );
   this.navbarService.isLoggedIn.subscribe(isLoggedIn => {
@@ -132,8 +159,20 @@ ngOnInit() {
   this.checkToken()
   };
 
-
-
+  search(event: any) {
+    if(event != ""){
+      this.materialService.getMaterialDynamic(event).subscribe(
+        response =>{
+          this.searchedItems = response.items
+        }
+      )
+    }
+  }
+  goToMaterialDetail(materialId: string) {
+    this.router.navigateByUrl(`/material-detail/${materialId}`);
+    this.searchedItems = [];
+    this.searchTerm = "";
+  }
 
 selectCategory(categoryId: string,categoryType: string) {
   this.router.navigate(['/material-list'], { queryParams: { type: categoryType, categoryId: categoryId } });

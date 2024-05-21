@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { UserService } from '../../../services/sidebar/user.service';
+
 import { NavbarService } from '../../../services/navbar/navbar.service';
+import { UserService } from '../../../services/user/user.service';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
@@ -26,19 +27,22 @@ export class SidebarComponent {
     this.getUser();
   }
   navigateToPenalties() {
-    this.router.navigate(['/penalty']);
+    this.router.navigate(['profile/penalty']);
   }
   navigateToActivity() {
-    this.router.navigate(['/activity']);
+    this.router.navigate(['profile/activity']);
   }
   navigateToHelp() {
     this.router.navigate(['/help']);
   }
   navigateToEditProfile() {
-    this.router.navigate(['/edit-profile']);
+    this.router.navigate(['profile/edit-profile']);
+  }
+  navigateToEditUser(){
+    this.router.navigate(['/edit-user']);
   }
   navigateToMyBook() {
-    this.router.navigate(['/my-materials']);
+    this.router.navigate(['profile/my-materials']);
   }
   navigateToAddMaterials(){
     this.router.navigate(['/add-materials']);
