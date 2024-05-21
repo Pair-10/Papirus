@@ -92,7 +92,7 @@ fetchUserById(): void {
     
     this.httpClient.get(`http://localhost:60805/api/Penalties/${id}`, { headers }).subscribe(
         (userData: any) => {
-            // Kullanıcı verilerini form üzerine doldur
+            // Kullanıcı verilerini form üzerine doldurur
             this.userForm.patchValue({
                 returnedId: userData.returnedId,
                 penaltyStatus: userData.penaltyStatus ? 'Active' : 'Inactive',
@@ -123,8 +123,6 @@ fetchUserById(): void {
         }
     );
 }
-
-
 
 
 saveUserData(): void {
@@ -219,10 +217,10 @@ deleteUserData(): void {
         });
 
     } else if (formData.materialName != null) {
-        // Materyal verisi silme işlemi
+        // Materyal verisini silme işlemi
         this.httpClient.delete(`http://localhost:60805/api/Materials/${id}`, { headers }).subscribe((response: any) => {
             console.log("Material data successfully deleted:", response);
-            this.userForm.reset(); // Formu sıfırlar
+            this.userForm.reset(); 
             this.isDeleting = false; 
         }, error => {
             console.error("Error deleting material data:", error);
