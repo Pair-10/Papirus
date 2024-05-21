@@ -1,62 +1,41 @@
 <div class="flex flex-col items-center content-start ">
-    <div
-      class=" text-black pt-5 col-span-3 flex flex-col items-center space-y--3 rounded-lg max-h-[100800px] overflow-y-auto ">
+     <div class=" text-black pt-5 col-span-3 flex flex-col items-center space-y--3 rounded-lg max-h-[100800px] overflow-y-auto ">
+          <div class="pt-4 mx-auto mx-auto pb-10 w-full sm:w-full md:w-2/3 pl-5 pr-5">
+          <div class="overflow-y-auto bg-gray-300 dark:bg-neutral-700 max-h-[500px] rounded-3xl p-1 w-full">
+           <div id="animatedDiv" class="relative m-1 mb-3 mr-5  float-left mt-1 pt-0.5 pr-0.5 rounded-lg">
+          <label for="inputSearch" class="sr-only">Search </label>
+          <input id="inputSearch" type="text" placeholder="Search..."
+           class="block w-64 rounded-lg border dark:border-none dark:bg-neutral-600 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400" />
+          <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transform">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"stroke="currentColor" class="h-4 w-4 text-neutral-500 dark:text-neutral-200">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+          </span>
+      </div>
   
   
-     
-  
-      <div class="pt-4 mx-auto mx-auto pb-10 w-full sm:w-full md:w-2/3 pl-5 pr-5">
-      
-  
-        <!-- Penalty History Table responsive wrapper -->
-        <div class="overflow-y-auto bg-gray-300 dark:bg-neutral-700 max-h-[500px] rounded-3xl p-1 w-full">
-          <!-- Search input -->
-          <div id="animatedDiv" class="relative m-1 mb-3 mr-5  float-left mt-1 pt-0.5 pr-0.5 rounded-lg">
-            <label for="inputSearch" class="sr-only">Search </label>
-            <input id="inputSearch" type="text" placeholder="Search..."
-              class="block w-64 rounded-lg border dark:border-none dark:bg-neutral-600 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400" />
-            <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transform">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="h-4 w-4 text-neutral-500 dark:text-neutral-200">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-              </svg>
-            </span>
-          </div>
-  
-  
-          <table class="min-w-full text-left text-xs whitespace-nowrap max-w-[200px] mx-auto">
+      <table class="min-w-full text-left text-xs whitespace-nowrap max-w-[200px] mx-auto">
             <thead class="uppercase tracking-wider border-b-2 dark:border-neutral-600 bg-neutral-50 dark:bg-neutral-800">
               <tr>
-             <th scope="col" class="px-6 py-3">Penalty ID</th>
-                   <!-- <th scope="col" class="px-6 py-3">User ID</th>
-                <th scope="col" class="px-6 py-3">Returned ID</th> -->
+                <th scope="col" class="px-6 py-3">Penalty ID</th>
                 <th scope="col" class="px-6 py-3">User ID</th>
                 <th scope="col" class="px-6 py-3">Material name</th>
                 <th scope="col" class="px-6 py-3"> Penalty Days</th>
                 <th scope="col" class="px-6 py-3">Penalty Price</th>
                 <th scope="col" class="px-6 py-3">Penalty Status</th>
-                 <!-- <th scope="col" class="px-6 py-3">Material ID</th> -->
-              
               </tr>
             </thead>
             <tbody>
-              
               <tr *ngFor="let penalty of penalties" class="border-b dark:border-neutral-600 hover:bg-blue-900 dark:hover:bg-neutral-600 hover:text-gray-200">
                 <td class="px-6 py-3">{{ penalty.id }}</td>
                 <td class="px-6 py-3">{{ penalty.userId }}</td>
                 <td class="px-6 py-3">{{ penalty.materialName }}</td>
-            
-             
                 <td class="px-6 py-3">{{ penalty.totalPenaltyDays }}</td>
-             
-                <td class="px-6 py-3">{{ penalty.penaltyPrice }}₺</td>
-               <!-- <td class="px-6 py-3">{{ penalty.materialId }}</td>  -->
-               <td class="px-6 py-3">
-                <!-- Durumu kontrol et ve metni yazdır -->
+                <td class="px-6 py-3">{{ penalty.penaltyPrice }}₺</td>           
+                <td class="px-6 py-3">
                 <ng-container *ngIf="penalty.penaltyStatus; else inactive">Active</ng-container>
                 <ng-template #inactive>inactive</ng-template>
-              </td>
+                </td>
               </tr>
             </tbody>
   
@@ -64,15 +43,14 @@
             <tfoot class="border-t-2 dark:border-neutral-600 bg-neutral-50 hover:bg-yellow-200">
               <tr>
                 <th class="px-6 py-3">Total:</th>
-               
                 <th class="px-6 py-3"></th>
                 <td class="px-6 py-3"></td>
                 <td class="px-6 py-3 font-bold">{{ totalPenaltyDays }}</td>
                 <td class="px-6 py-3 font-bold">{{ totalPenaltyPrice.toFixed(2) }}₺</td>
                 <td class="px-6 py-3"></td>
-              </tr>
+             </tr>
             </tfoot>
-          </table>
+        </table>
   
           <nav class="flex items-center justify-between text-sm" aria-label="Page navigation example">
             <p>
@@ -118,40 +96,9 @@
           </nav>
         </div>
       </div>
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
     </div>
   
   
   
   
-    <!-- <form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="max-w-md mx-auto">
-      <div class="relative z-0 w-full mb-5 group">
-        <label for="name_field" class="text-xl">penaltyStatus</label>
-        <input type="text" id="name_field" formControlName="penaltyStatus" class="block py-2.5 px-0 w-full text-xl text-blue-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required />
-      </div>
-      <div class="relative z-0 w-full mb-5 group">
-        <label for="surname-field" class="text-xl">totalPenaltyDays</label>
-        <input type="text" id="surname-field" formControlName="totalPenaltyDays" class="block py-2.5 px-0 w-full text-xl text-blue-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required />
-      </div>
-      <div class="relative z-0 w-full mb-5 group">
-        <label for="email-field" class="text-xl">penaltyPrice</label>
-        <input type="email" id="email-field" formControlName="penaltyPrice" class="block py-2.5 px-0 w-full text-xl text-blue-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" required />
-      </div>
-  
-      <button type="submit" class="text-white mt-8 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xl w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save Changes</button>
-    </form>   -->
+    

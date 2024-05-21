@@ -27,11 +27,11 @@
         <div class=" text-right font-bold text-l mr-2"> <input type="text" formControlName="addressId" class="ml-auto mt-2  text-black bg-gray-200 rounded-full"></div>
         <div class="mt-8 text-center ml-7 mb-4 ">
           <ng-container *ngIf="!userForm.get('id')?.value">
-            <!-- Eğer ID alanı dolu değilse (yeni bir kullanıcı oluşturuluyorsa) -->
+            <!-- Eğer ID alanı dolu değilse save butonu aktif olsun  -->
             <button type="submit" class=" bg-orange-700 hover:bg-orange-800 text-white font-bold py-2 px-4 rounded-xl mr-2">Save</button>
           </ng-container>
           <ng-container *ngIf="userForm.get('id')?.value">
-            <!-- Eğer ID alanı doluysa (bir kullanıcı güncelleniyorsa) -->
+            <!-- Eğer ID alanı doluysa update delete aktif olsun -->
             <button type="button" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded-xl" (click)="updateUserData()">Update</button>
             <button type="button" class="bg-blue-600 hover:bg-red-500 text-white font-bold py-2 px-4 rounded-xl ml-2" (click)="deleteUserData()">Delete</button>
           </ng-container>

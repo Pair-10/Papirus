@@ -20,7 +20,7 @@
      private jwtService: JwtService,
      private tokenService: TokenService,
    ) {   
-     const token = this.tokenService.getToken(); // TokenService'den token al
+     const token = this.tokenService.getToken(); // TokenService'den token alır
      if (!token) {
        console.error('Token not found.');
       return;
@@ -36,7 +36,7 @@
    }
 
    getUser() {
-    // Token içinde userId kontrolü yapsın
+    // Token içinde userId kontrolü yapar
     if (!this.userId) {
          console.error('User ID not found in token.');
          return throwError('User ID not found in token.');
@@ -47,7 +47,7 @@
     return this.http.get<any[]>(url, { headers: this.headers }).pipe(
        map(response => {
          console.log('Penalties for user:', response);
-        // Sadece bu kullanıcıya ait cezaları filtrele
+        // Sadece bu kullanıcıya ait cezaları filtreler
        const userPenalties = response.filter(penalty => penalty.userId === this.userId);
         return userPenalties;
        }),
@@ -108,9 +108,7 @@
  }
 
 
-
-
-  getMaterialName(id: string): Observable<any> {//materialid göre material name
+  getMaterialName(id: string): Observable<any> {//materialid göre material name getirir
     const url = `${this.apiUrl}/api/Materials/${id}`;
 
     return this.http.get<any>(url, { headers: this.headers }).pipe(

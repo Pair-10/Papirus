@@ -1,12 +1,7 @@
-
-
-// export const token = "eyJhbGciOiJodHRwOi8vd3d3LnczLm9yZy8yMDAxLzA0L3htbGRzaWctbW9yZSNobWFjLXNoYTUxMiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjYzOTdhNDIzLWIyODktNGM3ZC1iNjE4LTNiMGU4ZTUyNTI5MSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6Im5hcmNoQGtvZGxhbWEuaW8iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJBZG1pbiIsIm5iZiI6MTcxNTU0NTIxNCwiZXhwIjoxNzIxNTQ1MjE0LCJpc3MiOiJuQXJjaGl0ZWN0dXJlQGtvZGxhbWEuaW8iLCJhdWQiOiJzdGFydGVyUHJvamVjdEBrb2RsYW1hLmlvIn0.uxH_VRJz94PRcxcon26kqNeSqoz_ykH9TGHKYGHRYsmNbZtVV232mao3zpOsWmwMDwWsSq9CZIOxWaWdiyLlug";
-
-
 let storedToken = localStorage.getItem('Token');
 export const token = storedToken ? storedToken : "";
 
-// localStorage'da token güncellendiğinde yeni değeri almak için bir dinleyici ekle
+// localStorage'da token güncellendiğinde yeni değeri almak için bir dinleyici ekler
 window.addEventListener('storage', () => {
     storedToken = localStorage.getItem('Token');
 });

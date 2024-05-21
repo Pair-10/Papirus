@@ -16,16 +16,18 @@ import { Observable } from 'rxjs';
 export class TableComponent implements OnInit{
   Users: any[] = [];
   filteredUsers: any[] = [];
-   totalPenaltyPrice: number = 0; // Toplam ceza ücreti
+   totalPenaltyPrice: number = 0; 
    totalPenaltyDays:number=0;
    materialNames: { [key: string]: string } = {};
 penalties: any[] = [];   
-  constructor(private httpClient: HttpClient,private CommanModule:CommonModule,private JwtTokenService:JwtTokenService, 
+  constructor
+  (
+    private httpClient: HttpClient,private CommanModule:CommonModule,private JwtTokenService:JwtTokenService, 
     private penaltyService: PenaltyService,
     private penaltyAdminService:PenaltyAdminService
-   ) {}
+  ) {}
   filterUsers(event: any): void {
-    const searchTerm = event.target.value.trim().toLowerCase(); // Arama terimini küçük harfe dönüştür ve boşlukları temizle
+    const searchTerm = event.target.value.trim().toLowerCase(); // Arama terimini küçük harfe dönüştür ve boşlukları temizler
     if (searchTerm !== '') {
       this.filteredUsers = this.Users.filter(user =>
         user.userId.toLowerCase().includes(searchTerm)
@@ -33,30 +35,30 @@ penalties: any[] = [];
     } else {
       this.filteredUsers = [...this.Users];
     }
-    this.updateTotalPenaltyPrice();// Filtreleme sonrası toplam tutarı güncelle
-    this.updateTotalPenaltyDays();//Filtreleme sonrası toplam günü güncelle
+    this.updateTotalPenaltyPrice();// Filtreleme sonrası toplam tutarı günceller
+    this.updateTotalPenaltyDays();//Filtreleme sonrası toplam günü günceller
   }
   updateTotalPenaltyDays(): void {
-    this.totalPenaltyDays = 0; // Sıfırla
+    this.totalPenaltyDays = 0; //toplam günü Sıfırlar
     this.filteredUsers.forEach(user => {
-      this.totalPenaltyDays += user.totalPenaltyDays; // Filtrelenmiş kullanıcıların toplam ceza günlerini topla
+      this.totalPenaltyDays += user.totalPenaltyDays; // Filtrelenmiş kullanıcıların toplam ceza günlerini toplar
     });
   
-    // Toplam ceza günlerini tabloya ekleyin
+    // Toplam ceza günlerini tabloya ekler
     const totalRow = document.querySelector('tfoot tr');
     if (totalRow) {
-      totalRow.children[4].textContent = `${this.totalPenaltyDays}`; // Toplam ceza günlerini güncelle
+      totalRow.children[4].textContent = `${this.totalPenaltyDays}`; // Toplam ceza günlerini günceller
     } else {
       console.error("Total row element is null.");
     }
   }
   updateTotalPenaltyPrice(): void {
-    this.totalPenaltyPrice = 0; // Sıfırla
+    this.totalPenaltyPrice = 0; 
     this.filteredUsers.forEach(user => {
-      this.totalPenaltyPrice += user.penaltyPrice; // Filtrelenmiş kullanıcıların ceza tutarlarını topla
+      this.totalPenaltyPrice += user.penaltyPrice; // Filtrelenmiş kullanıcıların ceza tutarlarını toplar
     });
   
-    // Toplam ceza ücretini tabloya ekleyin
+    // Toplam ceza ücretini tabloya ekler
     const totalRow = document.querySelector('tfoot tr');
     if (totalRow) {
       totalRow.children[3].textContent = `${this.totalPenaltyPrice.toFixed(2)}₺`;
@@ -81,10 +83,11 @@ penalties: any[] = [];
           materialNameObservables.push(materialNameObservable);
         }
       });
-      // forkJoin kullanarak tüm gözlemlerin tamamlanmasını bekler
+      // forkJoin kullanılarak tüm gözlemlerin tamamlanmasını bekler 
+      //tüm verileri aynı anda aldıktan sonra bu alınan verilerle işlem yapmayı sağlar
       forkJoin(materialNameObservables).subscribe((materialNames: any[]) => {
         console.log("Material Names:", materialNames);
-        // Malzeme adlarını ceza nesnelerine atayın
+        // Malzeme adlarını ceza nesnelerine atar
         materialNames.forEach((material, index) => {
           this.penalties[index].materialName = material.materialName;
         });
@@ -102,8 +105,8 @@ penalties: any[] = [];
       this.filteredUsers.forEach((user, index) => {
         user.materialName = this.penalties[index].materialName;
       });
-      this.updateTotalPenaltyPrice(); // Toplam tutarı güncelle
-      this.updateTotalPenaltyDays(); // Toplam ceza günlerini güncelle
+      this.updateTotalPenaltyPrice(); // Toplam tutarı günceller
+      this.updateTotalPenaltyDays(); // Toplam ceza günlerini günceller
     }, error => {
       console.error("Error fetching users:", error); 
     });

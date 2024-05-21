@@ -83,10 +83,12 @@
                         src="https://picsum.photos/100?random&{{magazine.id}}">
                     <!-- Dergi başlığı -->
                     <h3 class="text-xl font-semibold mt-2">{{ magazine.material.materialName }}</h3>
+                    <p class="text-sm text-gray-600">Dil: {{magazine.material.language}}</p>
                     <!-- ISSN -->
                     <p class="text-sm text-gray-600">ISSN: {{ magazine.magazine.issn }}</p>
                     <!-- Sayı -->
                     <p class="text-sm text-gray-600">Sayı: {{ magazine.magazine.issue }}</p>
+                    <p class="text-sm text-gray-600">Adet: {{magazine.material.quantity}}</p>
                     <button (click)="materialyazdir(magazine)"
                         class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Daha
                         fazla oku</button>
@@ -104,7 +106,9 @@
                         src="https://picsum.photos/100?random&{{article.id}}">
                     <!-- Makale başlığı -->
                     <h3 class="text-xl font-semibold mt-2">{{ article.material.materialName }}</h3>
-                    <p class="text-sm text-gray-600">{{article.material.pageCount}}</p>
+                    <p class="text-sm text-gray-600">Dil: {{article.material.language}}</p>
+                    <p class="text-sm text-gray-600">Sayfa sayısı: {{article.material.pageCount}}</p>
+                    <p class="text-sm text-gray-600">Adet: {{article.material.quantity}}</p>
                     <button (click)="materialyazdir(article)"
                         class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">Daha
                         fazla oku</button>

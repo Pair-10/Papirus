@@ -40,40 +40,6 @@ export class AuthorService  {
     );
   }
 
-  getPenaltyAdminFormById(id: string): Observable<any> {
-    const url = `${this.apiUrl}/api/Penalties/${id}`;
 
-    return this.http.get<any>(url, { headers: this.headers }).pipe(
-      map(response => {
-        console.log(response);
-        return response;
-      })
-    );
-  }
-
-
-  updateUserPenaltyAdminForm(id: string, updatedData: any): Observable<any> {
-    const url = `${this.apiUrl}/api/Authors/${id}`; 
-    return this.http.put<any>(url, updatedData, { headers: this.headers }).pipe(
-        map(response => {
-            console.log(response);
-            return response;
-        })
-    );
-}
-
-
-
-
-
-  getMaterialName(id: string): Observable<any> {//materialid göre material name
-    const url = `${this.apiUrl}/api/Materials/${id}`;
-
-    return this.http.get<any>(url, { headers: this.headers }).pipe(
-      map(response => {
-        console.log(response);
-        return response;
-      })
-    );
-  }
+ 
 }
