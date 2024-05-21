@@ -4,10 +4,11 @@ import { SidebarAdminComponent } from '../../../../shared/components/sidebar-adm
 import { FormFirstComponent } from '../../components/forms/form-first/form-first.component';
 import { FormSecondComponent } from '../../components/forms/form-second/form-second.component';
 import { TableComponent } from '../../components/table/table/table.component';
+import { TablePenaltyAdminComponent } from '../../components/table-penalty-admin/table-penalty-admin.component';
  @Component({
    selector: 'app-penalty-admin',
    standalone: true,
-  imports: [NavbarComponent,SidebarAdminComponent,FormFirstComponent,FormSecondComponent,TableComponent],
+  imports: [NavbarComponent,SidebarAdminComponent,FormFirstComponent,FormSecondComponent,TableComponent,TablePenaltyAdminComponent],
    templateUrl: './penalty-admin.component.html',
    styleUrls: ['./penalty-admin.component.css'],
  })

@@ -3,11 +3,9 @@ import { NavbarComponent } from '../../../../shared/components/navbar/navbar.com
 import { SidebarComponent } from '../../../../shared/components/sidebar/sidebar.component';
 import { FormBuilder,FormGroup,ReactiveFormsModule } from '@angular/forms';
 import { PenaltyService } from '../../services/penalty.service';
-// import { UserService } from '../../../pnlty/pages/pnlty/user.service';
-
-// import { IFullUser } from '../../../pnlty/pages/pnlty/fullUser'
 import { addPenaltyRequest } from '../../models/addPenaltyRequest';
 import { CommonModule } from '@angular/common';
+
 
 
  @Component({
@@ -18,10 +16,13 @@ import { CommonModule } from '@angular/common';
    styleUrls: ['./penalty.component.css'],
  })
  export class PenaltyComponent {
-  materialNames: { [key: string]: string } = {};/////
+  materialNames: { [key: string]: string } = {};
   formBuilder=inject(FormBuilder);
-  // userService=inject(UserService);
-penaltyService=inject(PenaltyService);
+  penaltyService=inject(PenaltyService);
+  penalties: any[] = [];
+  filteredUsers: any[] = [];
+  Users: any[] = [];
+  filteredPenalties: any[] = []; 
 
 
   profileForm = this.formBuilder.group({
@@ -32,30 +33,18 @@ penaltyService=inject(PenaltyService);
     totalPenaltyDays: [],
     penaltyPrice: [],
     materialID:[],
+    materialName:[],
     });
     
     totalPenaltyPrice: number = 0;
   totalPenaltyDays: number = 0;
    constructor(private renderer: Renderer2, private el: ElementRef) {}
 
-   calculateTotalPenalties() {
-    // Get the values from the form controls
-    const penaltyDays = this.profileForm.get('totalPenaltyDays')?.value;
-    const penaltyPrice = this.profileForm.get('penaltyPrice')?.value;
-  
-    // Update the total penalty days and price only if they are valid numbers
-    if (penaltyDays  &&  penaltyPrice ) {
-      this.totalPenaltyDays = penaltyDays;
-      this.totalPenaltyPrice = penaltyPrice;
-    }
+   calculateTotalPenalties(): void {
+    this.totalPenaltyDays = this.penalties.reduce((total: number, penalty: any) => total + (penalty.totalPenaltyDays || 0), 0);
+    this.totalPenaltyPrice = this.penalties.reduce((total: number, penalty: any) => total + (penalty.penaltyPrice || 0), 0);
   }
   
-  
-  
-  
-  
-
-
    onSubmit() {
     const user: addPenaltyRequest = {
      id: this.profileForm.value.id!, 
@@ -65,24 +54,43 @@ penaltyService=inject(PenaltyService);
      totalPenaltyDays:  this.profileForm.value.totalPenaltyDays!, 
      penaltyPrice: this.profileForm.value.penaltyPrice!,
      materialID:this.profileForm.value.materialID!,
+     materialName:this.profileForm.value.materialName!,
    };
-   
-       
        
      }
 
-     ngOnInit(){
-      this.penaltyService.getUser().subscribe((result)=>{
-      
-       this.profileForm.patchValue(result);
-       this.calculateTotalPenalties();
-        
-      })
-      
-    
-  }
 
-   
+     ngOnInit() {
+      this.penaltyService.getUser().subscribe((result) => {
+        this.penalties = result;
+        this.filteredUsers = [...this.penalties]; // filteredUsers dizisini penalties dizisiyle doldur
+        // Toplam ceza günlerini ve toplam ceza tutarını sıfırla
+        this.totalPenaltyDays = 0;
+        this.totalPenaltyPrice = 0;
+    
+        // Ceza listesinde döngü yaparak toplam ceza günlerini ve ceza tutarını hesapla
+        this.penalties.forEach((penalty: any) => {
+          // Her ceza için ceza günlerini ve ceza tutarını toplam değerlere ekle
+          this.totalPenaltyDays += penalty.totalPenaltyDays || 0;
+          this.totalPenaltyPrice += penalty.penaltyPrice || 0;
+    
+          // Material adını getir ve penalty objesine ekle
+          const materialId = penalty.materialId;
+          if (materialId) {
+            this.penaltyService.getMaterialName(materialId).subscribe((material) => {
+              penalty.materialName = material.materialName;
+              this.filteredUsers = [...this.penalties]; // filteredUsers dizisini penalties dizisiyle güncelle
+            });
+          }
+        });
+      });
+    }
+    
+
+    
+    
+  
+     
    toggleSidebar(): void {
      const sidebar = this.el.nativeElement.querySelector('#default-sidebar');
      if (sidebar) {
@@ -109,6 +117,13 @@ penaltyService=inject(PenaltyService);
      // Yeni rengi ekle
      element.classList.add(colors[currentColorIndex]);
    }
+
+
+
+ 
+  
+
+   
  }
  
  // Her 2 saniyede bir rengi değiştir
