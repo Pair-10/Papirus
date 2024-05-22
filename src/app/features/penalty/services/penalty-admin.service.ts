@@ -71,7 +71,7 @@
 
    getUserPenaltyAdmin() 
    {
-     const url = `${this.apiUrl}/api/Penalties?PageIndex=0&PageSize=5`; 
+     const url = `${this.apiUrl}/api/Penalties?PageIndex=0&PageSize=6`; 
     return this.http.get<any[]>(url, { headers: this.headers }).pipe
     (
        map(response => {

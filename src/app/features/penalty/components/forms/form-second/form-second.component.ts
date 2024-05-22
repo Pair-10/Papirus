@@ -75,7 +75,8 @@ fetchUsers(): void {
                     userId: user.userId,
                     penaltyPrice: user.penaltyPrice,
                     materialID: user.materialID,
-                    materialName: user.materialName
+                    materialName: user.materialName,
+
                 });
                 // materialName alanını da form içine ekler
                 this.userForm.controls['materialName'].setValue(user.materialName);
@@ -85,6 +86,7 @@ fetchUsers(): void {
         console.error("Error fetching users:", error);
     });
 }
+
 
 fetchUserById(): void {
     const id = this.userForm.get('id')?.value;

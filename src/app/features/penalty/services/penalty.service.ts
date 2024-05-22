@@ -41,7 +41,7 @@
          console.error('User ID not found in token.');
          return throwError('User ID not found in token.');
     }
-     // userId'ye sahip cezaları getir
+     // userId'ye sahip cezaları getirir
      const url = `${this.apiUrl}/api/Penalties/byUserId/${this.userId}`;
 
     return this.http.get<any[]>(url, { headers: this.headers }).pipe(
@@ -68,7 +68,7 @@
    }
   
   getUserPenaltyAdmin() {
-     const url = `${this.apiUrl}/api/Penalties?PageIndex=0&PageSize=5`; 
+     const url = `${this.apiUrl}/api/Penalties?PageIndex=0&PageSize=10`; 
      return this.http.get<any[]>(url, { headers: this.headers }).pipe(
        map(response => {
         console.log(response);
@@ -78,7 +78,7 @@
    }
 
    getUserPenaltyAdminForm() {
-     const url = `${this.apiUrl}/api/Penalties?PageIndex=0&PageSize=2`; 
+     const url = `${this.apiUrl}/api/Penalties?PageIndex=0&PageSize=5`; 
      return this.http.get<any[]>(url, { headers: this.headers }).pipe(
        map(response => {
         console.log(response);

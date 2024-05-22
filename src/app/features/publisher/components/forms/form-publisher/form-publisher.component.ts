@@ -24,14 +24,14 @@ export class FormPublisherComponent implements OnInit{
           id: [''],
           name: [''],
           webSite: [''],
-          phoneNumber: [],
+          phoneNumber: [''],
           addressId: [''],
       });
   }
 
   fetchUsers(): void {
       const headers = { Authorization: `Bearer ${token}` };
-      this.httpClient.get('http://localhost:60805/api/Publishers?PageIndex=0&PageSize=1', { headers }).subscribe
+      this.httpClient.get('http://localhost:60805/api/Publishers?PageIndex=0&PageSize=2', { headers }).subscribe
       ((data: any) => 
        {
           console.log("API Response:", data);
@@ -74,20 +74,27 @@ export class FormPublisherComponent implements OnInit{
       });
   }
 
-  saveUserData(): void {
-      // kayıt işlemi
-      const formData = this.userForm.value;
-      const headers = { Authorization: `Bearer ${token}` };
-      this.httpClient.post('http://localhost:60805/api/Publishers', formData, { headers }).subscribe
-      ((response: any) => 
-       {
-          console.log("API Response:", response);
-         }, 
-         error => 
-         {
-          console.error("Error saving user data:", error);
-      });
+  onSubmit() {
+    console.log("Form submitted");
+    this.saveUserData();
   }
+  
+  saveUserData(): void {
+    console.log("saveUserData called");
+    const formData = this.userForm.value;
+    console.log("Form Data:", formData); // Form verilerini kontrol edin
+    const headers = { Authorization: `Bearer ${token}` };
+    this.httpClient.post('http://localhost:60805/api/Publishers', formData, { headers }).subscribe(
+      (response: any) => {
+        console.log("API Response:", response);
+      },
+      error => {
+        console.error("Error saving user data:", error);
+      }
+    );
+  }
+  
+
 
   updateUserData(): void 
    {
