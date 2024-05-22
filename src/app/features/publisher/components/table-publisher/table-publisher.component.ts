@@ -38,7 +38,7 @@ filterUsers(event: any): void {
 
   fetchUsers(): void {
       const headers = { Authorization: `Bearer ${token}` };
-      this.httpClient.get('http://localhost:60805/api/Publishers?PageIndex=0&PageSize=6', { headers }).subscribe
+      this.httpClient.get('http://localhost:60805/api/Publishers?PageIndex=0&PageSize=10', { headers }).subscribe
       ((data: any) =>
        {
           console.log("API Response:", data); 

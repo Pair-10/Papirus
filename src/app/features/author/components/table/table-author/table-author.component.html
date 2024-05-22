@@ -2,7 +2,6 @@
     <!-- Search input -->
     <div id="animatedDiv" class="relative m-1 mb-3 mr-5  float-left mt-1 pt-0.5 pr-0.5 rounded-lg">
       <label for="inputSearch" class="sr-only">Search </label>
-      <!-- <input id="inputSearch" type="text" placeholder="Search..." class="block w-64 rounded-lg border dark:border-none dark:bg-neutral-600 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400" /> -->
       <input id="inputSearch" type="text" placeholder="Search..." class="block w-64 rounded-lg border dark:border-none dark:bg-neutral-600 py-2 pl-10 pr-4 text-sm focus:border-blue-400 focus:outline-none focus:ring-1 focus:ring-blue-400" (input)="filterUsers($event)">
       <span class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 transform">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-4 w-4 text-neutral-500 dark:text-neutral-200">

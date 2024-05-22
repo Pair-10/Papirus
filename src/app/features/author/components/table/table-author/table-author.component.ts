@@ -20,11 +20,11 @@ export class TableAuthorComponent implements OnInit{
 
 //isim ve soyisim alanlarına göre arama çubuğundan filtreleme işlemi yapar tabloda
 filterUsers(event: any): void {
-  const searchTerm = event.target.value.trim().toLowerCase(); // Arama terimini küçük harfe dönüştür ve boşlukları temizle
+  const searchTerm = event.target.value.trim().toLowerCase(); // Arama terimini küçük harfe dönüştür ve boşlukları temizler
   if (searchTerm !== '') {
     this.filteredUsers = this.Users.filter(user => {
       const fullName = `${user.name.toLowerCase()} ${user.surname.toLowerCase()}`; // İsim ve soyisimleri birleştir
-      return fullName.includes(searchTerm); // Birleşik metni arama yap
+      return fullName.includes(searchTerm); // Birleşik metni arama yapar
     });
   } else {
     this.filteredUsers = [...this.Users];
